@@ -1,4 +1,4 @@
-package swu.xl.linkgame;
+package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,15 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SuccessActivity extends AppCompatActivity implements View.OnClickListener {
-    //日志
-    public static final String TAG = SuccessActivity.class.getSimpleName();
+import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.R;
+import swu.xl.linkgame.SelfView.XLTextView;
 
+public class SuccessActivity extends AppCompatActivity implements View.OnClickListener {
     //星星
     ImageView left_star;
     ImageView middle_star;
@@ -78,15 +78,15 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btn_menu:
                 //关卡菜单按钮
-                Log.d(TAG,"关卡菜单按钮");
+                Log.d(Constant.TAG,"关卡菜单按钮");
                 break;
             case R.id.btn_refresh:
                 //重新加载按钮
-                Log.d(TAG,"重新加载按钮");
+                Log.d(Constant.TAG,"重新加载按钮");
                 break;
             case R.id.btn_next:
                 //下一关按钮
-                Log.d(TAG,"下一个关卡按钮");
+                Log.d(Constant.TAG,"下一个关卡按钮");
                 break;
         }
     }

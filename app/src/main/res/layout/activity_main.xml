@@ -4,20 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Activity.MainActivity"
 
     android:orientation="vertical"
     android:background="@drawable/bg_main">
 
     <!--标题部分-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_weight="2"
         >
 
-    </LinearLayout>
+        <!--标题-->
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_title_bg"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:paddingBottom="8dp"
+            android:layout_alignBottom="@+id/main_banner"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="20dp"
+            />
+
+        <!--banner-->
+        <ImageView
+            android:id="@+id/main_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/main_banner"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
 
     <!--模式部分-->
     <LinearLayout
@@ -28,25 +53,25 @@
         >
 
         <!--简单-->
-        <Button
+        <swu.xl.linkgame.SelfView.XLButton
             android:id="@+id/main_mode_easy"
-            style="@style/Mode_btn"
-            android:drawableLeft="@drawable/main_mode_easy"
-            android:drawablePadding="5dp"
+            style="@style/mode_btn"
+            android:text="@string/mode_easy"
             />
 
         <!--普通-->
-        <Button
+        <swu.xl.linkgame.SelfView.XLButton
             android:id="@+id/main_mode_normal"
-            style="@style/Mode_btn"
+            style="@style/mode_btn"
+            android:text="@string/mode_normal"
             />
 
         <!--困难-->
-        <Button
+        <swu.xl.linkgame.SelfView.XLButton
             android:id="@+id/main_mode_hard"
-            style="@style/Mode_btn"
+            style="@style/mode_btn"
+            android:text="@string/mode_hard"
             />
-
 
     </LinearLayout>
 
@@ -56,7 +81,31 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1.5"
+        android:gravity="center"
         >
+
+        <!--设置-->
+        <Button
+            android:id="@+id/main_setting"
+            style="@style/main_bg"
+            android:background="@drawable/main_setting"
+            android:layout_marginEnd="30dp"
+            />
+
+        <!--帮助-->
+        <Button
+            android:id="@+id/main_help"
+            style="@style/main_bg"
+            android:background="@drawable/main_help"
+            />
+
+        <!--商店-->
+        <Button
+            android:id="@+id/main_store"
+            style="@style/main_bg"
+            android:background="@drawable/main_store"
+            android:layout_marginStart="30dp"
+            />
 
     </LinearLayout>
 

@@ -1,9 +1,11 @@
 package swu.xl.linkgame.Model;
 
+import org.litepal.crud.LitePalSupport;
+
 /**
  * 关卡类
  */
-public class XLLevel {
+public class XLLevel extends LitePalSupport {
     //关卡号
     private int l_id;
     //闯关时间
@@ -54,5 +56,16 @@ public class XLLevel {
 
     public void setL_money(int l_money) {
         this.l_money = l_money;
+    }
+
+    @Override
+    public String toString() {
+        return "XLLevel{" +
+                "l_id=" + l_id +
+                ", l_time=" + l_time +
+                ", l_mode=" + l_mode +
+                ", l_new=" + l_new +
+                ", l_money=" + l_money +
+                '}';
     }
 }

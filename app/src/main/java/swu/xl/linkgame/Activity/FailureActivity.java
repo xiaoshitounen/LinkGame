@@ -1,4 +1,4 @@
-package swu.xl.linkgame;
+package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class FailureActivity extends AppCompatActivity {
-    //日志
-    public static final String TAG = FailureActivity.class.getSimpleName();
+import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.R;
 
+public class FailureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +19,7 @@ public class FailureActivity extends AppCompatActivity {
         findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"关卡菜单按钮被点击了");
+                Log.d(Constant.TAG,"关卡菜单按钮被点击了");
             }
         });
 
@@ -27,7 +27,7 @@ public class FailureActivity extends AppCompatActivity {
         findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"刷新按钮被点击了");
+                Log.d(Constant.TAG,"刷新按钮被点击了");
             }
         });
     }

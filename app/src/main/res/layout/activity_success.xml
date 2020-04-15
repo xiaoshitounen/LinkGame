@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SuccessActivity"
+    tools:context=".Activity.SuccessActivity"
 
     android:orientation="vertical"
     android:background="@drawable/bg_success_failure">
@@ -33,12 +33,12 @@
             android:layout_alignParentBottom="true"
             />
 
-        <swu.xl.linkgame.XLTextView
+        <swu.xl.linkgame.SelfView.XLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Success"
             android:layout_centerHorizontal="true"
-            style="@style/ShowMessage_Success_Text"
+            style="@style/ShowSuccessMessage"
             android:layout_alignTop="@id/iv_banner"
             android:layout_marginTop="36dp"
             />
@@ -88,12 +88,12 @@
         </RelativeLayout>
 
         <!--关卡信息-->
-        <swu.xl.linkgame.XLTextView
+        <swu.xl.linkgame.SelfView.XLTextView
             android:id="@+id/level_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第17关"
-            style="@style/LevelMessage_Text"
+            style="@style/LevelMessage"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
@@ -107,19 +107,19 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="-10dp"
             >
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Score"
-                style="@style/StateTitleMessage_Text"
+                style="@style/StateTitleMessage"
                 />
 
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:id="@+id/score_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3024"
-                style="@style/StateContentMessage_Text"
+                style="@style/StateContentMessage"
                 />
         </LinearLayout>
 
@@ -131,19 +131,19 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="-5dp"
             >
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Time"
-                style="@style/StateTitleMessage_Text"
+                style="@style/StateTitleMessage"
                 />
 
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12.9秒"
-                style="@style/StateContentMessage_Text"
+                style="@style/StateContentMessage"
                 />
         </LinearLayout>
 
@@ -155,19 +155,19 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="-15dp"
             >
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Batter"
-                style="@style/StateTitleMessage_Text"
+                style="@style/StateTitleMessage"
                 />
 
-            <swu.xl.linkgame.XLTextView
+            <swu.xl.linkgame.SelfView.XLTextView
                 android:id="@+id/batter_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20次"
-                style="@style/StateContentMessage_Text"
+                style="@style/StateContentMessage"
                 />
         </LinearLayout>
 

@@ -1,6 +1,12 @@
 package swu.xl.linkgame;
 
 import org.junit.Test;
+import org.litepal.LitePal;
+
+import java.util.List;
+
+import swu.xl.linkgame.Constant.Enum.LevelMode;
+import swu.xl.linkgame.Model.XLLevel;
 
 import static org.junit.Assert.*;
 
@@ -14,4 +20,11 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    //测试枚举的值
+    @Test
+    public void enumValueTest(){
+        assertEquals(1, LevelMode.LEVEL_MODE_EASY.getValue());
+    }
+
 }

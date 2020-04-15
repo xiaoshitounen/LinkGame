@@ -1,4 +1,4 @@
-package swu.xl.linkgame;
+package swu.xl.linkgame.SelfView;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -6,12 +6,12 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-public class XLTextView extends androidx.appcompat.widget.AppCompatTextView {
-    public XLTextView(Context context) {
+public class XLButton extends androidx.appcompat.widget.AppCompatButton {
+    public XLButton(Context context) {
         super(context);
     }
 
-    public XLTextView(Context context, @Nullable AttributeSet attrs) {
+    public XLButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

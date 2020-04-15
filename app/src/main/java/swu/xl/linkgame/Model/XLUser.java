@@ -1,11 +1,13 @@
 package swu.xl.linkgame.Model;
 
+import org.litepal.crud.LitePalSupport;
+
 import java.util.List;
 
 /**
  * 用户
  */
-public class XLUser {
+public class XLUser extends LitePalSupport {
     //用户的账号
     private int u_id;
     //用户持有的金币数
@@ -46,5 +48,15 @@ public class XLUser {
 
     public void setU_background(int u_background) {
         this.u_background = u_background;
+    }
+
+    @Override
+    public String toString() {
+        return "XLUser{" +
+                "u_id=" + u_id +
+                ", u_money=" + u_money +
+                ", u_props=" + u_props +
+                ", u_background=" + u_background +
+                '}';
     }
 }

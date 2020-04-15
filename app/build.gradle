@@ -33,4 +33,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'org.litepal.android:java:3.0.0'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.0'
 }

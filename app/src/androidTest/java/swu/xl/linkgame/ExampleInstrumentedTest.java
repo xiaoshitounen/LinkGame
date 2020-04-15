@@ -7,6 +7,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.litepal.LitePal;
+
+import java.util.List;
+
+import swu.xl.linkgame.Constant.Enum.LevelMode;
+import swu.xl.linkgame.Model.XLLevel;
 
 import static org.junit.Assert.*;
 
@@ -23,5 +29,12 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         assertEquals("swu.xl.linkgame", appContext.getPackageName());
+    }
+
+    //测试简单模式查询的值
+    @Test
+    public void modeEasyCountTest(){
+        List<XLLevel> XLLevels = LitePal.where("l_mode == ?", "0").find(XLLevel.class);
+        assertEquals(20,XLLevels.size());
     }
 }

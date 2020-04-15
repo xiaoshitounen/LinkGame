@@ -1,9 +1,13 @@
 package swu.xl.linkgame.Model;
 
+import androidx.constraintlayout.solver.LinearSystem;
+
+import org.litepal.crud.LitePalSupport;
+
 /**
  * 道具
  */
-public class XLProp {
+public class XLProp extends LitePalSupport {
     //道具号
     private int p_id;
     //道具的种类
@@ -64,5 +68,17 @@ public class XLProp {
 
     public void setP_user(XLUser p_user) {
         this.p_user = p_user;
+    }
+
+    @Override
+    public String toString() {
+        return "XLProp{" +
+                "p_id=" + p_id +
+                ", p_kind=" + p_kind +
+                ", p_name='" + p_name + '\'' +
+                ", p_number=" + p_number +
+                ", p_price=" + p_price +
+                ", p_user=" + p_user +
+                '}';
     }
 }

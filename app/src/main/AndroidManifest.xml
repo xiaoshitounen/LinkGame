@@ -11,11 +11,15 @@
         android:theme="@style/AppTheme"
         android:name="org.litepal.LitePalApplication">
 
-        <activity android:name=".FailureActivity" />
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
 
-        <activity android:name=".SuccessActivity" />
+        <activity android:name=".Activity.FailureActivity" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.SuccessActivity" />
+
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
