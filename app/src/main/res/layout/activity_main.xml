@@ -31,6 +31,8 @@
         <Button
             android:id="@+id/main_mode_easy"
             style="@style/Mode_btn"
+            android:drawableLeft="@drawable/main_mode_easy"
+            android:drawablePadding="50dp"
             />
 
         <!--普通-->
