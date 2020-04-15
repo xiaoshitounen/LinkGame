@@ -1,5 +1,7 @@
 package swu.xl.linkgame.Model;
 
+import java.util.List;
+
 /**
  * 用户
  */
@@ -8,8 +10,8 @@ public class XLUser {
     private int u_id;
     //用户持有的金币数
     private int u_money;
-    //用户持有的道具号
-    private int p_id;
+    //用户持有的道具
+    private List<XLProp> u_props;
     //当前用户使用的游戏背景
     private int u_background;
 
@@ -30,12 +32,12 @@ public class XLUser {
         this.u_money = u_money;
     }
 
-    public int getP_id() {
-        return p_id;
+    public List<XLProp> getU_props() {
+        return u_props;
     }
 
-    public void setP_id(int p_id) {
-        this.p_id = p_id;
+    public void setU_props(List<XLProp> u_props) {
+        this.u_props = u_props;
     }
 
     public int getU_background() {

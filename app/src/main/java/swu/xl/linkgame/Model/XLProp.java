@@ -14,6 +14,8 @@ public class XLProp {
     private int p_number;
     //道具的价格
     private int p_price;
+    //道具属于谁
+    private XLUser p_user;
 
     //setter，getter方法
     public int getP_id() {
@@ -54,5 +56,13 @@ public class XLProp {
 
     public void setP_price(int p_price) {
         this.p_price = p_price;
+    }
+
+    public XLUser getP_user() {
+        return p_user;
+    }
+
+    public void setP_user(XLUser p_user) {
+        this.p_user = p_user;
     }
 }

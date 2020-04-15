@@ -15,11 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //数据库
+        //数据库 LitePal
         LitePal.initialize(this);
-
-        SQLiteDatabase db = LitePal.getDatabase();
-
         //startActivity(new Intent(this,FailureActivity.class));
     }
 }
