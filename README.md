@@ -3,6 +3,7 @@
 
 #### 第一次commit-2020-04-15:
 - 项目基础操作。
+- 自定义XLTextView和XLButton类，方便设置其字体样式为指定的字体样式。
 - 成功，失败界面搭建。
 - 文件结构调整。
 - 数据库创建（第三方库：[Litepal](https://github.com/LitePalFramework/LitePal)）。
