@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--
+    	数据库名称
+    -->
+    <dbname value="link_game" />
+
+    <!--
+    	数据库版本
+    -->
+    <version value="1" />
+
+    <!--
+    	数据库持有的表
+    -->
+    <list>
+        <mapping class="swu.xl.linkgame.Model.XLUser"  />
+        <mapping class="swu.xl.linkgame.Model.XLProp"  />
+        <mapping class="swu.xl.linkgame.Model.XLLevel" />
+    </list>
+
+</litepal>

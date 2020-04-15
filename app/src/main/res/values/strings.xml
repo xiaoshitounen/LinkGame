@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">连连看</string>
+    <string name="Score">分数</string>
+    <string name="Time">时间</string>
+    <string name="Batter">连击</string>
+    <string name="Failure">失败啦!</string>
+    <string name="Success">恭喜通关!</string>
+</resources>

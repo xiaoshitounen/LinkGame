@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FailureActivity"
+    android:background="@drawable/bg_success_failure"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <!--哭泣的比卡丘-->
+        <ImageView
+            android:id="@+id/cry_pikaqiu"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pikaqiu_cry"
+            android:layout_centerInParent="true"
+            />
+
+        <!--失败了-->
+        <swu.xl.linkgame.XLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cry_pikaqiu"
+            android:layout_marginTop="180dp"
+            android:layout_centerHorizontal="true"
+
+            android:text="@string/Failure"
+            style="@style/ShowMessage_Failure_Text"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        >
+
+        <!--关卡菜单按钮-->
+        <ImageButton
+            android:id="@+id/btn_menu"
+            style="@style/operation_btn"
+            android:src="@drawable/menu"
+            android:background="@drawable/btn_shape_menu"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="50dp"
+            />
+
+        <!--刷新按钮-->
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            style="@style/operation_btn"
+            android:src="@drawable/refresh"
+            android:background="@drawable/btn_shape_refresh"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="50dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

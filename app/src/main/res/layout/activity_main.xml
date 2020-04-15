@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+
+    android:orientation="vertical"
+    android:background="@drawable/bg_main">
+
+    <!--标题部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        >
+
+    </LinearLayout>
+
+    <!--模式部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+        <!--简单-->
+        <Button
+            android:id="@+id/main_mode_easy"
+            style="@style/Mode_btn"
+            />
+
+        <!--普通-->
+        <Button
+            android:id="@+id/main_mode_normal"
+            style="@style/Mode_btn"
+            />
+
+        <!--困难-->
+        <Button
+            android:id="@+id/main_mode_hard"
+            style="@style/Mode_btn"
+            />
+
+
+    </LinearLayout>
+
+    <!--相关设置-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1.5"
+        >
+
+    </LinearLayout>
+
+</LinearLayout>
