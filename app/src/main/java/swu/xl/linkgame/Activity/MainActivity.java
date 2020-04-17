@@ -2,9 +2,11 @@ package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,8 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import org.litepal.LitePal;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
@@ -106,6 +110,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.d(Constant.TAG,xlLevel.toString());
                 }
 
+                //跳转界面
+                Intent intent_easy = new Intent(this, LevelActivity.class);
+                //加入数据
+                Bundle bundle_easy = new Bundle();
+                //加入关卡模式数据
+                bundle_easy.putString("mode","简单");
+                //加入关卡数据
+                bundle_easy.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels1);
+                intent_easy.putExtras(bundle_easy);
+                //跳转
+                startActivity(intent_easy);
+
                 break;
             case R.id.main_mode_normal:
                 Log.d(Constant.TAG,"普通模式按钮");
@@ -119,6 +135,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.d(Constant.TAG,xlLevel.toString());
                 }
 
+                //跳转界面
+                Intent intent_normal = new Intent(this, LevelActivity.class);
+                //加入数据
+                Bundle bundle_normal = new Bundle();
+                //加入关卡模式数据
+                bundle_normal.putString("mode","简单");
+                //加入关卡数据
+                bundle_normal.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels2);
+                intent_normal.putExtras(bundle_normal);
+                //跳转
+                startActivity(intent_normal);
+
                 break;
             case R.id.main_mode_hard:
                 Log.d(Constant.TAG,"困难模式按钮");
@@ -131,6 +159,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for (XLLevel xlLevel : XLLevels3) {
                     Log.d(Constant.TAG,xlLevel.toString());
                 }
+
+                //跳转界面
+                Intent intent_hard = new Intent(this, LevelActivity.class);
+                //加入数据
+                Bundle bundle_hard = new Bundle();
+                //加入关卡模式数据
+                bundle_hard.putString("mode","简单");
+                //加入关卡数据
+                bundle_hard.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels3);
+                intent_hard.putExtras(bundle_hard);
+                //跳转
+                startActivity(intent_hard);
 
                 break;
             case R.id.main_setting:

@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/animals"
+            android:src="@drawable/success_animals"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="80dp"
             />
@@ -28,7 +28,7 @@
             android:id="@+id/iv_banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/banner"
+            android:src="@drawable/success_banner"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             />
@@ -64,7 +64,7 @@
                 android:id="@+id/star_left"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/star"
+                android:src="@drawable/success_star"
                 android:layout_alignEnd="@id/star_middle"
                 android:layout_marginEnd="70dp"
                 android:layout_marginTop="10dp"/>
@@ -73,14 +73,14 @@
                 android:id="@+id/star_middle"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/star"
+                android:src="@drawable/success_star"
                 android:layout_centerHorizontal="true"/>
 
             <ImageView
                 android:id="@+id/star_right"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/star"
+                android:src="@drawable/success_star"
                 android:layout_alignStart="@id/star_middle"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="10dp"/>

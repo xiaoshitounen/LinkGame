@@ -1,11 +1,14 @@
 package swu.xl.linkgame.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
  * 关卡类
  */
-public class XLLevel extends LitePalSupport {
+public class XLLevel extends LitePalSupport implements Parcelable {
     //关卡号
     private int l_id;
     //闯关时间
@@ -68,4 +71,39 @@ public class XLLevel extends LitePalSupport {
                 ", l_money=" + l_money +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(l_id);
+        dest.writeInt(l_time);
+        dest.writeCharArray(new char[]{l_mode,l_new});
+        dest.writeInt(l_money);
+    }
+
+    public static final Creator<XLLevel> CREATOR = new Creator<XLLevel>() {
+        @Override
+        public XLLevel createFromParcel(Parcel in) {
+            //必须按顺序读取
+            XLLevel xlLevel = new XLLevel();
+            xlLevel.l_id = in.readInt();
+            xlLevel.l_time = in.readInt();
+            char[] temp = new char[2];
+            in.readCharArray(temp);
+            xlLevel.l_mode = temp[0];
+            xlLevel.l_new = temp[1];
+            xlLevel.l_money = in.readInt();
+
+            return xlLevel;
+        }
+
+        @Override
+        public XLLevel[] newArray(int size) {
+            return new XLLevel[size];
+        }
+    };
 }

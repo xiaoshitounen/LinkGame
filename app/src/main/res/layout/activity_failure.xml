@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/pikaqiu_cry"
+            android:src="@drawable/failure_pikaqiu_cry"
             android:layout_centerInParent="true"
             />
 

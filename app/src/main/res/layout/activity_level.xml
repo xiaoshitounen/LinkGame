@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LevelActivity"
+
+    android:background="@drawable/level_bg">
+
+    <!--关卡列表-->
+    <RelativeLayout
+        android:id="@+id/level_show"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/page_controller"
+        >
+
+        <!--多页面显示关卡-->
+        <HorizontalScrollView
+            android:id="@+id/level_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/level_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <!--关卡控制器-->
+    <RelativeLayout
+        android:id="@+id/page_controller"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:layout_constraintTop_toBottomOf="@id/level_show"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <!--返回按钮-->
+        <ImageButton
+            android:id="@+id/pager_back"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            style="@style/operation_btn"
+            android:background="@drawable/btn_shape_next"
+            android:src="@drawable/level_back"
+            />
+
+        <!--页面控制器-->
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+
+            <Button
+                android:id="@+id/pager_up"
+                style="@style/pager_bg"
+                android:background="@drawable/level_page_up"
+                />
+
+            <swu.xl.linkgame.SelfView.XLTextView
+                android:id="@+id/pager_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/2"
+                android:layout_gravity="center_vertical"
+                style="@style/ShowPagerMessage"
+                />
+
+            <Button
+                android:id="@+id/pager_down"
+                style="@style/pager_bg"
+                android:background="@drawable/level_page_down"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
