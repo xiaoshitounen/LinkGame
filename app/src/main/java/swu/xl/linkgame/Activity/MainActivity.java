@@ -15,12 +15,12 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import org.litepal.LitePal;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LitePal.initialize(this);
         SQLiteDatabase db = LitePal.getDatabase();
 
+        //向数据库装入数据
+        initSQLite3();
+
         //初始化数据
         initView();
 
@@ -61,6 +64,93 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setDrawableLeft(mode_easy,R.drawable.main_mode_easy);
         setDrawableLeft(mode_normal,R.drawable.main_mode_normal);
         setDrawableLeft(mode_hard,R.drawable.main_mode_hard);
+    }
+
+    /**
+     * 初始化数据库
+     */
+    private void initSQLite3() {
+        //查找当前数据库的内容
+        List<XLUser> users = LitePal.findAll(XLUser.class);
+        List<XLLevel> levels = LitePal.findAll(XLLevel.class);
+
+        //用户数据
+        if (users.size() == 0){
+            XLUser user = new XLUser();
+            user.setU_id(1701);
+            user.setU_money(0);
+            user.setU_background(0);
+            user.save();
+        }
+
+        //如果数据为空，装入数据
+        if (levels.size() == 0){
+            //简单模式
+            for(int i = 1; i <= 20; i++){
+                XLLevel level = new XLLevel();
+                //设置关卡号
+                level.setL_id(i);
+                //设置关卡模式
+                level.setL_mode('1');
+                //设置关卡闯关成功的金币
+                level.setL_money(0);
+                //设置关卡的闯关状态
+                if (i == 1){
+                    level.setL_new('4');
+                }else {
+                    level.setL_new('0');
+                }
+                //设置关卡的闯关时间
+                level.setL_time(0);
+
+                //插入
+                level.save();
+            }
+
+            //普通模式
+            for(int i = 1; i <= 20; i++){
+                XLLevel level = new XLLevel();
+                //设置关卡号
+                level.setL_id(i);
+                //设置关卡模式
+                level.setL_mode('2');
+                //设置关卡闯关成功的金币
+                level.setL_money(0);
+                //设置关卡的闯关状态
+                if (i == 1){
+                    level.setL_new('4');
+                }else {
+                    level.setL_new('0');
+                }
+                //设置关卡的闯关时间
+                level.setL_time(0);
+
+                //插入
+                level.save();
+            }
+
+            //困难模式
+            for(int i = 1; i <= 20; i++){
+                XLLevel level = new XLLevel();
+                //设置关卡号
+                level.setL_id(i);
+                //设置关卡模式
+                level.setL_mode('3');
+                //设置关卡闯关成功的金币
+                level.setL_money(0);
+                //设置关卡的闯关状态
+                if (i == 1){
+                    level.setL_new('4');
+                }else {
+                    level.setL_new('0');
+                }
+                //设置关卡的闯关时间
+                level.setL_time(0);
+
+                //插入
+                level.save();
+            }
+        }
     }
 
     /**

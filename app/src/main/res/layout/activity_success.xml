@@ -7,7 +7,7 @@
     tools:context=".Activity.SuccessActivity"
 
     android:orientation="vertical"
-    android:background="@drawable/bg_success_failure">
+    android:background="@drawable/bg_success_failure_link">
 
     <!--banner部分-->
     <RelativeLayout

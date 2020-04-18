@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.FailureActivity"
-    android:background="@drawable/bg_success_failure"
+    android:background="@drawable/bg_success_failure_link"
     android:orientation="vertical">
 
     <RelativeLayout

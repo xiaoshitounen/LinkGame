@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
@@ -18,6 +20,10 @@ public class LinkActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link);
+
+        //沉浸式状态栏
+        ImmersionBar.with(this).init();
+
         //加载数据
         initData();
     }
