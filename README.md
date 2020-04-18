@@ -19,3 +19,10 @@
 - 数据库可视化依赖（第三方库：[Android-Debug-Database](https://github.com/amitshekhariitbhu/Android-Debug-Database)）。
 - 数据库查询操作（注意DataSupport已经废弃，模型类需要继承于LitePalSupport）。
 - 数据库查询测试。
+
+#### 第四次commit-2020-04-17-19:10：
+- 枚举的完善。
+- Activity跳转，携带自定义类的数据。针对数据模型类，实现Serializable接口或Parcelable接口接口。
+- 关卡页面布局。
+- 自定义XLImageView，显示不同关卡状态的图片。
+- 完善工具类：获取屏幕宽度，高度。
