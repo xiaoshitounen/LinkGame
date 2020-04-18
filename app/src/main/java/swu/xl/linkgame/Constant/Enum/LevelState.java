@@ -5,44 +5,48 @@ package swu.xl.linkgame.Constant.Enum;
  */
 public enum LevelState {
     //没有闯关
-    LEVEL_STATE_NO(0),
+    LEVEL_STATE_NO('0'),
     //一星
-    LEVEL_STATE_ONE(1),
+    LEVEL_STATE_ONE('1'),
     //二星
-    LEVEL_STATE_TWO(2),
+    LEVEL_STATE_TWO('2'),
     //三星
-    LEVEL_STATE_THREE(3),
+    LEVEL_STATE_THREE('3'),
     //闯关中
-    LEVEL_STATE_DOING(4);
+    LEVEL_STATE_DOING('4');
 
     //存储传递的值
-    private final int value;
+    private final char value;
 
     //构造方法
-    LevelState(int value) {
+    LevelState(char value) {
         this.value = value;
     }
 
     //getter方法
-    public int getValue() {
+    public char getValue() {
         return value;
     }
 
     //根据值得到状态
-    public static LevelState getState(int value){
+    public static LevelState getState(char value){
         LevelState levelState = LEVEL_STATE_NO;
 
         //找到对应的state
         switch (value){
-            case 0:
+            case '0':
                 levelState = LEVEL_STATE_NO;
-            case 1:
+                break;
+            case '1':
                 levelState = LEVEL_STATE_ONE;
-            case 2:
+                break;
+            case '2':
                 levelState = LEVEL_STATE_TWO;
-            case 3:
+                break;
+            case '3':
                 levelState = LEVEL_STATE_THREE;
-            case 4:
+                break;
+            case '4':
                 levelState = LEVEL_STATE_DOING;
         }
 

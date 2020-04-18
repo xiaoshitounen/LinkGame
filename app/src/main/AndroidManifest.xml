@@ -10,12 +10,13 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LevelActivity"></activity>
 
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
 
+        <activity android:name=".Activity.LinkActivity"></activity>
+        <activity android:name=".Activity.LevelActivity" />
         <activity android:name=".Activity.FailureActivity" />
         <activity android:name=".Activity.SuccessActivity" />
         <activity android:name=".Activity.MainActivity">

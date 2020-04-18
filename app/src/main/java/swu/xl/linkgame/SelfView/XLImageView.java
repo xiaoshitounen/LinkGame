@@ -30,6 +30,6 @@ public class XLImageView extends androidx.appcompat.widget.AppCompatImageView {
      */
     public void changeLevelState(LevelState levelState){
         //切换到对应状态的图片
-        this.setBackgroundResource(resources[levelState.getValue()]);
+        this.setBackgroundResource(resources[Integer.parseInt(String.valueOf(levelState.getValue()))]);
     }
 }

@@ -6,45 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".Activity.LevelActivity"
 
-    android:background="@drawable/level_bg">
+    android:background="@drawable/level_bg"
+    >
 
     <!--关卡列表-->
-    <RelativeLayout
-        android:id="@+id/level_show"
+    <HorizontalScrollView
+        android:id="@+id/level_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/page_controller"
+
+        android:scrollbars="none"
+        android:fillViewport="true"
         >
 
-        <!--多页面显示关卡-->
-        <HorizontalScrollView
-            android:id="@+id/level_pager"
+        <RelativeLayout
+            android:id="@+id/level_root"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             >
 
-            <RelativeLayout
-                android:id="@+id/level_root"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+        </RelativeLayout>
 
-            </RelativeLayout>
-
-        </HorizontalScrollView>
-
-    </RelativeLayout>
+    </HorizontalScrollView>
 
     <!--关卡控制器-->
     <RelativeLayout
         android:id="@+id/page_controller"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:layout_constraintTop_toBottomOf="@id/level_show"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/level_pager"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
