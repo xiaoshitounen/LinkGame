@@ -65,7 +65,8 @@
             <Button
                 android:id="@+id/pager_up"
                 style="@style/pager_bg"
-                android:background="@drawable/level_page_up"
+                android:background="@drawable/level_page_up_enable"
+                android:enabled="false"
                 />
 
             <swu.xl.linkgame.SelfView.XLTextView

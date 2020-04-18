@@ -7,6 +7,8 @@
     tools:context=".Activity.LinkActivity"
 
     android:background="@drawable/bg_success_failure_link"
+
     >
+
 
 </RelativeLayout>

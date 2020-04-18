@@ -3,8 +3,12 @@ package swu.xl.linkgame.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -41,4 +45,5 @@ public class LinkActivity extends AppCompatActivity {
         Log.d(Constant.TAG,"--------");
         Log.d(Constant.TAG, String.valueOf(level));
     }
+
 }

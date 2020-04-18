@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //如果数据为空，装入数据
         if (levels.size() == 0){
             //简单模式
-            for(int i = 1; i <= 20; i++){
+            for(int i = 1; i <= 40; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //普通模式
-            for(int i = 1; i <= 20; i++){
+            for(int i = 1; i <= 40; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //困难模式
-            for(int i = 1; i <= 20; i++){
+            for(int i = 1; i <= 40; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
