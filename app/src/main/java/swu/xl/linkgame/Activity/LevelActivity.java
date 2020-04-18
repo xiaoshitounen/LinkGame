@@ -119,10 +119,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         pager_text = findViewById(R.id.pager_text);
 
         level_pager = findViewById(R.id.level_pager);
+        //禁止HorizontalScrollView滑动
         level_pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //禁止HorizontalScrollView滑动
                 //滑动会影响页面控制器
                 //HorizontalScrollView滑动时也没有回调方法
                 return true;
