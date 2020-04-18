@@ -31,3 +31,7 @@
 - 关卡页面bug解决。不是Horizontal无法嵌套RelativeLayout而是计算页面的时候理论上应该这样计算`int pager = i / Constant.level_pager_count;`，但是最终写成了对`level_width`取整。
 - 创建了游戏界面，关卡界面到游戏界面的数据传递已经完成。
 - 注意：游戏界面到数据界面的回调数据还没有完成。
+
+#### 第六次commit-2020-04-18-10:37:
+- 数据库的初始化问题解决，代码自动判断生成关卡表的数据。
+- Android Debug Database的使用条件是手机和电脑在同一个局域网下。
