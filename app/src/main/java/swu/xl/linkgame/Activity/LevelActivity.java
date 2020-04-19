@@ -16,6 +16,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -119,10 +120,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         pager_text = findViewById(R.id.pager_text);
 
         level_pager = findViewById(R.id.level_pager);
-        //禁止HorizontalScrollView滑动
         level_pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                //禁止HorizontalScrollView滑动
                 //滑动会影响页面控制器
                 //HorizontalScrollView滑动时也没有回调方法
                 return true;
@@ -195,6 +196,8 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                             //判断是否可以进入该关卡
                             if (LevelState.getState(levels.get(v.getId()).getL_new()) != LevelState.LEVEL_STATE_NO){
                                 jumpToLinkActivity(levels.get(v.getId()));
+                            }else {
+                                Toast.makeText(LevelActivity.this, "当前关卡不可进入", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -13,6 +13,11 @@ import android.widget.RelativeLayout;
 import com.gyf.immersionbar.ImmersionBar;
 
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.LinkGame.AnimalPoint;
+import swu.xl.linkgame.LinkGame.AnimalSearch;
+import swu.xl.linkgame.LinkGame.AnimalView;
+import swu.xl.linkgame.LinkGame.LinkBoard;
+import swu.xl.linkgame.LinkGame.LinkInfo;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
 

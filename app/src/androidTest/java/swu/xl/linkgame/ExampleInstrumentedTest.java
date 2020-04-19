@@ -30,11 +30,4 @@ public class ExampleInstrumentedTest {
 
         assertEquals("swu.xl.linkgame", appContext.getPackageName());
     }
-
-    //测试简单模式查询的值
-    @Test
-    public void modeEasyCountTest(){
-        List<XLLevel> XLLevels = LitePal.where("l_mode == ?", "0").find(XLLevel.class);
-        assertEquals(20,XLLevels.size());
-    }
 }
