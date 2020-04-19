@@ -22,7 +22,7 @@ import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
 
 public class LinkActivity extends AppCompatActivity {
-    //当前关卡
+    //当前关卡模型数据
     XLLevel level;
 
     @Override
