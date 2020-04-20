@@ -49,3 +49,8 @@
 - 抽象出LinkBoard接口用来存储相关布局以及数据。
 - 抽象出AnimalSearch类用来判断在给定的布局中所给的两个AnimalView能否按照给定的规则连接。
 - 抽象出LinkInfo类用来存储两个AnimalView相连接所涉及的点信息。
+
+#### 第九次commit-2020-04-20-10:11:
+- 抽象出的LinkBoard接口更改为LinkConstant作用不变。
+- 使用单例模式抽象出LinkManager类用来管理一局游戏，目前已经完成了开始游戏的布局部分。
+- 创建工具类LinkUtil辅助LinkManager完成任务。
