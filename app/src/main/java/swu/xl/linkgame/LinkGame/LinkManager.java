@@ -1,6 +1,7 @@
 package swu.xl.linkgame.LinkGame;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class LinkManager {
     //掌管游戏时间
     private int time = LinkConstant.time;
 
+    //偏移间距
+    private int padding;
+
     //存储所有AnimalView
     private List<AnimalView> animals = new ArrayList<>();
 
@@ -36,16 +40,23 @@ public class LinkManager {
     }
 
     //开始游戏
-    public void startGame(Context context, RelativeLayout layout, int width, float density, int level_id, int level_mode){
+    public void startGame(Context context, RelativeLayout layout, int width,int level_id, int level_mode){
+        //清楚上一次游戏的痕迹
+        board = null;
+        time = LinkConstant.time;
+        padding = 0;
+        animals.clear();
+        lastAnimal = null;
+
         //产生二维数组布局模板
         setBoard(LinkUtil.loadLevelWithIdAndMode(level_id,level_mode));
 
         //界面布局
-        addAnimalViewToLayout(context,layout,width,density);
+        addAnimalViewToLayout(context,layout,width);
     }
 
     //在给定的布局上添加AnimalView
-    private void addAnimalViewToLayout(Context context, RelativeLayout layout, int width, float density){
+    private void addAnimalViewToLayout(Context context, RelativeLayout layout, int width){
         //随机加载AnimalView的显示图片
         List<Integer> resources = LinkUtil.loadPictureResourceWithBoard(getBoard());
 
@@ -54,46 +65,54 @@ public class LinkManager {
         int col_animal_num = getBoard()[0].length;
 
         //计算两边的间距
-        int padding = (width - row_animal_num * PxUtil.dpToPx(LinkConstant.animal_size, density)) / 2;
+        padding = (width - col_animal_num * PxUtil.dpToPx(LinkConstant.animal_size, context)) / 2;
 
         //依次添加到布局中
         for (int i = 0; i < row_animal_num; i++) {
             for (int j = 0; j < col_animal_num; j++) {
                 //判断当前位置是否需要显示内容
+                AnimalView animal;
                 if (getBoard()[i][j] == 0){
-                    continue;
+                    animal = new AnimalView(
+                            context,
+                            0,
+                            new AnimalPoint(i,j));
+                    animal.setVisibility(View.INVISIBLE);
+                }else {
+                    //创建一个AnimalView
+                    animal = new AnimalView(
+                            context,
+                            LinkConstant.ANIMAL_RESOURCE[resources.get(getBoard()[i][j]-1)],
+                            getBoard()[i][j],
+                            new AnimalPoint(i, j)
+                    );
                 }
-
-                //创建一个AnimalView
-                AnimalView animal = new AnimalView(context,
-                        LinkConstant.ANIMAL_RESOURCE[resources.get(getBoard()[i][j]-1)],
-                        getBoard()[i][j],
-                        new AnimalPoint(i, j)
-                );
 
                 //创建布局约束
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                        PxUtil.dpToPx(LinkConstant.animal_size,density),
-                        PxUtil.dpToPx(LinkConstant.animal_size,density)
+                        PxUtil.dpToPx(LinkConstant.animal_size,context),
+                        PxUtil.dpToPx(LinkConstant.animal_size,context)
                 );
 
                 //左上间距
-                layoutParams.leftMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,density) * i;
-                layoutParams.topMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,density) * j;
+                layoutParams.leftMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,context) * j;
+                layoutParams.topMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,context) * i;
 
                 //设置内间距
                 animal.setPadding(
-                        PxUtil.dpToPx(LinkConstant.animal_padding,density),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,density),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,density),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,density)
+                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
+                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
+                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
+                        PxUtil.dpToPx(LinkConstant.animal_padding,context)
                 );
 
                 //添加视图
                 layout.addView(animal,layoutParams);
 
                 //保存该视图
-                animals.add(animal);
+                if (animal.getFlag() != 0){
+                    animals.add(animal);
+                }
             }
         }
     }
@@ -139,5 +158,13 @@ public class LinkManager {
 
     public void setLastAnimal(AnimalView lastAnimal) {
         this.lastAnimal = lastAnimal;
+    }
+
+    public int getPadding() {
+        return padding;
+    }
+
+    public void setPadding(int padding) {
+        this.padding = padding;
     }
 }

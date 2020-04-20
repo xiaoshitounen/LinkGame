@@ -1,10 +1,29 @@
 package swu.xl.linkgame.LinkGame;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import swu.xl.linkgame.Util.PxUtil;
+
 public class LinkUtil {
+    /**
+     * 索引坐标->真实坐标
+     * @param point
+     * @param context
+     * @return
+     */
+    public static AnimalPoint getRealAnimalPoint(AnimalPoint point, Context context){
+        LinkManager manager = LinkManager.getLinkManager();
+
+        return new AnimalPoint(
+                manager.getPadding() + PxUtil.dpToPx(LinkConstant.animal_size,context) / 2 + point.y  * PxUtil.dpToPx(LinkConstant.animal_size,context),
+                manager.getPadding() + PxUtil.dpToPx(LinkConstant.animal_size,context) / 2 + point.x  * PxUtil.dpToPx(LinkConstant.animal_size,context)
+        );
+    }
+
     /**
      * 加载给定关卡号和难度的布局
      * @param level_id
@@ -12,7 +31,18 @@ public class LinkUtil {
      * @return
      */
     public static int[][] loadLevelWithIdAndMode(int level_id, int level_mode){
-        return LinkConstant.board_test1;
+        int row = LinkConstant.board_test1.length;
+        int col = LinkConstant.board_test1[0].length;
+
+        int[][] clone = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                clone[i][j] = LinkConstant.board_test1[i][j];
+            }
+        }
+
+        return clone;
     }
 
     /**

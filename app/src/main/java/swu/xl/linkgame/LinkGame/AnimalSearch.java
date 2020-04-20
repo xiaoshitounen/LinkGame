@@ -20,9 +20,9 @@ public class AnimalSearch {
         int min = 0;
         int max = 0;
 
-        //如果两个点 x 坐标相同，则在水平方向扫描
+        //如果两个点 x 坐标相同，则在竖直方向扫描
         if (startPoint.x == endPoint.x){
-            //水平方向扫描的范围
+            //竖直方向扫描的范围
             min = Math.min(startPoint.y,endPoint.y);
             max = Math.max(startPoint.y,endPoint.y);
 
@@ -33,7 +33,7 @@ public class AnimalSearch {
                 }
             }
         }else {
-            //如果两个点 y 坐标相同，则在竖直方向扫描
+            //如果两个点 y 坐标相同，则在水平方向扫描
 
             //水平方向扫描的范围
             min = Math.min(startPoint.x,endPoint.x);
@@ -116,6 +116,7 @@ public class AnimalSearch {
 
         //判断是不是一个转折连接
         if (canMatchTwoAnimalWithOneBreak(board,startPoint,endPoint,linkInfo)){
+
             return true;
         }
 

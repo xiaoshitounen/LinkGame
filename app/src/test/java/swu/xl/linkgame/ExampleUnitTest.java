@@ -159,4 +159,33 @@ public class ExampleUnitTest {
 
         assertEquals(4,lists.size());
     }
+
+    //追加测试
+    //一个转折点:测试连连看(1,3),(3,1)两点相连的点信息
+    @Test
+    public void matchOneLinkInfo_Add(){
+        LinkInfo linkInfo = new LinkInfo();
+
+        AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+                LinkConstant.board_test3,
+                new AnimalPoint(1, 3),
+                new AnimalPoint(3, 1),
+                linkInfo
+        );
+
+        assertEquals(3,linkInfo.getPoints().size());
+    }
+
+    //无转折点：测试连连看(1,3),(3,1)两点是否可以相连的逻辑实现
+    @Test
+    public void canMatchNo_Add(){
+        LinkInfo linkInfo = new LinkInfo();
+
+        assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+                LinkConstant.board_test3,
+                new AnimalPoint(1, 3),
+                new AnimalPoint(3, 1),
+                linkInfo
+        ));
+    }
 }

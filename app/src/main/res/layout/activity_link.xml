@@ -9,8 +9,13 @@
     android:background="@drawable/bg_success_failure_link"
     >
 
-    <!--布局部分-->
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <!--布局部分-->
+    <swu.xl.linkgame.LinkGame.XLRelativeLayout
         android:id="@+id/link_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,7 +1,5 @@
 package swu.xl.linkgame.LinkGame;
 
-import android.graphics.Point;
-
 import java.util.ArrayList;
 import java.util.List;
 

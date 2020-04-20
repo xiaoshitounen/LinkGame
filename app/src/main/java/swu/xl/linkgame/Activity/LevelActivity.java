@@ -28,9 +28,6 @@ import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
-    //屏幕密度
-    float density;
-
     //屏幕宽度
     int screenWidth;
 
@@ -104,9 +101,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
-        //屏幕密度
-        density = getResources().getDisplayMetrics().density;
-
         //屏幕的宽高
         screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());
         Log.d(Constant.TAG,"屏幕宽度："+screenWidth);
@@ -152,7 +146,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                     int pager_col = i % Constant.level_pager_count % Constant.level_row_count;
                     //边距
                     int level_padding = (screenWidth - Constant.level_row_count *
-                            PxUtil.dpToPx(Constant.level_size,density)) /
+                            PxUtil.dpToPx(Constant.level_size,getApplicationContext())) /
                             (Constant.level_row_count + 1);
 
                     //创建视图
@@ -165,16 +159,16 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
                     //布局参数
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                            PxUtil.dpToPx(Constant.level_size,density),
-                            PxUtil.dpToPx(Constant.level_size,density)
+                            PxUtil.dpToPx(Constant.level_size,getApplicationContext()),
+                            PxUtil.dpToPx(Constant.level_size,getApplicationContext())
                     );
 
                     //添加约束
                     layoutParams.leftMargin = screenWidth * pager + level_padding +
-                            (level_padding + PxUtil.dpToPx(Constant.level_size,density)) * pager_col;
+                            (level_padding + PxUtil.dpToPx(Constant.level_size,getApplicationContext())) * pager_col;
                     layoutParams.topMargin = ScreenUtil.getStateBarHeight(getApplicationContext()) +
-                            PxUtil.dpToPx(Constant.level_top,density) +
-                            level_padding + (level_padding + PxUtil.dpToPx(Constant.level_size,density)) * pager_row;
+                            PxUtil.dpToPx(Constant.level_top,getApplicationContext()) +
+                            level_padding + (level_padding + PxUtil.dpToPx(Constant.level_size,getApplicationContext())) * pager_row;
 
                     //最后一位需要添加右边距
                     if (i == levels.size()-1) {

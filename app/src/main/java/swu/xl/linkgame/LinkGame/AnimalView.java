@@ -15,6 +15,11 @@ public class AnimalView extends androidx.appcompat.widget.AppCompatImageView {
      * 构造方法
      * @param context
      */
+    public AnimalView(Context context, int flag, AnimalPoint point) {
+        super(context);
+        this.flag = flag;
+        this.point = point;
+    }
     public AnimalView(Context context, int resource_src, int flag, AnimalPoint point) {
         super(context);
 
@@ -42,5 +47,13 @@ public class AnimalView extends androidx.appcompat.widget.AppCompatImageView {
 
     public AnimalPoint getPoint() {
         return point;
+    }
+
+    @Override
+    public String toString() {
+        return "AnimalView{" +
+                "flag=" + flag +
+                ", point=" + point +
+                '}';
     }
 }
