@@ -1,13 +1,10 @@
 package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +17,6 @@ import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
@@ -108,7 +104,12 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
+        //屏幕密度
         density = getResources().getDisplayMetrics().density;
+
+        //屏幕的宽高
+        screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());
+        Log.d(Constant.TAG,"屏幕宽度："+screenWidth);
 
         back = findViewById(R.id.pager_back);
         back.setOnClickListener(this);
@@ -140,10 +141,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         level_layout.post(new Runnable() {
             @Override
             public void run() {
-                //屏幕的宽高
-                screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());
-                Log.d(Constant.TAG,"屏幕宽度："+screenWidth);
-
                 //循环展示
                 for (int i = 0; i < levels.size(); i++){
                     //确定页数
@@ -155,7 +152,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                     int pager_col = i % Constant.level_pager_count % Constant.level_row_count;
                     //边距
                     int level_padding = (screenWidth - Constant.level_row_count *
-                            PxUtil.dpToPx(Constant.level_width,density)) /
+                            PxUtil.dpToPx(Constant.level_size,density)) /
                             (Constant.level_row_count + 1);
 
                     //创建视图
@@ -168,16 +165,16 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
                     //布局参数
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                            PxUtil.dpToPx(Constant.level_width,density),
-                            PxUtil.dpToPx(Constant.level_width,density)
+                            PxUtil.dpToPx(Constant.level_size,density),
+                            PxUtil.dpToPx(Constant.level_size,density)
                     );
 
                     //添加约束
                     layoutParams.leftMargin = screenWidth * pager + level_padding +
-                            (level_padding + PxUtil.dpToPx(Constant.level_width,density)) * pager_col;
+                            (level_padding + PxUtil.dpToPx(Constant.level_size,density)) * pager_col;
                     layoutParams.topMargin = ScreenUtil.getStateBarHeight(getApplicationContext()) +
                             PxUtil.dpToPx(Constant.level_top,density) +
-                            level_padding + (level_padding + PxUtil.dpToPx(Constant.level_width,density)) * pager_row;
+                            level_padding + (level_padding + PxUtil.dpToPx(Constant.level_size,density)) * pager_row;
 
                     //最后一位需要添加右边距
                     if (i == levels.size()-1) {

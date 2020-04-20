@@ -2,11 +2,14 @@ package swu.xl.linkgame;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import swu.xl.linkgame.Constant.Enum.LevelMode;
 import swu.xl.linkgame.LinkGame.AnimalPoint;
 import swu.xl.linkgame.LinkGame.AnimalSearch;
-import swu.xl.linkgame.LinkGame.LinkBoard;
+import swu.xl.linkgame.LinkGame.LinkConstant;
 import swu.xl.linkgame.LinkGame.LinkInfo;
+import swu.xl.linkgame.LinkGame.LinkUtil;
 
 import static org.junit.Assert.*;
 
@@ -41,7 +44,7 @@ public class ExampleUnitTest {
      * 0,1,0,3,4,0
      * 0,2,0,1,4,0
      * 0,3,1,3,2,0
-     * 0,1,4,2,3,0
+     * 0,1,5,2,3,0
      * 0,0,0,0,0,0
      */
 
@@ -51,7 +54,7 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test1,
+                LinkConstant.board_test1,
                 new AnimalPoint(1, 1),
                 new AnimalPoint(4, 1),
                 linkInfo
@@ -64,7 +67,7 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test1,
+                LinkConstant.board_test1,
                 new AnimalPoint(1, 1),
                 new AnimalPoint(4, 1),
                 linkInfo
@@ -79,7 +82,7 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test2,
+                LinkConstant.board_test2,
                 new AnimalPoint(2, 3),
                 new AnimalPoint(3, 2),
                 linkInfo
@@ -92,7 +95,7 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test2,
+                LinkConstant.board_test2,
                 new AnimalPoint(2, 3),
                 new AnimalPoint(3, 2),
                 linkInfo
@@ -107,7 +110,7 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test1,
+                LinkConstant.board_test1,
                 new AnimalPoint(1, 4),
                 new AnimalPoint(2, 4),
                 linkInfo
@@ -120,12 +123,40 @@ public class ExampleUnitTest {
         LinkInfo linkInfo = new LinkInfo();
 
         AnimalSearch.canMatchTwoAnimalWithTwoBreak(
-                LinkBoard.board_test1,
+                LinkConstant.board_test1,
                 new AnimalPoint(1, 4),
                 new AnimalPoint(2, 4),
                 linkInfo
         );
 
         assertEquals(2,linkInfo.getPoints().size());
+    }
+
+    //测试二维矩阵最大值的求解
+    @Test
+    public void maxData_Test1(){
+        int maxData = LinkUtil.getMaxData(LinkConstant.board_test1);
+
+        assertEquals(4,maxData);
+    }
+
+    //测试二维矩阵最大值的求解
+    @Test
+    public void maxData_Test2(){
+        int maxData = LinkUtil.getMaxData(LinkConstant.board_test2);
+
+        assertEquals(5,maxData);
+    }
+
+    //测试加载的图片是否随机
+    @Test
+    public void randomResource(){
+        List<Integer> lists = LinkUtil.loadPictureResourceWithBoard(LinkConstant.board_test1);
+
+        for (int i = 0; i < lists.size(); i++) {
+            System.out.println(lists.get(i));
+        }
+
+        assertEquals(4,lists.size());
     }
 }

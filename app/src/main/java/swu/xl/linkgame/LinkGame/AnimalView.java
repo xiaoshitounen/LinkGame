@@ -2,6 +2,8 @@ package swu.xl.linkgame.LinkGame;
 
 import android.content.Context;
 
+import swu.xl.linkgame.Util.PxUtil;
+
 public class AnimalView extends androidx.appcompat.widget.AppCompatImageView {
     //图片的标志代号，用来判断两个图片是否相等
     private int flag;
@@ -17,7 +19,7 @@ public class AnimalView extends androidx.appcompat.widget.AppCompatImageView {
         super(context);
 
         //设置背景颜色
-        this.setBackgroundResource(LinkBoard.ANIMAL_BG);
+        this.setBackgroundResource(LinkConstant.ANIMAL_BG);
         //设置显示的图片
         this.setImageResource(resource_src);
 

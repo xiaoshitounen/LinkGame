@@ -7,8 +7,15 @@
     tools:context=".Activity.LinkActivity"
 
     android:background="@drawable/bg_success_failure_link"
-
     >
+
+    <!--布局部分-->
+    <RelativeLayout
+        android:id="@+id/link_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
 
 </RelativeLayout>

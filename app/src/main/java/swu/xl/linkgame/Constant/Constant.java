@@ -11,7 +11,7 @@ public interface Constant {
     int level_row_count = 4;
 
     //关卡的宽高,dp
-    int level_width = 60;
+    int level_size = 60;
 
     //关卡总体向下偏移的距离
     int level_top = 60;
