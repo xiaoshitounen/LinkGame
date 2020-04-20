@@ -54,3 +54,7 @@
 - 抽象出的LinkBoard接口更改为LinkConstant作用不变。
 - 使用单例模式抽象出LinkManager类用来管理一局游戏，目前已经完成了开始游戏的布局部分。
 - 创建工具类LinkUtil辅助LinkManager完成任务。
+
+#### 第十次commit-2020-04-20-21-30:
+- 修改PxUtil传入参数density修改为context。
+- 游戏的逻辑实现完成包括布局显示、事件交互、简单的动画。
