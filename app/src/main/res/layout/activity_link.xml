@@ -9,6 +9,7 @@
     android:background="@drawable/bg_success_failure_link"
     >
 
+    <!--关卡，道具，暂停信息-->
     <RelativeLayout
         android:id="@+id/message_show"
         android:layout_width="match_parent"
@@ -16,8 +17,6 @@
         android:paddingTop="40dp"
         android:background="@drawable/link_message"
         >
-
-        <!--关卡，道具，暂停信息-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +42,7 @@
                     />
 
                 <swu.xl.linkgame.SelfView.XLTextView
+                    android:id="@+id/link_level_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="15"
@@ -54,6 +54,7 @@
 
             <!--道具 拳击-->
             <RelativeLayout
+                android:id="@+id/link_prop_fight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
@@ -73,6 +74,7 @@
 
             <!--道具 诈弹-->
             <RelativeLayout
+                android:id="@+id/link_prop_bomb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
@@ -94,6 +96,7 @@
 
             <!--道具 混乱-->
             <RelativeLayout
+                android:id="@+id/link_prop_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
@@ -115,6 +118,7 @@
 
             <!--暂停-->
             <ImageView
+                android:id="@+id/link_pause"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="15dp"
@@ -151,10 +155,28 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="1099"
-            style="@style/money_text"
+            style="@style/link_money_text"
             />
 
     </LinearLayout>
+
+    <!--时间控制-->
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="-40dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/link_time_bg"
+        >
+
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="61.7秒"
+            style="@style/link_time_text"
+            />
+
+    </RelativeLayout>
 
     <!--布局部分-->
     <swu.xl.linkgame.LinkGame.XLRelativeLayout

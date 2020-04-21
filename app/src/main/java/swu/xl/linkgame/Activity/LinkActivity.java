@@ -15,6 +15,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -30,7 +32,7 @@ import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 
-public class LinkActivity extends AppCompatActivity {
+public class LinkActivity extends AppCompatActivity implements View.OnClickListener {
     //屏幕宽度
     int screenWidth;
 
@@ -45,6 +47,19 @@ public class LinkActivity extends AppCompatActivity {
 
     //游戏管理者
     LinkManager manager;
+
+    //关卡显示的文本
+    TextView level_text;
+
+    //拳头道具
+    View prop_fight;
+    //炸弹道具
+    View prop_bomb;
+    //刷新道具
+    View prop_refresh;
+
+    //暂停
+    ImageView pause;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -199,6 +214,19 @@ public class LinkActivity extends AppCompatActivity {
         linkInfo = new LinkInfo();
 
         manager = LinkManager.getLinkManager();
+
+        level_text = findViewById(R.id.link_level_text);
+        level_text.setText(String.valueOf(level.getL_id()));
+
+        prop_fight = findViewById(R.id.prop_fight);
+        prop_fight.setOnClickListener(this);
+        prop_bomb = findViewById(R.id.prop_bomb);
+        prop_bomb.setOnClickListener(this);
+        prop_refresh = findViewById(R.id.prop_refresh);
+        prop_refresh.setOnClickListener(this);
+
+        pause = findViewById(R.id.link_pause);
+        pause.setOnClickListener(this);
     }
 
     /**
@@ -243,5 +271,24 @@ public class LinkActivity extends AppCompatActivity {
         //开启动画
         animal.startAnimation(animationSet);
         animationSet.startNow();
+    }
+
+    //点击事件
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.prop_fight:
+                Log.d(Constant.TAG,"拳头道具");
+                break;
+            case R.id.prop_bomb:
+                Log.d(Constant.TAG,"炸弹道具");
+                break;
+            case R.id.prop_refresh:
+                Log.d(Constant.TAG,"刷新道具");
+                break;
+            case R.id.link_pause:
+                Log.d(Constant.TAG,"暂停");
+                break;
+        }
     }
 }
