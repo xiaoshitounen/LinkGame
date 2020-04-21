@@ -82,7 +82,7 @@
     <style name="link_prop">
         <item name="android:layout_width">45dp</item>
         <item name="android:layout_height">45dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:background">@drawable/link_prop</item>
     </style>
