@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--第一层 阴影-->
+    <item>
+        <shape>
+            <corners android:bottomRightRadius="30dp"/>
+
+            <solid android:color="#991E506E"/>
+
+            <stroke android:width="1dp" android:color="#1e506e"/>
+        </shape>
+    </item>
+
+    <!--第二层 前景-->
+    <item android:bottom="3dp" android:left="0dp"
+        android:right="3dp" android:top="1dp"
+        >
+
+        <shape android:shape="rectangle">
+            <corners android:bottomRightRadius="30dp"/>
+
+            <solid android:color="#224A5E"/>
+
+            <stroke android:width="1dp" android:color="#1e506e"/>
+        </shape>
+
+    </item>
+
+
+</layer-list>

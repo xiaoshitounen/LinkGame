@@ -1,12 +1,14 @@
 package swu.xl.linkgame.LinkGame;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Util.PxUtil;
 
 /**
@@ -28,6 +30,9 @@ public class LinkManager {
 
     //保存上一个触摸的AnimalView
     private AnimalView lastAnimal;
+
+    //AnimalView的大小
+    private int animal_size;
 
     //单例模式
     private static LinkManager instance;
@@ -64,8 +69,16 @@ public class LinkManager {
         int row_animal_num = getBoard().length;
         int col_animal_num = getBoard()[0].length;
 
+        //根据数量动态设置AnimalView的大小
+        Log.d(Constant.TAG,"行数："+row_animal_num+" 列数："+col_animal_num);
+        if (row_animal_num <= 8 && col_animal_num <= 6){
+            animal_size = LinkConstant.animal_size;
+        }else {
+            animal_size = LinkConstant.animal_size_small;
+        }
+
         //计算两边的间距
-        padding = (width - col_animal_num * PxUtil.dpToPx(LinkConstant.animal_size, context)) / 2;
+        padding = (width - col_animal_num * PxUtil.dpToPx(animal_size, context)) / 2;
 
         //依次添加到布局中
         for (int i = 0; i < row_animal_num; i++) {
@@ -90,13 +103,13 @@ public class LinkManager {
 
                 //创建布局约束
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                        PxUtil.dpToPx(LinkConstant.animal_size,context),
-                        PxUtil.dpToPx(LinkConstant.animal_size,context)
+                        PxUtil.dpToPx(animal_size,context),
+                        PxUtil.dpToPx(animal_size,context)
                 );
 
                 //左上间距
-                layoutParams.leftMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,context) * j;
-                layoutParams.topMargin = padding + PxUtil.dpToPx(LinkConstant.animal_size,context) * i;
+                layoutParams.leftMargin = padding + PxUtil.dpToPx(animal_size,context) * j;
+                layoutParams.topMargin = padding + PxUtil.dpToPx(animal_size,context) * i;
 
                 //设置内间距
                 animal.setPadding(
@@ -166,5 +179,13 @@ public class LinkManager {
 
     public void setPadding(int padding) {
         this.padding = padding;
+    }
+
+    public int getAnimal_size() {
+        return animal_size;
+    }
+
+    public void setAnimal_size(int animal_size) {
+        this.animal_size = animal_size;
     }
 }

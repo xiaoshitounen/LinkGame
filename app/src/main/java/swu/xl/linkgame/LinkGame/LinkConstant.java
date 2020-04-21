@@ -7,6 +7,7 @@ public interface LinkConstant {
      * 连连看图标大小
      */
     int animal_size = 70;
+    int animal_size_small = 60;
 
     /**
      * 连连看AnimalView的内间距
@@ -70,4 +71,24 @@ public interface LinkConstant {
             {0,0,4,2,3,0},
             {0,0,0,0,0,0}
     };
+
+    /**
+     * 连连看正式模板-简单
+     */
+    int [][][] board_easy = {
+            LinkBoard.board_easy_1,
+            LinkBoard.board_easy_2,
+            LinkBoard.board_easy_3,
+            LinkBoard.board_easy_4,
+            LinkBoard.board_easy_5,
+            LinkBoard.board_easy_6,
+            LinkBoard.board_easy_7,
+            LinkBoard.board_easy_8,
+            LinkBoard.board_easy_9,
+            LinkBoard.board_easy_10,
+            LinkBoard.board_easy_11,
+            LinkBoard.board_easy_12,
+            LinkBoard.board_easy_13,
+    };
+
 }

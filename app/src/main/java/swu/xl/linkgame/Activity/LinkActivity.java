@@ -53,7 +53,7 @@ public class LinkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_link);
 
         //沉浸式状态栏
-        ImmersionBar.with(this).init();
+        ImmersionBar.with(this).barAlpha(1.0f).init();
 
         //加载数据
         initData();

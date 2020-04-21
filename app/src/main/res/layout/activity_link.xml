@@ -10,16 +10,159 @@
     >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/message_show"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:paddingTop="40dp"
+        android:background="@drawable/link_message"
+        >
+
+        <!--关卡，道具，暂停信息-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:layout_marginStart="80dp"
+            android:clipChildren="false"
+            >
+
+            <!--关卡-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="1dp"
+                    android:text="@string/Link"
+                    style="@style/link_level"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:paddingStart="25dp"
+                    style="@style/link_level_message"
+                    />
+
+            </LinearLayout>
+
+            <!--道具 拳击-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <ImageView
+                    android:id="@+id/prop_fight"
+                    style="@style/link_prop"
+                    android:src="@drawable/link_prop_fight"
+                    />
+                
+                <TextView
+                    style="@style/link_prop_num"
+                    android:text="+"
+                    android:layout_alignEnd="@id/prop_fight"
+                    android:layout_alignBottom="@+id/prop_fight"
+                    />
+            </RelativeLayout>
+
+            <!--道具 诈弹-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/prop_bomb"
+                    style="@style/link_prop"
+                    android:src="@drawable/link_prop_bomb"
+                    />
+
+                <TextView
+                    style="@style/link_prop_num"
+                    android:text="+"
+                    android:layout_alignEnd="@id/prop_bomb"
+                    android:layout_alignBottom="@+id/prop_bomb"
+                    />
+
+            </RelativeLayout>
+
+            <!--道具 混乱-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/prop_refresh"
+                    style="@style/link_prop"
+                    android:src="@drawable/link_prop_resort"
+                    />
+
+                <TextView
+                    style="@style/link_prop_num"
+                    android:text="+"
+                    android:layout_alignEnd="@id/prop_refresh"
+                    android:layout_alignBottom="@+id/prop_refresh"
+                    />
+
+            </RelativeLayout>
+
+            <!--暂停-->
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/link_stop"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--金币-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_show"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/link_message"
+        android:layout_marginEnd="40dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="2dp"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/link_coin"
+            android:layout_marginStart="80dp"
+            />
+
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="1099"
+            style="@style/money_text"
+            />
+
+    </LinearLayout>
 
     <!--布局部分-->
     <swu.xl.linkgame.LinkGame.XLRelativeLayout
         android:id="@+id/link_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/message_show"
+        android:layout_marginTop="50dp"
         />
 
 

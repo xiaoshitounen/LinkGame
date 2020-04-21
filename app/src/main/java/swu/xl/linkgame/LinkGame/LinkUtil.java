@@ -19,8 +19,8 @@ public class LinkUtil {
         LinkManager manager = LinkManager.getLinkManager();
 
         return new AnimalPoint(
-                manager.getPadding() + PxUtil.dpToPx(LinkConstant.animal_size,context) / 2 + point.y  * PxUtil.dpToPx(LinkConstant.animal_size,context),
-                manager.getPadding() + PxUtil.dpToPx(LinkConstant.animal_size,context) / 2 + point.x  * PxUtil.dpToPx(LinkConstant.animal_size,context)
+                manager.getPadding() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.y  * PxUtil.dpToPx(manager.getAnimal_size(),context),
+                manager.getPadding() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.x  * PxUtil.dpToPx(manager.getAnimal_size(),context)
         );
     }
 
@@ -31,14 +31,19 @@ public class LinkUtil {
      * @return
      */
     public static int[][] loadLevelWithIdAndMode(int level_id, int level_mode){
-        int row = LinkConstant.board_test1.length;
-        int col = LinkConstant.board_test1[0].length;
+        //资源ID
+        int resourceID = new Random().nextInt(LinkConstant.board_easy.length);
 
+        //获取随机产生的模板
+        int[][] board = LinkConstant.board_easy[resourceID];
+
+        //拷贝过去
+        int row = board.length;
+        int col = board[0].length;
         int[][] clone = new int[row][col];
-
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                clone[i][j] = LinkConstant.board_test1[i][j];
+                clone[i][j] = board[i][j];
             }
         }
 

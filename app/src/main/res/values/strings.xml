@@ -8,4 +8,5 @@
     <string name="mode_normal">普通模式</string>
     <string name="mode_hard">困难模式</string>
     <string name="mode_easy">简单模式</string>
+    <string name="Link">关卡</string>
 </resources>
