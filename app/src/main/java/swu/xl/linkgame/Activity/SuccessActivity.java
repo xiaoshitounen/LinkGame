@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
-import swu.xl.linkgame.LinkGame.LinkUtil;
+import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.SelfView.XLTextView;
@@ -183,6 +183,16 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         }else {
             //下一关
+            //跳转界面
+            Intent intent = new Intent(this, LinkActivity.class);
+            //加入数据
+            Bundle bundle = new Bundle();
+            //加入关卡数据
+            XLLevel next_level = LitePal.find(XLLevel.class, level.getId() + 1);
+            bundle.putParcelable("level",next_level);
+            intent.putExtras(bundle);
+            //跳转
+            startActivity(intent);
         }
     }
 }

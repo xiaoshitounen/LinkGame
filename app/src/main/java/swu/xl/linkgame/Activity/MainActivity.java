@@ -20,6 +20,7 @@ import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
@@ -70,17 +71,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //查找当前数据库的内容
         List<XLUser> users = LitePal.findAll(XLUser.class);
         List<XLLevel> levels = LitePal.findAll(XLLevel.class);
+        List<XLProp> props = LitePal.findAll(XLProp.class);
 
-        //用户数据
+        //如果用户数据为空，装入数据
         if (users.size() == 0){
             XLUser user = new XLUser();
-            user.setU_id(1701);
-            user.setU_money(0);
+            user.setU_money(1000);
             user.setU_background(0);
             user.save();
         }
 
-        //如果数据为空，装入数据
+        //如果关卡数据为空，装入数据
         if (levels.size() == 0){
             //简单模式
             for(int i = 1; i <= 40; i++){
@@ -89,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 level.setL_id(i);
                 //设置关卡模式
                 level.setL_mode('1');
-                //设置关卡闯关成功的金币
-                level.setL_money(0);
                 //设置关卡的闯关状态
                 if (i == 1){
                     level.setL_new('4');
@@ -111,8 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 level.setL_id(i);
                 //设置关卡模式
                 level.setL_mode('2');
-                //设置关卡闯关成功的金币
-                level.setL_money(0);
                 //设置关卡的闯关状态
                 if (i == 1){
                     level.setL_new('4');
@@ -133,8 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 level.setL_id(i);
                 //设置关卡模式
                 level.setL_mode('3');
-                //设置关卡闯关成功的金币
-                level.setL_money(0);
                 //设置关卡的闯关状态
                 if (i == 1){
                     level.setL_new('4');
@@ -147,6 +142,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //插入
                 level.save();
             }
+        }
+
+        //如果道具数据为空，装入数据
+        if (props.size() == 0){
+            //1.装入拳头道具
+            XLProp prop_fight = new XLProp();
+            prop_fight.setP_kind('1');
+            prop_fight.setP_number(9);
+            prop_fight.setP_price(10);
+            prop_fight.save();
+
+            //2.装入炸弹道具
+            XLProp prop_bomb = new XLProp();
+            prop_bomb.setP_kind('2');
+            prop_bomb.setP_number(9);
+            prop_bomb.setP_price(10);
+            prop_bomb.save();
+
+            //3.装入刷新道具
+            XLProp prop_refresh = new XLProp();
+            prop_refresh.setP_kind('3');
+            prop_refresh.setP_number(9);
+            prop_refresh.setP_price(10);
+            prop_refresh.save();
         }
     }
 

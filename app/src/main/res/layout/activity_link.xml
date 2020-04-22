@@ -65,6 +65,7 @@
                     />
                 
                 <TextView
+                    android:id="@+id/link_prop_fight_text"
                     style="@style/link_prop_num"
                     android:text="+"
                     android:layout_alignEnd="@id/prop_fight"
@@ -72,7 +73,7 @@
                     />
             </RelativeLayout>
 
-            <!--道具 诈弹-->
+            <!--道具 炸弹-->
             <RelativeLayout
                 android:id="@+id/link_prop_bomb"
                 android:layout_width="wrap_content"
@@ -86,6 +87,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/link_prop_bomb_text"
                     style="@style/link_prop_num"
                     android:text="+"
                     android:layout_alignEnd="@id/prop_bomb"
@@ -108,6 +110,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/link_prop_refresh_text"
                     style="@style/link_prop_num"
                     android:text="+"
                     android:layout_alignEnd="@id/prop_refresh"
@@ -181,7 +184,7 @@
     </RelativeLayout>
 
     <!--布局部分-->
-    <swu.xl.linkgame.LinkGame.XLRelativeLayout
+    <swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout
         android:id="@+id/link_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Model;
 
 /**
  * 显示当前点的索引坐标

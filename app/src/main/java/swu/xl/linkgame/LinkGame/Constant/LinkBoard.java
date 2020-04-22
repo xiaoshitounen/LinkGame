@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Constant;
 
 public interface LinkBoard {
     /**

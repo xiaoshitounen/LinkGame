@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Model;
 
 import java.util.ArrayList;
 import java.util.List;

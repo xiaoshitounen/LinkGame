@@ -1,8 +1,9 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.SelfView;
 
 import android.content.Context;
 
-import swu.xl.linkgame.Util.PxUtil;
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 
 public class AnimalView extends androidx.appcompat.widget.AppCompatImageView {
     //图片的标志代号，用来判断两个图片是否相等

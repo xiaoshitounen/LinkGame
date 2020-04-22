@@ -9,6 +9,8 @@ import org.litepal.crud.LitePalSupport;
  * 关卡类
  */
 public class XLLevel extends LitePalSupport implements Parcelable {
+    //id
+    private int id;
     //关卡号
     private int l_id;
     //闯关时间
@@ -17,10 +19,16 @@ public class XLLevel extends LitePalSupport implements Parcelable {
     private char l_mode;
     //闯关状态 0：没有闯关 1：1星 2：2星 3：3星
     private char l_new;
-    //闯关获得的金币数
-    private int l_money;
 
     //setter、getter方法
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getL_id() {
         return l_id;
     }
@@ -53,22 +61,14 @@ public class XLLevel extends LitePalSupport implements Parcelable {
         this.l_new = l_new;
     }
 
-    public int getL_money() {
-        return l_money;
-    }
-
-    public void setL_money(int l_money) {
-        this.l_money = l_money;
-    }
-
     @Override
     public String toString() {
         return "XLLevel{" +
-                "l_id=" + l_id +
+                "id=" + id +
+                ", l_id=" + l_id +
                 ", l_time=" + l_time +
                 ", l_mode=" + l_mode +
                 ", l_new=" + l_new +
-                ", l_money=" + l_money +
                 '}';
     }
 
@@ -79,10 +79,10 @@ public class XLLevel extends LitePalSupport implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeInt(l_id);
         dest.writeInt(l_time);
         dest.writeCharArray(new char[]{l_mode,l_new});
-        dest.writeInt(l_money);
     }
 
     public static final Creator<XLLevel> CREATOR = new Creator<XLLevel>() {
@@ -90,13 +90,13 @@ public class XLLevel extends LitePalSupport implements Parcelable {
         public XLLevel createFromParcel(Parcel in) {
             //必须按顺序读取
             XLLevel xlLevel = new XLLevel();
+            xlLevel.id = in.readInt();
             xlLevel.l_id = in.readInt();
             xlLevel.l_time = in.readInt();
             char[] temp = new char[2];
             in.readCharArray(temp);
             xlLevel.l_mode = temp[0];
             xlLevel.l_new = temp[1];
-            xlLevel.l_money = in.readInt();
 
             return xlLevel;
         }

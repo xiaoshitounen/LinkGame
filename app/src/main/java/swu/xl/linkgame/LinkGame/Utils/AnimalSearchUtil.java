@@ -1,9 +1,12 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Utils;
+
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Model.LinkInfo;
 
 /**
  * 判断一个布局中的两个动物是否可以连接
  */
-public class AnimalSearch {
+public class AnimalSearchUtil {
     /**
      * 判断在给点的布局中，给定的两个位置，能否无转折点连接。
      * @param board

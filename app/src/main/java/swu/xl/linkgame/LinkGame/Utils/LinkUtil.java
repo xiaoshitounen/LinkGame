@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
+import swu.xl.linkgame.LinkGame.Manager.LinkManager;
 import swu.xl.linkgame.Util.PxUtil;
 
 public class LinkUtil {
@@ -44,7 +47,7 @@ public class LinkUtil {
                                 if (board[point1.x][point1.y] == board[point2.x][point2.y]
                                 && board[point1.x][point1.y] != 0){
                                     //并且可以被消除
-                                    if (AnimalSearch.canMatchTwoAnimalWithTwoBreak(board,point1,point2,null)){
+                                    if (AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(board,point1,point2,null)){
                                         return new AnimalPoint[]{point1,point2};
                                     }
                                 }
@@ -115,7 +118,7 @@ public class LinkUtil {
      * @return
      */
     public static char getStarByTime(int time){
-        if (time <= 50){
+        if (time <= 40){
             return '1';
         }else if (time <= 60){
             return '2';

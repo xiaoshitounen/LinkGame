@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Manager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,6 +20,10 @@ import java.util.TimerTask;
 import swu.xl.linkgame.Activity.FailureActivity;
 import swu.xl.linkgame.Activity.SuccessActivity;
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
+import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
+import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Util.PxUtil;
 

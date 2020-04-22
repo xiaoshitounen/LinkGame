@@ -5,11 +5,11 @@ import org.junit.Test;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Enum.LevelMode;
-import swu.xl.linkgame.LinkGame.AnimalPoint;
-import swu.xl.linkgame.LinkGame.AnimalSearch;
-import swu.xl.linkgame.LinkGame.LinkConstant;
-import swu.xl.linkgame.LinkGame.LinkInfo;
-import swu.xl.linkgame.LinkGame.LinkUtil;
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
+import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
+import swu.xl.linkgame.LinkGame.Model.LinkInfo;
+import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 
 import static org.junit.Assert.*;
 
@@ -53,7 +53,7 @@ public class ExampleUnitTest {
     public void canMatchTwo(){
         LinkInfo linkInfo = new LinkInfo();
 
-        assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        assertTrue(AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test1,
                 new AnimalPoint(1, 1),
                 new AnimalPoint(4, 1),
@@ -66,7 +66,7 @@ public class ExampleUnitTest {
     public void matchTwoLinkInfo(){
         LinkInfo linkInfo = new LinkInfo();
 
-        AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test1,
                 new AnimalPoint(1, 1),
                 new AnimalPoint(4, 1),
@@ -81,7 +81,7 @@ public class ExampleUnitTest {
     public void canMatchOne(){
         LinkInfo linkInfo = new LinkInfo();
 
-        assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        assertTrue(AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test2,
                 new AnimalPoint(2, 3),
                 new AnimalPoint(3, 2),
@@ -94,7 +94,7 @@ public class ExampleUnitTest {
     public void matchOneLinkInfo(){
         LinkInfo linkInfo = new LinkInfo();
 
-        AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test2,
                 new AnimalPoint(2, 3),
                 new AnimalPoint(3, 2),
@@ -109,7 +109,7 @@ public class ExampleUnitTest {
     public void canMatchNo(){
         LinkInfo linkInfo = new LinkInfo();
 
-        assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        assertTrue(AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test1,
                 new AnimalPoint(1, 4),
                 new AnimalPoint(2, 4),
@@ -122,7 +122,7 @@ public class ExampleUnitTest {
     public void matchNoLinkInfo(){
         LinkInfo linkInfo = new LinkInfo();
 
-        AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test1,
                 new AnimalPoint(1, 4),
                 new AnimalPoint(2, 4),
@@ -166,7 +166,7 @@ public class ExampleUnitTest {
     public void matchOneLinkInfo_Add(){
         LinkInfo linkInfo = new LinkInfo();
 
-        AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test3,
                 new AnimalPoint(1, 3),
                 new AnimalPoint(3, 1),
@@ -181,7 +181,7 @@ public class ExampleUnitTest {
     public void canMatchNo_Add(){
         LinkInfo linkInfo = new LinkInfo();
 
-        assertTrue(AnimalSearch.canMatchTwoAnimalWithTwoBreak(
+        assertTrue(AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
                 LinkConstant.board_test3,
                 new AnimalPoint(1, 3),
                 new AnimalPoint(3, 1),

@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.Constant;
 
 import swu.xl.linkgame.R;
 
@@ -13,7 +13,7 @@ public interface LinkConstant {
     /**
      * 连连看AnimalView的内间距
      */
-    int ANIMAL_PADDING = 6;
+    int ANIMAL_PADDING = 8;
 
     /**
      * 连连看图标

@@ -22,6 +22,7 @@ import swu.xl.linkgame.R;
 
 public class FailureActivity extends AppCompatActivity {
 
+    //level
     XLLevel level;
 
     @Override

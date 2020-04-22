@@ -1,4 +1,4 @@
-package swu.xl.linkgame.LinkGame;
+package swu.xl.linkgame.LinkGame.SelfView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,7 +11,9 @@ import android.widget.RelativeLayout;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
-import swu.xl.linkgame.Util.PxUtil;
+import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
+import swu.xl.linkgame.LinkGame.Model.LinkInfo;
+import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 
 public class XLRelativeLayout extends RelativeLayout {
     //点的信息
