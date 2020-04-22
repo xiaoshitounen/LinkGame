@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +43,11 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
 
+        //沉浸式状态栏
+        ImmersionBar.with(this).init();
+
         //找到相关控件
         initView();
-
-        //设置相关信息
     }
 
     /**

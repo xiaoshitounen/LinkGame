@@ -151,6 +151,7 @@
             />
 
         <swu.xl.linkgame.SelfView.XLTextView
+            android:id="@+id/link_money_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -170,6 +171,7 @@
         >
 
         <swu.xl.linkgame.SelfView.XLTextView
+            android:id="@+id/link_time_text"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="61.7秒"

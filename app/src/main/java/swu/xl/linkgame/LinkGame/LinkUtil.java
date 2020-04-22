@@ -10,6 +10,21 @@ import swu.xl.linkgame.Util.PxUtil;
 
 public class LinkUtil {
     /**
+     * 根据游戏时间获取相关星级评价
+     * @param time
+     * @return
+     */
+    public static char getStarByTime(int time){
+        if (time <= 50){
+            return '3';
+        }else if (time <= 60){
+            return '2';
+        }else {
+            return '1';
+        }
+    }
+
+    /**
      * 索引坐标->真实坐标
      * @param point
      * @param context

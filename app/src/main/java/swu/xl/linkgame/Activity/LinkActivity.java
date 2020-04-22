@@ -3,6 +3,7 @@ package swu.xl.linkgame.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -20,19 +21,21 @@ import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 
+import java.text.DecimalFormat;
+
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.LinkGame.AnimalSearch;
 import swu.xl.linkgame.LinkGame.AnimalView;
 import swu.xl.linkgame.LinkGame.LinkConstant;
 import swu.xl.linkgame.LinkGame.LinkInfo;
 import swu.xl.linkgame.LinkGame.LinkManager;
+import swu.xl.linkgame.LinkGame.LinkUtil;
 import swu.xl.linkgame.LinkGame.XLRelativeLayout;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
-import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 
-public class LinkActivity extends AppCompatActivity implements View.OnClickListener {
+public class LinkActivity extends AppCompatActivity implements View.OnClickListener,LinkManager.LinkGame {
     //屏幕宽度
     int screenWidth;
 
@@ -48,8 +51,12 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
     //游戏管理者
     LinkManager manager;
 
-    //关卡显示的文本
+    //显示关卡的文本
     TextView level_text;
+    //显示金币的文本
+    TextView money_text;
+    //显示时间的文本
+    TextView time_text;
 
     //拳头道具
     View prop_fight;
@@ -217,6 +224,8 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
         level_text = findViewById(R.id.link_level_text);
         level_text.setText(String.valueOf(level.getL_id()));
+        money_text = findViewById(R.id.link_money_text);
+        time_text = findViewById(R.id.link_time_text);
 
         prop_fight = findViewById(R.id.prop_fight);
         prop_fight.setOnClickListener(this);
@@ -227,6 +236,8 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
         pause = findViewById(R.id.link_pause);
         pause.setOnClickListener(this);
+
+        manager.setListener(this);
     }
 
     /**
@@ -285,10 +296,46 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.prop_refresh:
                 Log.d(Constant.TAG,"刷新道具");
+                manager.refreshGame(
+                        getApplicationContext(),
+                        link_layout,
+                        screenWidth,
+                        level.getL_id(),
+                        level.getL_mode());
                 break;
             case R.id.link_pause:
                 Log.d(Constant.TAG,"暂停");
+                manager.pauseGame();
                 break;
         }
+    }
+
+    //时间发生改变的时间
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onTimeChanged(float time) {
+        //如果时间小于0
+        if (time <= 0.0){
+            manager.pauseGame();
+            manager.endGame(this,level,time);
+        }else {
+            //保留小数后一位
+            time_text.setText(new DecimalFormat("##0.0").format(time)+"秒");
+        }
+
+        //判断board是否全部清除了
+        for (int i = 0; i < manager.getBoard().length; i++) {
+            for (int j = 0; j < manager.getBoard()[0].length; j++) {
+                if (manager.getBoard()[i][j] > 0){
+                    return;
+                }
+            }
+        }
+
+        //全部消除了
+        manager.pauseGame();
+        level.setL_time((int) (LinkConstant.time-time));
+        level.setL_new(LinkUtil.getStarByTime((int) time));
+        manager.endGame(this,level,time);
     }
 }

@@ -8,6 +8,7 @@ public interface LinkConstant {
      */
     int animal_size = 70;
     int animal_size_small = 60;
+    int animal_size_more_small = 55;
 
     /**
      * 连连看AnimalView的内间距
@@ -38,7 +39,7 @@ public interface LinkConstant {
     /**
      * 连连看默认的时间
      */
-    int time = 90000;
+    int time = 90;
 
     /**
      * 连连看测试模板

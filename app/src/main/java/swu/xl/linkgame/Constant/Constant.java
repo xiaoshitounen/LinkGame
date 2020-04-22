@@ -15,4 +15,7 @@ public interface Constant {
 
     //关卡总体向下偏移的距离
     int level_top = 60;
+
+    //发送定时器消息的what
+    int timer = 1;
 }
