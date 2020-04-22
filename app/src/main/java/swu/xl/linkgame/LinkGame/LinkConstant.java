@@ -6,14 +6,14 @@ public interface LinkConstant {
     /**
      * 连连看图标大小
      */
-    int animal_size = 70;
-    int animal_size_small = 60;
-    int animal_size_more_small = 55;
+    int ANIMAL_SIZE = 70;
+    int ANIMAL_SIZE_SMALL = 60;
+    int ANIMAL_SIZE_MORE_SMALL = 55;
 
     /**
      * 连连看AnimalView的内间距
      */
-    int animal_padding = 10;
+    int ANIMAL_PADDING = 6;
 
     /**
      * 连连看图标
@@ -39,7 +39,12 @@ public interface LinkConstant {
     /**
      * 连连看默认的时间
      */
-    int time = 90;
+    int TIME = 90;
+
+    /**
+     * 基础分数
+     */
+    int BASE_SCORE = 500;
 
     /**
      * 连连看测试模板
@@ -76,7 +81,7 @@ public interface LinkConstant {
     /**
      * 连连看正式模板-简单
      */
-    int [][][] board_easy = {
+    int [][][] BOARD_EASY = {
             LinkBoard.board_easy_1,
             LinkBoard.board_easy_2,
             LinkBoard.board_easy_3,
@@ -91,5 +96,4 @@ public interface LinkConstant {
             LinkBoard.board_easy_12,
             LinkBoard.board_easy_13,
     };
-
 }

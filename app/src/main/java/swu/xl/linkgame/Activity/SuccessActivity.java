@@ -2,7 +2,9 @@ package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,10 +12,14 @@ import android.widget.ImageView;
 
 import com.gyf.immersionbar.ImmersionBar;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.LinkGame.LinkUtil;
+import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.SelfView.XLTextView;
 
@@ -38,6 +44,9 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
     ImageButton refresh_btn;
     ImageButton next_btn;
 
+    //关卡
+    XLLevel level;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +57,52 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
 
         //找到相关控件
         initView();
+
+        //数据加载配置
+        initData();
     }
 
     /**
-     * 通过FindById找到相关的控件
+     * 加载数据
+     */
+    private void initData() {
+        //获取数据
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        assert bundle != null;
+        level = bundle.getParcelable("level");
+
+        //设置关卡数据
+        level_text.setText("第"+level.getL_id()+"关");
+
+        //设置星星
+        int star_size = level.getL_new() - '0';
+        Log.d(Constant.TAG,"星星个数："+level.getL_new()+" "+star_size);
+        for (int i = 1; i <= star_size; i++) {
+            stars.get(i-1).setVisibility(View.VISIBLE);
+        }
+
+        //设置时间
+        time_text.setText(level.getL_time()+"秒");
+
+        //设置分数
+        score_text.setText(LinkUtil.getScoreByTime(level.getL_time())+"分");
+
+        //设置连击
+        batter_text.setText(LinkUtil.getSerialClick()+"次");
+    }
+
+    /**
+     * 找到相关的控件
      */
     private void initView() {
         stars = new ArrayList<>();
         left_star = findViewById(R.id.star_left);
+        left_star.setVisibility(View.INVISIBLE);
         middle_star = findViewById(R.id.star_middle);
+        middle_star.setVisibility(View.INVISIBLE);
         right_star = findViewById(R.id.star_right);
+        right_star.setVisibility(View.INVISIBLE);
         stars.add(left_star);
         stars.add(middle_star);
         stars.add(right_star);
@@ -82,15 +127,62 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_menu:
                 //关卡菜单按钮
                 Log.d(Constant.TAG,"关卡菜单按钮");
+
+                jumpToActivity(0);
+
                 break;
             case R.id.btn_refresh:
                 //重新加载按钮
                 Log.d(Constant.TAG,"重新加载按钮");
+
+                jumpToActivity(1);
+
                 break;
             case R.id.btn_next:
                 //下一关按钮
                 Log.d(Constant.TAG,"下一个关卡按钮");
+
+                jumpToActivity(2);
+
                 break;
+        }
+    }
+
+    /**
+     * 跳转界面
+     * @param flag
+     */
+    private void jumpToActivity(int flag){
+        if (flag == 0){
+            //查询对应模式的数据
+            List<XLLevel> XLLevels = LitePal.where("l_mode == ?", String.valueOf(level.getL_mode())).find(XLLevel.class);
+            Log.d(Constant.TAG,XLLevels.size()+"");
+            //依次查询每一个内容
+            for (XLLevel xlLevel : XLLevels) {
+                Log.d(Constant.TAG, xlLevel.toString());
+            }
+
+            //跳转界面
+            Intent intent = new Intent(this, LevelActivity.class);
+            //加入数据
+            Bundle bundle = new Bundle();
+            //加入关卡模式数据
+            bundle.putString("mode","简单");
+            //加入关卡数据
+            bundle.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }else if (flag == 1){
+            //跳转界面
+            Intent intent = new Intent(this, LinkActivity.class);
+            //加入数据
+            Bundle bundle = new Bundle();
+            //加入关卡数据
+            bundle.putParcelable("level",level);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }else {
+            //下一关
         }
     }
 }

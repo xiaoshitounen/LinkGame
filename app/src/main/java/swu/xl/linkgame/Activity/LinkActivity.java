@@ -3,7 +3,6 @@ package swu.xl.linkgame.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -290,22 +289,36 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.prop_fight:
                 Log.d(Constant.TAG,"拳头道具");
+
+                //随机消除一对可以消除的AnimalView
+                manager.fightGame();
+
                 break;
             case R.id.prop_bomb:
                 Log.d(Constant.TAG,"炸弹道具");
+
+                //随机消除某一种所有的AnimalView
+                manager.bombGame();
+
                 break;
             case R.id.prop_refresh:
                 Log.d(Constant.TAG,"刷新道具");
+
+                //刷新游戏
                 manager.refreshGame(
                         getApplicationContext(),
                         link_layout,
                         screenWidth,
                         level.getL_id(),
                         level.getL_mode());
+
                 break;
             case R.id.link_pause:
                 Log.d(Constant.TAG,"暂停");
+
+                //暂停游戏
                 manager.pauseGame();
+
                 break;
         }
     }
@@ -323,19 +336,12 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
             time_text.setText(new DecimalFormat("##0.0").format(time)+"秒");
         }
 
-        //判断board是否全部清除了
-        for (int i = 0; i < manager.getBoard().length; i++) {
-            for (int j = 0; j < manager.getBoard()[0].length; j++) {
-                if (manager.getBoard()[i][j] > 0){
-                    return;
-                }
-            }
+        //如果board全部清除了
+        if (LinkUtil.getBoardState()){
+            manager.pauseGame();
+            level.setL_time((int) (LinkConstant.TIME -time));
+            level.setL_new(LinkUtil.getStarByTime((int) time));
+            manager.endGame(this,level,time);
         }
-
-        //全部消除了
-        manager.pauseGame();
-        level.setL_time((int) (LinkConstant.time-time));
-        level.setL_new(LinkUtil.getStarByTime((int) time));
-        manager.endGame(this,level,time);
     }
 }

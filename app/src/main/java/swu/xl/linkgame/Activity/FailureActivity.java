@@ -59,6 +59,10 @@ public class FailureActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 跳转界面
+     * @param flag
+     */
     private void jumpToActivity(int flag){
         if (flag == 0){
             //查询对应模式的数据

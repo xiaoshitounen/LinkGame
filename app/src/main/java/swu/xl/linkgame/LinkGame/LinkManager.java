@@ -12,8 +12,6 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import org.litepal.LitePal;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -35,15 +33,15 @@ public class LinkManager {
 
     //掌管游戏时间
     private Timer timer;
-    private float time = LinkConstant.time;
+    private float time = LinkConstant.TIME;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
 
         @Override
         public void handleMessage(@NonNull Message msg) {
             //判断消息来源
-            if (msg.what == Constant.timer){
-                Log.d(Constant.TAG,"测试处理");
+            if (msg.what == Constant.TIMER){
+                //Log.d(Constant.TAG,"测试处理");
 
                 //时间减少
                 time -= 0.1;
@@ -107,7 +105,7 @@ public class LinkManager {
     //清楚上一次游戏的痕迹
     private void clearLastGame() {
         board = null;
-        time = LinkConstant.time;
+        time = LinkConstant.TIME;
         padding = 0;
         animals.clear();
         lastAnimal = null;
@@ -127,11 +125,11 @@ public class LinkManager {
         //根据数量动态设置AnimalView的大小
         Log.d(Constant.TAG,"行数："+row_animal_num+" 列数："+col_animal_num);
         if (row_animal_num <= 8 && col_animal_num <= 6){
-            animal_size = LinkConstant.animal_size;
+            animal_size = LinkConstant.ANIMAL_SIZE;
         }else if (row_animal_num >= 10){
-            animal_size = LinkConstant.animal_size_more_small;
+            animal_size = LinkConstant.ANIMAL_SIZE_MORE_SMALL;
         }else {
-            animal_size = LinkConstant.animal_size_small;
+            animal_size = LinkConstant.ANIMAL_SIZE_SMALL;
         }
 
         //计算两边的间距
@@ -170,10 +168,10 @@ public class LinkManager {
 
                 //设置内间距
                 animal.setPadding(
-                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,context),
-                        PxUtil.dpToPx(LinkConstant.animal_padding,context)
+                        PxUtil.dpToPx(LinkConstant.ANIMAL_PADDING,context),
+                        PxUtil.dpToPx(LinkConstant.ANIMAL_PADDING,context),
+                        PxUtil.dpToPx(LinkConstant.ANIMAL_PADDING,context),
+                        PxUtil.dpToPx(LinkConstant.ANIMAL_PADDING,context)
                 );
 
                 //添加视图
@@ -201,7 +199,7 @@ public class LinkManager {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.sendEmptyMessage(Constant.timer);
+                handler.sendEmptyMessage(Constant.TIMER);
             }
         },0,100);
     }
@@ -210,6 +208,97 @@ public class LinkManager {
     private void stopTimer() {
         timer.cancel();
         timer = null;
+    }
+
+    /**
+     * 拳头道具的功能实现
+     */
+    public void fightGame() {
+        //1.产生一对消除的点
+        AnimalPoint[] doubleRemove = LinkUtil.getDoubleRemove();
+        Log.d(Constant.TAG,"第一个点："+doubleRemove[0].x+" "+doubleRemove[0].y);
+        Log.d(Constant.TAG,"第二个点："+doubleRemove[1].x+" "+doubleRemove[1].y);
+
+        //2.board修改
+        board[doubleRemove[0].x][doubleRemove[0].y] = 0;
+        board[doubleRemove[1].x][doubleRemove[1].y] = 0;
+
+        //3.AnimalView隐藏
+        for (AnimalView animal : animals) {
+            if ((animal.getPoint().x == doubleRemove[0].x
+                    && animal.getPoint().y == doubleRemove[0].y)
+            || animal.getPoint().x == doubleRemove[1].x
+                    && animal.getPoint().y == doubleRemove[1].y){
+                //恢复背景颜色和清除动画
+                if (animal.getAnimation() != null){
+                    animal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
+                    animal.clearAnimation();
+                }
+
+                //隐藏
+                animal.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /**
+     * 炸弹道具的功能实现
+     */
+    public void bombGame() {
+        //1.随机产生一个待消除的
+        int random = LinkUtil.getExistAnimal();
+        Log.d(Constant.TAG,"消除"+random);
+
+        //2.board修改
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == random){
+                    board[i][j] = 0;
+                }
+            }
+        }
+
+        //3.AnimalView隐藏
+        for (AnimalView animal : animals) {
+            if (animal.getFlag() == random){
+                //恢复背景颜色和清除动画
+                if (animal.getAnimation() != null){
+                    animal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
+                    animal.clearAnimation();
+                }
+
+                //隐藏
+                animal.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    /**
+     * 刷新道具的功能实现
+     * @param context
+     * @param layout
+     * @param width
+     * @param level_id
+     * @param level_mode
+     */
+    public void refreshGame(Context context, RelativeLayout layout, int width,int level_id, int level_mode){
+        //1.所以的AnimalView消失
+        for (AnimalView animal : animals) {
+            //恢复背景颜色和清除动画
+            if (animal.getAnimation() != null){
+                animal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
+                animal.clearAnimation();
+            }
+
+            //隐藏
+            animal.setVisibility(View.INVISIBLE);
+        }
+
+        //2.移除所有的子视图
+        layout.removeAllViews();
+
+        //3.重新开始游戏
+        startGame(context,layout,width,level_id,level_mode);
     }
 
     /**
@@ -225,22 +314,6 @@ public class LinkManager {
 
         //切换状态
         isPause = !isPause;
-    }
-
-    /**
-     * 刷新游戏
-     * @param context
-     * @param layout
-     * @param width
-     * @param level_id
-     * @param level_mode
-     */
-    public void refreshGame(Context context, RelativeLayout layout, int width,int level_id, int level_mode){
-        //移除所有的子视图
-        layout.removeAllViews();
-
-        //重新开始游戏
-        startGame(context,layout,width,level_id,level_mode);
     }
 
     /**

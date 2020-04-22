@@ -1,14 +1,114 @@
 package swu.xl.linkgame.LinkGame;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Util.PxUtil;
 
 public class LinkUtil {
+    /**
+     * 返回一个布局中可以消除的两个AnimalView
+     * @return
+     */
+    public static AnimalPoint[] getDoubleRemove(){
+        //获得模板
+        int[][] board = LinkManager.getLinkManager().getBoard();
+
+        //存储两个相对坐标
+        AnimalPoint point1 = null;
+        AnimalPoint point2 = null;
+
+        //找到两个点
+        while (point1 == null && point2 == null){
+            //寻找第一个点
+            for (int i = 1; i < board.length-1; i++) {
+                for (int j = 1; j < board[0].length-1; j++) {
+                    //产生第一个点
+                    point1 = new AnimalPoint(i,j);
+
+                    for (int p = 1; p < board.length-1; p++) {
+                        for (int q = 1; q < board[0].length-1; q++) {
+                            //产生第二个点
+                            point2 = new AnimalPoint(p,q);
+                            Log.d(Constant.TAG,"第一个点："+point1.x+" "+point1.y);
+                            Log.d(Constant.TAG,"第二个点："+point2.x+" "+point2.y);
+
+                            //如果两个点不是同一个点
+                            if (point1.x != point2.x || point1.y != point2.y){
+                                //并且该两点图案相同 且不为0
+                                if (board[point1.x][point1.y] == board[point2.x][point2.y]
+                                && board[point1.x][point1.y] != 0){
+                                    //并且可以被消除
+                                    if (AnimalSearch.canMatchTwoAnimalWithTwoBreak(board,point1,point2,null)){
+                                        return new AnimalPoint[]{point1,point2};
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        return new AnimalPoint[]{point1,point2};
+    }
+
+    /**
+     * 返回一个布局存在的AnimalView
+     * @return
+     */
+    public static int getExistAnimal(){
+        //获取布局
+        int[][] board = LinkManager.getLinkManager().getBoard();
+
+        //产生随机数
+        int random = 0;
+        while (!LinkUtil.getBoardState()){
+            //产生一个随机数
+            random = new Random().nextInt(LinkUtil.getMaxData(board))+1;
+            Log.d(Constant.TAG,"测试消除"+random);
+
+            //判断该布局中是否有
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    if (board[i][j] == random){
+                        return random;
+                    }
+                }
+            }
+        }
+
+        return random;
+    }
+
+    /**
+     * 判断是否全部消除
+     * @return
+     */
+    public static boolean getBoardState(){
+        //获取布局
+        int[][] board = LinkManager.getLinkManager().getBoard();
+
+        //判断状态
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] != 0){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * 根据游戏时间获取相关星级评价
      * @param time
@@ -16,12 +116,31 @@ public class LinkUtil {
      */
     public static char getStarByTime(int time){
         if (time <= 50){
-            return '3';
+            return '1';
         }else if (time <= 60){
             return '2';
         }else {
-            return '1';
+            return '3';
         }
+    }
+
+    /**
+     * 根据游戏时间获取相关分数评价
+     * @param time
+     * @return
+     */
+    public static int getScoreByTime(int time){
+        return (LinkConstant.TIME -time) * LinkConstant.BASE_SCORE / LinkConstant.TIME;
+    }
+
+    /**
+     * 获取连击数
+     */
+    public static int getSerialClick(){
+        //获取布局
+        int[][] board = LinkManager.getLinkManager().getBoard();
+
+        return (board.length-2) * (board[0].length-2) / 2;
     }
 
     /**
@@ -47,10 +166,10 @@ public class LinkUtil {
      */
     public static int[][] loadLevelWithIdAndMode(int level_id, int level_mode){
         //资源ID
-        int resourceID = new Random().nextInt(LinkConstant.board_easy.length);
+        int resourceID = new Random().nextInt(LinkConstant.BOARD_EASY.length);
 
         //获取随机产生的模板
-        int[][] board = LinkConstant.board_easy[resourceID];
+        int[][] board = LinkConstant.BOARD_EASY[resourceID];
 
         //拷贝过去
         int row = board.length;

@@ -139,7 +139,9 @@ public class AnimalSearch {
                 LinkInfo temp_info = new LinkInfo();
                 if (canMatchTwoAnimalWithOneBreak(board,breakPoint,endPoint,temp_info)){
                     //封装数据
-                    linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    if (linkInfo != null){
+                        linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    }
 
                     //返回
                     return true;
@@ -170,7 +172,9 @@ public class AnimalSearch {
                 LinkInfo temp_info = new LinkInfo();
                 if (canMatchTwoAnimalWithOneBreak(board,breakPoint,endPoint,temp_info)){
                     //封装数据
-                    linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    if (linkInfo != null){
+                        linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    }
 
                     //返回
                     return true;
@@ -200,7 +204,9 @@ public class AnimalSearch {
                 LinkInfo temp_info = new LinkInfo();
                 if (canMatchTwoAnimalWithOneBreak(board,breakPoint,endPoint,temp_info)){
                     //封装数据
-                    linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    if (linkInfo != null){
+                        linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    }
 
                     //返回
                     return true;
@@ -230,7 +236,9 @@ public class AnimalSearch {
                 LinkInfo temp_info = new LinkInfo();
                 if (canMatchTwoAnimalWithOneBreak(board,breakPoint,endPoint,temp_info)){
                     //封装数据
-                    linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    if (linkInfo != null){
+                        linkInfo.setPoints(new LinkInfo(startPoint, breakPoint, temp_info.getPoints().get(1), endPoint).getPoints());
+                    }
 
                     //返回
                     return true;
