@@ -7,8 +7,6 @@ public interface LinkConstant {
      * 连连看图标大小
      */
     int ANIMAL_SIZE = 70;
-    int ANIMAL_SIZE_SMALL = 60;
-    int ANIMAL_SIZE_MORE_SMALL = 55;
 
     /**
      * 连连看AnimalView的内间距

@@ -14,13 +14,12 @@
         android:id="@+id/message_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+
         android:background="@drawable/link_message"
         >
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:layout_marginStart="80dp"
             android:clipChildren="false"
@@ -52,71 +51,77 @@
 
             </LinearLayout>
 
-            <!--道具 拳击-->
+            <!--道具-->
             <RelativeLayout
-                android:id="@+id/link_prop_fight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/link_props"
+                style="@style/link_prop_relative"
+                android:clipChildren="false"
                 >
-                <ImageView
-                    android:id="@+id/prop_fight"
-                    style="@style/link_prop"
-                    android:src="@drawable/link_prop_fight"
-                    />
-                
-                <TextView
-                    android:id="@+id/link_prop_fight_text"
-                    style="@style/link_prop_num"
-                    android:text="+"
-                    android:layout_alignEnd="@id/prop_fight"
-                    android:layout_alignBottom="@+id/prop_fight"
-                    />
-            </RelativeLayout>
+                <!--道具 拳击-->
+                <RelativeLayout
+                    style="@style/link_prop_in"
+                    android:id="@+id/link_prop_fight"
+                    >
+                    <ImageView
+                        android:id="@+id/prop_fight"
+                        style="@style/link_prop"
+                        android:src="@drawable/link_prop_fight"
+                        />
 
-            <!--道具 炸弹-->
-            <RelativeLayout
-                android:id="@+id/link_prop_bomb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                    <TextView
+                        android:id="@+id/link_prop_fight_text"
+                        style="@style/link_prop_num"
+                        android:text="+"
+                        android:layout_alignEnd="@id/prop_fight"
+                        android:layout_alignBottom="@+id/prop_fight"
+                        />
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/prop_bomb"
-                    style="@style/link_prop"
-                    android:src="@drawable/link_prop_bomb"
-                    />
+                <!--道具 炸弹-->
+                <RelativeLayout
+                    style="@style/link_prop_in"
+                    android:id="@+id/link_prop_bomb"
+                    android:layout_marginStart="55dp"
+                    >
 
-                <TextView
-                    android:id="@+id/link_prop_bomb_text"
-                    style="@style/link_prop_num"
-                    android:text="+"
-                    android:layout_alignEnd="@id/prop_bomb"
-                    android:layout_alignBottom="@+id/prop_bomb"
-                    />
+                    <ImageView
+                        android:id="@+id/prop_bomb"
+                        style="@style/link_prop"
+                        android:src="@drawable/link_prop_bomb"
+                        />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/link_prop_bomb_text"
+                        style="@style/link_prop_num"
+                        android:text="+"
+                        android:layout_alignEnd="@id/prop_bomb"
+                        android:layout_alignBottom="@+id/prop_bomb"
+                        />
 
-            <!--道具 混乱-->
-            <RelativeLayout
-                android:id="@+id/link_prop_refresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/prop_refresh"
-                    style="@style/link_prop"
-                    android:src="@drawable/link_prop_resort"
-                    />
+                <!--道具 混乱-->
+                <RelativeLayout
+                    style="@style/link_prop_in"
+                    android:id="@+id/link_prop_refresh"
+                    android:layout_marginLeft="110dp"
+                    >
 
-                <TextView
-                    android:id="@+id/link_prop_refresh_text"
-                    style="@style/link_prop_num"
-                    android:text="+"
-                    android:layout_alignEnd="@id/prop_refresh"
-                    android:layout_alignBottom="@+id/prop_refresh"
-                    />
+                    <ImageView
+                        android:id="@+id/prop_refresh"
+                        style="@style/link_prop"
+                        android:src="@drawable/link_prop_resort"
+                        />
 
+                    <TextView
+                        android:id="@+id/link_prop_refresh_text"
+                        style="@style/link_prop_num"
+                        android:text="+"
+                        android:layout_alignEnd="@id/prop_refresh"
+                        android:layout_alignBottom="@+id/prop_refresh"
+                        />
+
+                </RelativeLayout>
             </RelativeLayout>
 
             <!--暂停-->
@@ -124,12 +129,13 @@
                 android:id="@+id/link_pause"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="15dp"
                 android:layout_marginBottom="5dp"
                 android:src="@drawable/link_stop"
-                />
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"
+                 />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -166,6 +172,7 @@
 
     <!--时间控制-->
     <RelativeLayout
+        android:id="@+id/time_show"
         android:layout_marginTop="12dp"
         android:layout_marginStart="-40dp"
         android:layout_width="120dp"
@@ -187,9 +194,8 @@
     <swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout
         android:id="@+id/link_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/message_show"
-        android:layout_marginTop="50dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/time_show"
         />
 
 

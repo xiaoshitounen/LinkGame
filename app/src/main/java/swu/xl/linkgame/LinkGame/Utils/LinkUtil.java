@@ -156,8 +156,8 @@ public class LinkUtil {
         LinkManager manager = LinkManager.getLinkManager();
 
         return new AnimalPoint(
-                manager.getPadding() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.y  * PxUtil.dpToPx(manager.getAnimal_size(),context),
-                manager.getPadding() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.x  * PxUtil.dpToPx(manager.getAnimal_size(),context)
+                manager.getPadding_hor() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.y  * PxUtil.dpToPx(manager.getAnimal_size(),context),
+                manager.getPadding_ver() + PxUtil.dpToPx(manager.getAnimal_size(),context) / 2 + point.x  * PxUtil.dpToPx(manager.getAnimal_size(),context)
         );
     }
 

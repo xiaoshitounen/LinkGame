@@ -10,12 +10,14 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +41,16 @@ import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.R;
+import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 
 public class LinkActivity extends AppCompatActivity implements View.OnClickListener,LinkManager.LinkGame {
-    //屏幕宽度
+    //屏幕宽度,高度
     int screenWidth;
+    int screenHeight;
+
+    //信息布局的bottom
+    int message_bottom;
 
     //当前关卡模型数据
     XLLevel level;
@@ -53,6 +60,12 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
     //道具
     List<XLProp> props;
+
+    //道具信息等布局
+    RelativeLayout message_show_layout;
+
+    //时间信息等布局
+    RelativeLayout time_show_layout;
 
     //AnimalView的容器
     XLRelativeLayout link_layout;
@@ -115,13 +128,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
         //加载视图
         initView();
-
-        //开始游戏
-        manager.startGame(this,
-                link_layout,screenWidth,
-                level.getL_id(),
-                level.getL_mode()
-        );
 
         //监听触摸事件
         link_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -272,8 +278,45 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initView() {
         screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());
+        screenHeight = ScreenUtil.getScreenHeight(getApplicationContext());
+        Log.d(Constant.TAG,"屏幕宽度："+screenWidth+" "+"屏幕高度："+screenHeight);
+
+        message_show_layout = findViewById(R.id.message_show);
+        message_show_layout.setPadding(0,ScreenUtil.getStateBarHeight(this)+ PxUtil.dpToPx(5,this),0,0);
+        time_show_layout = findViewById(R.id.time_show);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                PxUtil.dpToPx(120, this),
+                PxUtil.dpToPx(120, this)
+        );
+        layoutParams.setMargins(
+                PxUtil.dpToPx(-40, this),
+                ScreenUtil.getStateBarHeight(this) - PxUtil.dpToPx(20,this),
+                0,0);
+        time_show_layout.setLayoutParams(layoutParams);
+        time_show_layout.post(new Runnable() {
+            @Override
+            public void run() {
+                message_bottom = time_show_layout.getBottom();
+
+                //开始游戏
+                manager.startGame(getApplicationContext(),
+                        link_layout,
+                        screenWidth,
+                        screenHeight-message_bottom,
+                        level.getL_id(),
+                        level.getL_mode()
+                );
+
+                Log.d(Constant.TAG,"屏幕高度："+PxUtil.pxToDp(screenHeight,getApplicationContext()));
+                Log.d(Constant.TAG,"时间文本的bottom：："+PxUtil.pxToDp(message_bottom,getApplicationContext()));
+                Log.d(Constant.TAG,"AnimalView内容的高度："+PxUtil.pxToDp(screenHeight-message_bottom,getApplicationContext()));
+            }
+        });
 
         link_layout = findViewById(R.id.link_layout);
+        ViewGroup.LayoutParams params = link_layout.getLayoutParams();
+        params.height = screenHeight-message_bottom;
+        link_layout.setLayoutParams(params);
 
         linkInfo = new LinkInfo();
 
@@ -367,6 +410,11 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                     //数量减1
                     fight_num--;
                     fight_num_text.setText(String.valueOf(fight_num));
+
+                    //数据库处理
+                    XLProp prop = props.get(0);
+                    prop.setP_number(fight_num);
+                    prop.update(1);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }
@@ -382,6 +430,11 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                     //数量减1
                     bomb_num--;
                     bomb_num_text.setText(String.valueOf(bomb_num));
+
+                    //数据库处理
+                    XLProp prop = props.get(1);
+                    prop.setP_number(bomb_num);
+                    prop.update(2);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }
@@ -396,12 +449,18 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                             getApplicationContext(),
                             link_layout,
                             screenWidth,
+                            screenHeight-message_bottom,
                             level.getL_id(),
                             level.getL_mode());
 
                     //数量减1
                     refresh_num--;
                     refresh_num_text.setText(String.valueOf(refresh_num));
+
+                    //数据库处理
+                    XLProp prop = props.get(2);
+                    prop.setP_number(refresh_num);
+                    prop.update(3);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }
@@ -447,22 +506,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
             //金币道具清算
             user.setU_money(money);
             user.update(1);
-            for (XLProp prop : props) {
-                if (prop.getP_kind() == PropMode.PROP_FIGHT.getValue()){
-                    //拳头道具
-                    prop.setP_number(fight_num);
-                    prop.update(1);
-                }else if (prop.getP_kind() == PropMode.PROP_BOMB.getValue()){
-                    //炸弹道具
-                    prop.setP_number(bomb_num);
-                    prop.update(2);
-                }else {
-                    //刷新道具
-                    prop.setP_number(refresh_num);
-                    prop.update(3);
-                }
-            }
-
         }
     }
 }

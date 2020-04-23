@@ -56,8 +56,11 @@ public class LinkManager {
         }
     };
 
-    //偏移间距
-    private int padding;
+    //水平方向偏移间距
+    private int padding_hor;
+
+    //竖直方向偏移间距
+    private int padding_ver;
 
     //存储所有AnimalView
     private List<AnimalView> animals = new ArrayList<>();
@@ -92,7 +95,7 @@ public class LinkManager {
      * @param level_id
      * @param level_mode
      */
-    public void startGame(Context context, RelativeLayout layout, int width,int level_id, int level_mode){
+    public void startGame(Context context, RelativeLayout layout, int width, int height, int level_id, int level_mode){
         //清楚上一次游戏的痕迹
         clearLastGame();
 
@@ -100,7 +103,7 @@ public class LinkManager {
         setBoard(LinkUtil.loadLevelWithIdAndMode(level_id,level_mode));
 
         //界面布局
-        addAnimalViewToLayout(context,layout,width);
+        addAnimalViewToLayout(context,layout,width,height);
 
         //开启定时器
         startTimer(time);
@@ -110,7 +113,8 @@ public class LinkManager {
     private void clearLastGame() {
         board = null;
         time = LinkConstant.TIME;
-        padding = 0;
+        padding_hor = 0;
+        padding_ver = 0;
         animals.clear();
         lastAnimal = null;
         animal_size = 0;
@@ -118,7 +122,7 @@ public class LinkManager {
     }
 
     //在给定的布局上添加AnimalView
-    private void addAnimalViewToLayout(Context context, RelativeLayout layout, int width){
+    private void addAnimalViewToLayout(Context context, RelativeLayout layout, int width, int height){
         //随机加载AnimalView的显示图片
         List<Integer> resources = LinkUtil.loadPictureResourceWithBoard(getBoard());
 
@@ -128,16 +132,27 @@ public class LinkManager {
 
         //根据数量动态设置AnimalView的大小
         Log.d(Constant.TAG,"行数："+row_animal_num+" 列数："+col_animal_num);
-        if (row_animal_num <= 8 && col_animal_num <= 6){
-            animal_size = LinkConstant.ANIMAL_SIZE;
-        }else if (row_animal_num >= 10){
-            animal_size = LinkConstant.ANIMAL_SIZE_MORE_SMALL;
-        }else {
-            animal_size = LinkConstant.ANIMAL_SIZE_SMALL;
+
+        //循环找到适合的大小
+        for (int size = LinkConstant.ANIMAL_SIZE; size >= 10; size--) {
+
+            //如果宽度高度都满足条件
+            if (size * col_animal_num < PxUtil.pxToDp(width,context) &&
+                    size * row_animal_num < PxUtil.pxToDp(height,context)){
+                animal_size = size;
+                break;
+            }
         }
 
         //计算两边的间距
-        padding = (width - col_animal_num * PxUtil.dpToPx(animal_size, context)) / 2;
+        padding_hor = (width - col_animal_num * PxUtil.dpToPx(animal_size, context)) / 2;
+        padding_ver = (height - row_animal_num * PxUtil.dpToPx(animal_size, context)) / 2;
+        Log.d(Constant.TAG,"width："+PxUtil.pxToDp(width,context));
+        Log.d(Constant.TAG,"height："+PxUtil.pxToDp(height,context));
+        Log.d(Constant.TAG,"width-sum："+col_animal_num * animal_size);
+        Log.d(Constant.TAG,"height-sum："+row_animal_num * animal_size);
+        Log.d(Constant.TAG,"水平间距："+PxUtil.pxToDp(padding_hor,context));
+        Log.d(Constant.TAG,"垂直间距："+PxUtil.pxToDp(padding_ver,context));
 
         //依次添加到布局中
         for (int i = 0; i < row_animal_num; i++) {
@@ -147,7 +162,7 @@ public class LinkManager {
                 if (getBoard()[i][j] == 0){
                     animal = new AnimalView(
                             context,
-                            0,
+                            getBoard()[i][j],
                             new AnimalPoint(i,j));
                     animal.setVisibility(View.INVISIBLE);
                 }else {
@@ -167,8 +182,8 @@ public class LinkManager {
                 );
 
                 //左上间距
-                layoutParams.leftMargin = padding + PxUtil.dpToPx(animal_size,context) * j;
-                layoutParams.topMargin = padding + PxUtil.dpToPx(animal_size,context) * i;
+                layoutParams.leftMargin = padding_hor + PxUtil.dpToPx(animal_size,context) * j;
+                layoutParams.topMargin = padding_ver + PxUtil.dpToPx(animal_size,context) * i;
 
                 //设置内间距
                 animal.setPadding(
@@ -285,7 +300,7 @@ public class LinkManager {
      * @param level_id
      * @param level_mode
      */
-    public void refreshGame(Context context, RelativeLayout layout, int width,int level_id, int level_mode){
+    public void refreshGame(Context context, RelativeLayout layout, int width, int height, int level_id, int level_mode){
         //1.所以的AnimalView消失
         for (AnimalView animal : animals) {
             //恢复背景颜色和清除动画
@@ -302,7 +317,7 @@ public class LinkManager {
         layout.removeAllViews();
 
         //3.重新开始游戏
-        startGame(context,layout,width,level_id,level_mode);
+        startGame(context,layout,width,height,level_id,level_mode);
     }
 
     /**
@@ -386,12 +401,20 @@ public class LinkManager {
         this.lastAnimal = lastAnimal;
     }
 
-    public int getPadding() {
-        return padding;
+    public int getPadding_hor() {
+        return padding_hor;
     }
 
-    public void setPadding(int padding) {
-        this.padding = padding;
+    public void setPadding_hor(int padding_hor) {
+        this.padding_hor = padding_hor;
+    }
+
+    public int getPadding_ver() {
+        return padding_ver;
+    }
+
+    public void setPadding_ver(int padding_ver) {
+        this.padding_ver = padding_ver;
     }
 
     public int getAnimal_size() {

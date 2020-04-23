@@ -131,4 +131,17 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
+    <!--包裹道具的布局样式-->
+    <style name="link_prop_relative">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">45dp</item>
+    </style>
+
+    <!--包裹道具的布局内部样式-->
+    <style name="link_prop_in">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
