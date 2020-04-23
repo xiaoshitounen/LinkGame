@@ -75,6 +75,7 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
         Bundle bundle = intent.getExtras();
         assert bundle != null;
         level = bundle.getParcelable("level");
+        int serial_click = bundle.getInt("serial_click");
 
         //设置关卡数据
         level_text.setText("第"+level.getL_id()+"关");
@@ -93,7 +94,7 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
         score_text.setText(LinkUtil.getScoreByTime(level.getL_time())+"分");
 
         //设置连击
-        batter_text.setText(LinkUtil.getSerialClick()+"次");
+        batter_text.setText(serial_click+"次");
     }
 
     /**

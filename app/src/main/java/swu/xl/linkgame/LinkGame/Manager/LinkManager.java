@@ -1,6 +1,7 @@
 package swu.xl.linkgame.LinkGame.Manager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 
 /**
@@ -95,7 +97,7 @@ public class LinkManager {
      * @param level_id
      * @param level_mode
      */
-    public void startGame(Context context, RelativeLayout layout, int width, int height, int level_id, int level_mode){
+    public void startGame(Context context, RelativeLayout layout, int width, int height, int level_id, char level_mode){
         //清楚上一次游戏的痕迹
         clearLastGame();
 
@@ -169,7 +171,7 @@ public class LinkManager {
                     //创建一个AnimalView
                     animal = new AnimalView(
                             context,
-                            LinkConstant.ANIMAL_RESOURCE[resources.get(getBoard()[i][j]-1)],
+                            ((getBoard()[i][j] > 0) ? LinkConstant.ANIMAL_RESOURCE[resources.get(getBoard()[i][j]-1)] : LinkConstant.ANIMAL_WOOD),
                             getBoard()[i][j],
                             new AnimalPoint(i, j)
                     );
@@ -197,7 +199,7 @@ public class LinkManager {
                 layout.addView(animal,layoutParams);
 
                 //保存该视图
-                if (animal.getFlag() != 0){
+                if (animal.getFlag() > 0){
                     animals.add(animal);
                 }
             }
@@ -300,7 +302,7 @@ public class LinkManager {
      * @param level_id
      * @param level_mode
      */
-    public void refreshGame(Context context, RelativeLayout layout, int width, int height, int level_id, int level_mode){
+    public void refreshGame(Context context, RelativeLayout layout, int width, int height, int level_id, char level_mode){
         //1.所以的AnimalView消失
         for (AnimalView animal : animals) {
             //恢复背景颜色和清除动画
@@ -358,8 +360,19 @@ public class LinkManager {
             Bundle bundle = new Bundle();
             bundle.putParcelable("level",level);
             intent.putExtras(bundle);
+            bundle.putInt("serial_click",LinkUtil.getSerialClick());
             context.startActivity(intent);
+
         }
+
+        //自定义 从右向左滑动的效果
+        //((Activity)context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        // 自定义的淡入淡出动画效果
+        ((Activity)context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+
+        //清楚上一场游戏
+        clearLastGame();
     }
 
     //接口

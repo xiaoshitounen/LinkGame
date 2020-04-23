@@ -602,6 +602,8 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         }
                     });
+                }else {
+                    Toast.makeText(this, "正在加载视图，请稍后再试", Toast.LENGTH_SHORT).show();
                 }
 
                 break;

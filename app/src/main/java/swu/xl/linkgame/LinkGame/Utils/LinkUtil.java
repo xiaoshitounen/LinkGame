@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.Constant.Enum.LevelMode;
 import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
 import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Manager.LinkManager;
@@ -103,7 +104,7 @@ public class LinkUtil {
         //判断状态
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] != 0){
+                if (board[i][j] > 0){
                     return false;
                 }
             }
@@ -167,14 +168,24 @@ public class LinkUtil {
      * @param level_mode
      * @return
      */
-    public static int[][] loadLevelWithIdAndMode(int level_id, int level_mode){
-        //资源ID
-        int resourceID = new Random().nextInt(LinkConstant.BOARD_EASY.length);
+    public static int[][] loadLevelWithIdAndMode(int level_id, char level_mode){
+        //1.先判断是什么类型的关卡
+        int [][][] BOARD = null;
+        if (level_mode == LevelMode.LEVEL_MODE_EASY.getValue()){
+            BOARD = LinkConstant.BOARD_EASY;
+        }else if (level_mode == LevelMode.LEVEL_MODE_NORMAL.getValue()){
+            BOARD = LinkConstant.BOARD_NORMAL;
+        }else {
+            BOARD = LinkConstant.BOARD_HARD;
+        }
 
-        //获取随机产生的模板
-        int[][] board = LinkConstant.BOARD_EASY[resourceID];
+        //2.获取需要加载的资源数量
+        int resourceID = new Random().nextInt(BOARD.length);
 
-        //拷贝过去
+        //3.获取随机产生的模板
+        int[][] board = BOARD[resourceID];
+
+        //4.拷贝模板
         int row = board.length;
         int col = board[0].length;
         int[][] clone = new int[row][col];

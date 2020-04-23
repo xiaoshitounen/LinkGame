@@ -27,6 +27,8 @@ public interface LinkConstant {
             R.drawable.animal_14, R.drawable.animal_15,
             R.drawable.animal_16
     };
+    //木头图标
+    int ANIMAL_WOOD = R.drawable.animal_no;
 
     /**
      * 连连看图标背景
@@ -93,5 +95,27 @@ public interface LinkConstant {
             LinkBoard.board_easy_11,
             LinkBoard.board_easy_12,
             LinkBoard.board_easy_13,
+    };
+
+    /**
+     * 连连看正式模板-普通
+     */
+    int[][][] BOARD_NORMAL = {
+            LinkBoard.board_normal_1,
+            LinkBoard.board_normal_2,
+            LinkBoard.board_normal_3,
+            LinkBoard.board_normal_4,
+            LinkBoard.board_normal_5
+    };
+
+    /**
+     * 连连看正式模板-困难
+     */
+    int[][][] BOARD_HARD = {
+            LinkBoard.board_hard_1,
+            LinkBoard.board_hard_2,
+            LinkBoard.board_hard_3,
+            LinkBoard.board_hard_4,
+            LinkBoard.board_hard_5
     };
 }

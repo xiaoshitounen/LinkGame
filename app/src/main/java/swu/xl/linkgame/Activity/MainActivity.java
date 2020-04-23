@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.zhangyue.we.x2c.X2C;
@@ -48,11 +49,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //根布局
     RelativeLayout root_main;
 
+    //设置布局
+    LinearLayout inflate_setting;
     //帮助布局
     LinearLayout inflate_help;
+    //商店布局
+    LinearLayout inflate_store;
 
+    //是否加载设置布局完成标志
+    boolean flag_setting = false;
     //是否加载帮助布局完成标志
     boolean flag_help = false;
+    //是否加载商店布局完成标志
 
     @Xml(layouts = "activity_main")
     @Override
@@ -333,6 +341,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             root_main.removeViewInLayout(inflate_help);
                         }
                     });
+                }else {
+                    Toast.makeText(this, "正在加载视图，请稍后点击", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
