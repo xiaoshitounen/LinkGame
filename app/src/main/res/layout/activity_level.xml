@@ -47,7 +47,7 @@
         <!--返回按钮-->
         <ImageButton
             android:id="@+id/pager_back"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
             style="@style/operation_btn"
             android:background="@drawable/btn_shape_next"
@@ -56,7 +56,7 @@
 
         <!--页面控制器-->
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="45dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

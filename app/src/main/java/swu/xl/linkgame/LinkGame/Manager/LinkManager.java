@@ -432,4 +432,12 @@ public class LinkManager {
     public void setListener(LinkGame listener) {
         this.listener = listener;
     }
+
+    public boolean isPause() {
+        return isPause;
+    }
+
+    public void setPause(boolean pause) {
+        isPause = pause;
+    }
 }

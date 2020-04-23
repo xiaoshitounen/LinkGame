@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#CC000000"
+    android:padding="10dp">
+
+    <!--暂停文字和图标-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        >
+
+        <!--暂停-->
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            style="@style/ShowPauseText"
+            />
+
+        <!--躺下的皮卡丘-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/view_pikaqiu"
+            />
+
+    </LinearLayout>
+
+    <!--操作提示-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        >
+
+        <!--解释说明文字-->
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ExplainString"
+            style="@style/ShowExplainText"
+            />
+
+        <!--无转折，两个转折-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+            <!--无转折-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/view_no_break"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/No_break"
+                    style="@style/ShowExplainText"
+                    />
+
+            </LinearLayout>
+
+            <!--两个转折-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/view_two_break1"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/Two_break"
+                    style="@style/ShowExplainText"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--一个转折，两个转折-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+            <!--一个转折-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/view_one_break"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/No_break"
+                    style="@style/ShowExplainText"
+                    />
+
+            </LinearLayout>
+
+            <!--两个转折-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/view_two_break2"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/Two_break"
+                    style="@style/ShowExplainText"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--拳头道具，炸弹道具-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <!--拳头道具-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/link_prop_fight"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Fight_Explain"
+                    style="@style/ShowExplainText"
+                    />
+            </LinearLayout>
+
+            <!--炸弹道具-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/link_prop_bomb"
+                    />
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Bomb_Explain"
+                    style="@style/ShowExplainText"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!--刷新道具，暂停-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <!--刷新道具-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/link_prop_resort"
+                    />
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Refresh_Explain"
+                    style="@style/ShowExplainText"
+                    />
+            </LinearLayout>
+
+            <!--暂停-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/link_stop"
+                    />
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Pause_Explain"
+                    style="@style/ShowExplainText"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--按钮提示-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:id="@+id/main_know"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_shape_main_know"
+            android:text="@string/Know_Explain"
+            android:textSize="30sp"
+            android:textColor="#ffffff"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

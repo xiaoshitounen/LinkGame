@@ -35,4 +35,7 @@ dependencies {
     implementation 'org.litepal.android:java:3.0.0'
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.0'
+
+    annotationProcessor 'com.zhangyue.we:x2c-apt:1.1.2'
+    implementation 'com.zhangyue.we:x2c-lib:1.0.6'
 }

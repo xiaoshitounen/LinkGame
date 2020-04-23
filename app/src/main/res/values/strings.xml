@@ -9,4 +9,13 @@
     <string name="mode_hard">困难模式</string>
     <string name="mode_easy">简单模式</string>
     <string name="Link">关卡</string>
+    <string name="PauseString">暂停中</string>
+    <string name="ExplainString">&#160;&#160;&#160;&#160;相同的神奇宝贝连线之后可以消除，注意神奇宝贝之间的转折不能超过两个</string>
+    <string name="No_break">无转折</string>
+    <string name="Two_break">两个转折</string>
+    <string name="Fight_Explain">消除一对神奇宝贝</string>
+    <string name="Bomb_Explain">消除某一对神奇宝贝</string>
+    <string name="Refresh_Explain">重新刷新布局</string>
+    <string name="Pause_Explain">暂停游戏</string>
+    <string name="Know_Explain">我明白了</string>
 </resources>

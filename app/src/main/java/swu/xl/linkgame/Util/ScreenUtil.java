@@ -2,10 +2,13 @@ package swu.xl.linkgame.Util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 public class ScreenUtil {
@@ -44,7 +47,7 @@ public class ScreenUtil {
     }
 
     /**
-     * 获取状态栏的高度
+     * 获取StatusBar状态栏的高度
      * @param context
      * @return
      */
@@ -60,6 +63,53 @@ public class ScreenUtil {
             e.printStackTrace();
         }
         return statusHeight;
+    }
+
+    /**
+     * 判断设置是否有NavigationBar导航栏
+     * @param context
+     * @return
+     */
+    private static boolean checkDeviceHasNavigationBar(Context context) {
+        boolean hasNavigationBar = false;
+        Resources rs = context.getResources();
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0) {
+            hasNavigationBar = rs.getBoolean(id);
+        }
+        try {
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                hasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                hasNavigationBar = true;
+            }
+        } catch (Exception e) {
+
+        }
+
+        return hasNavigationBar;
+    }
+
+    /**
+     * 返回NavigationBar导航栏的高度
+     * @param context
+     * @return
+     */
+    public static int getNavigationBarHeight(Context context) {
+        int height = 0;
+
+        //如果存在
+        if (ScreenUtil.checkDeviceHasNavigationBar(context)){
+            Resources resources = context.getResources();
+            int resourceId = resources.getIdentifier("navigation_bar_height","dimen", "android");
+            height = resources.getDimensionPixelSize(resourceId);
+            Log.v("dbw", "Navi height:" + height);
+        }
+
+        return height;
     }
 
 }

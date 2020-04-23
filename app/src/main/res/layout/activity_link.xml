@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.LinkActivity"
-
     android:background="@drawable/bg_success_failure_link"
+
+    android:id="@+id/root_link"
     >
 
     <!--关卡，道具，暂停信息-->
@@ -14,15 +15,13 @@
         android:id="@+id/message_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@drawable/link_message"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
             android:layout_marginStart="80dp"
-            android:clipChildren="false"
+            android:layout_marginBottom="5dp"
             >
 
             <!--关卡-->
@@ -82,6 +81,7 @@
                     style="@style/link_prop_in"
                     android:id="@+id/link_prop_bomb"
                     android:layout_marginStart="55dp"
+                    android:clipChildren="false"
                     >
 
                     <ImageView
@@ -105,6 +105,7 @@
                     style="@style/link_prop_in"
                     android:id="@+id/link_prop_refresh"
                     android:layout_marginLeft="110dp"
+                    android:clipChildren="false"
                     >
 
                     <ImageView
@@ -131,8 +132,6 @@
                 android:layout_height="45dp"
                 android:layout_marginBottom="5dp"
                 android:src="@drawable/link_stop"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"
                  />
 
         </RelativeLayout>

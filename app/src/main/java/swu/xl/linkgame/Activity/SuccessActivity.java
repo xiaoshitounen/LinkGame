@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.zhangyue.we.x2c.X2C;
+import com.zhangyue.we.x2c.ano.Xml;
 
 import org.litepal.LitePal;
 
@@ -47,10 +49,12 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
     //关卡
     XLLevel level;
 
+    @Xml(layouts = "activity_success")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_success);
+        //setContentView(R.layout.activity_success);
+        X2C.setContentView(this,R.layout.activity_success);
 
         //沉浸式状态栏
         ImmersionBar.with(this).init();

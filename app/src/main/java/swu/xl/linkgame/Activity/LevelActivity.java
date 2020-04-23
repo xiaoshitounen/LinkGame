@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.zhangyue.we.x2c.X2C;
+import com.zhangyue.we.x2c.ano.Xml;
 
 import java.util.List;
 
@@ -57,10 +59,12 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     //关卡根布局
     RelativeLayout level_layout;
 
+    @Xml(layouts = "activity_level")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level);
+        //setContentView(R.layout.activity_level);
+        X2C.setContentView(this,R.layout.activity_level);
 
         //沉浸式状态栏
         ImmersionBar.with(this).init();
@@ -264,7 +268,17 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.pager_back:
                 Log.d(Constant.TAG,"返回按钮");
-                finish();
+
+                startActivity(new Intent(LevelActivity.this,MainActivity.class));
+
+                //淡入淡出切换动画
+                //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                //从左向右滑动动画
+                //overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
+                //自定义动画
+                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
                 break;
             case R.id.pager_up:
                 Log.d(Constant.TAG,"上一页");

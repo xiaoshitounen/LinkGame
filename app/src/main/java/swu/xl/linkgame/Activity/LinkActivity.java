@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,18 +18,23 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.zhangyue.we.x2c.X2C;
+import com.zhangyue.we.x2c.ano.Xml;
 
 import org.litepal.LitePal;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
+import swu.xl.linkgame.Constant.Enum.LevelState;
 import swu.xl.linkgame.Constant.Enum.PropMode;
 import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
 import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
@@ -63,6 +69,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
     //道具信息等布局
     RelativeLayout message_show_layout;
+
+    //道具布局
+    RelativeLayout props_layout;
 
     //时间信息等布局
     RelativeLayout time_show_layout;
@@ -113,12 +122,23 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
     //暂停
     ImageView pause;
+    
+    //根布局
+    RelativeLayout root_link;
 
+    //暂停布局
+    LinearLayout inflate_pause;
+
+    //是否加载暂停布局完成标志
+    boolean flag_pause = false;
+
+    @Xml(layouts = "activity_link")
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_link);
+        //setContentView(R.layout.activity_link);
+        X2C.setContentView(this,R.layout.activity_link);
 
         //沉浸式状态栏
         ImmersionBar.with(this).barAlpha(1.0f).init();
@@ -128,6 +148,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
         //加载视图
         initView();
+
+        //加载布局
+        initInflate();
 
         //监听触摸事件
         link_layout.setOnTouchListener(new View.OnTouchListener() {
@@ -279,7 +302,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());
         screenHeight = ScreenUtil.getScreenHeight(getApplicationContext());
-        Log.d(Constant.TAG,"屏幕宽度："+screenWidth+" "+"屏幕高度："+screenHeight);
+        Log.d(Constant.TAG,"屏幕宽度："+PxUtil.pxToDp(screenWidth,this)+" "+"屏幕高度："+PxUtil.pxToDp(screenWidth,this));
 
         message_show_layout = findViewById(R.id.message_show);
         message_show_layout.setPadding(0,ScreenUtil.getStateBarHeight(this)+ PxUtil.dpToPx(5,this),0,0);
@@ -302,7 +325,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 manager.startGame(getApplicationContext(),
                         link_layout,
                         screenWidth,
-                        screenHeight-message_bottom,
+                        screenHeight-message_bottom-ScreenUtil.getNavigationBarHeight(getApplicationContext()),
                         level.getL_id(),
                         level.getL_mode()
                 );
@@ -314,9 +337,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         link_layout = findViewById(R.id.link_layout);
-        ViewGroup.LayoutParams params = link_layout.getLayoutParams();
-        params.height = screenHeight-message_bottom;
-        link_layout.setLayoutParams(params);
+        ViewGroup.LayoutParams params_link_layout = link_layout.getLayoutParams();
+        params_link_layout.height = screenHeight-message_bottom;
+        link_layout.setLayoutParams(params_link_layout);
 
         linkInfo = new LinkInfo();
 
@@ -327,6 +350,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         money_text = findViewById(R.id.link_money_text);
         time_text = findViewById(R.id.link_time_text);
 
+        props_layout = findViewById(R.id.link_props);
         prop_fight = findViewById(R.id.prop_fight);
         prop_fight.setOnClickListener(this);
         prop_bomb = findViewById(R.id.prop_bomb);
@@ -334,6 +358,24 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         prop_refresh = findViewById(R.id.prop_refresh);
         prop_refresh.setOnClickListener(this);
         pause = findViewById(R.id.link_pause);
+        final RelativeLayout.LayoutParams params_pause = new RelativeLayout.LayoutParams(
+                PxUtil.dpToPx(45, this),
+                PxUtil.dpToPx(45, this)
+        );
+        props_layout.post(new Runnable() {
+            @Override
+            public void run() {
+                //添加向右依赖
+                params_pause.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+                //设置右边距
+                params_pause.rightMargin = (screenWidth-props_layout.getRight()) / 2;
+
+                //设置给控件
+                pause.setLayoutParams(params_pause);
+            }
+        });
+
         pause.setOnClickListener(this);
 
         manager.setListener(this);
@@ -350,6 +392,26 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         fight_num_text.setText(String.valueOf(fight_num));
         bomb_num_text.setText(String.valueOf(bomb_num));
         refresh_num_text.setText(String.valueOf(refresh_num));
+
+        root_link = findViewById(R.id.root_link);
+    }
+
+    /**
+     * 加载布局
+     */
+    @Xml(layouts = "pause_view")
+    private void initInflate() {
+        //加载帮助布局
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //加载布局
+                inflate_pause = (LinearLayout) X2C.inflate(LinkActivity.this, R.layout.pause_view, null);
+
+                //改变标志
+                flag_pause = true;
+            }
+        }).start();
     }
 
     /**
@@ -449,7 +511,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                             getApplicationContext(),
                             link_layout,
                             screenWidth,
-                            screenHeight-message_bottom,
+                            screenHeight-message_bottom-ScreenUtil.getNavigationBarHeight(getApplicationContext()),
                             level.getL_id(),
                             level.getL_mode());
 
@@ -470,7 +532,77 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(Constant.TAG,"暂停");
 
                 //暂停游戏
-                manager.pauseGame();
+                if (flag_pause){
+                    //定时器暂停
+                    manager.pauseGame();
+
+                    //加载布局
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT);
+                    //layoutParams.setMargins(0, ScreenUtil.getScreenHeight(getApplicationContext()),0,0);
+                    root_link.addView(inflate_pause,layoutParams);
+
+                    //按钮的事件回调
+                    inflate_pause.findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //回到关卡
+
+                            //查询对应模式的数据
+                            List<XLLevel> XLLevels = LitePal.where("l_mode == ?", String.valueOf(level.getL_mode())).find(XLLevel.class);
+                            Log.d(Constant.TAG,XLLevels.size()+"");
+                            //依次查询每一个内容
+                            for (XLLevel xlLevel : XLLevels) {
+                                Log.d(Constant.TAG, xlLevel.toString());
+                            }
+
+                            //跳转界面
+                            Intent intent = new Intent(LinkActivity.this, LevelActivity.class);
+                            //加入数据
+                            Bundle bundle = new Bundle();
+                            //加入关卡模式数据
+                            bundle.putString("mode","简单");
+                            //加入关卡数据
+                            bundle.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+                    inflate_pause.findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //回到游戏
+                            manager.pauseGame();
+
+                            //移除自己
+                            root_link.removeView(inflate_pause);
+                        }
+                    });
+                    inflate_pause.findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //下一关
+
+                            //加入关卡数据
+                            XLLevel next_level = LitePal.find(XLLevel.class, level.getId() + 1);
+
+                            //判断是否开启
+                            if (next_level.getL_new() != LevelState.LEVEL_STATE_NO.getValue()){
+                                //跳转界面
+                                Intent intent = new Intent(LinkActivity.this, LinkActivity.class);
+                                //加入数据
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("level",next_level);
+                                intent.putExtras(bundle);
+                                //跳转
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(LinkActivity.this, "下一关还没有开启", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
 
                 break;
         }
@@ -499,13 +631,35 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
             //关卡结算
             level.update(level.getId());
-            XLLevel next_level = new XLLevel();
-            next_level.setL_new('4');
-            next_level.update(level.getId()+1);
+
+            //下一关判断
+            XLLevel next_level = LitePal.find(XLLevel.class, level.getId() + 1);
+            if (next_level.getL_new() == '0'){
+                next_level.setL_new('4');
+                next_level.update(level.getId()+1);
+            }
 
             //金币道具清算
             user.setU_money(money);
             user.update(1);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //暂停游戏
+        manager.pauseGame();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //开启游戏
+        if (manager.isPause()){
+            manager.pauseGame();
         }
     }
 }

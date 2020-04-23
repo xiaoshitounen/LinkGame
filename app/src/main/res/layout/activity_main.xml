@@ -1,112 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
 
-    android:orientation="vertical"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+    android:id="@+id/root_main">
 
-    <!--标题部分-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        >
-
-        <!--标题-->
-        <swu.xl.linkgame.SelfView.XLTextView
-            android:id="@+id/main_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/main_title_bg"
-            android:text="@string/app_name"
-            android:gravity="center"
-            android:textSize="28sp"
-            android:paddingBottom="8dp"
-            android:layout_alignBottom="@+id/main_banner"
-            android:layout_marginBottom="100dp"
-            android:layout_marginStart="20dp"
-            />
-
-        <!--success_banner-->
-        <ImageView
-            android:id="@+id/main_banner"
-            android:layout_width="wrap_content"
-            android:layout_height="130dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/main_banner"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            />
-
-    </RelativeLayout>
-
-    <!--模式部分-->
+    <!--包裹布局-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
         >
 
-        <!--简单-->
-        <swu.xl.linkgame.SelfView.XLButton
-            android:id="@+id/main_mode_easy"
-            style="@style/mode_btn"
-            android:text="@string/mode_easy"
-            />
+        <!--标题部分-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            >
 
-        <!--普通-->
-        <swu.xl.linkgame.SelfView.XLButton
-            android:id="@+id/main_mode_normal"
-            style="@style/mode_btn"
-            android:text="@string/mode_normal"
-            />
+            <!--标题-->
+            <swu.xl.linkgame.SelfView.XLTextView
+                android:id="@+id/main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_title_bg"
+                android:text="@string/app_name"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:paddingBottom="8dp"
+                android:layout_alignBottom="@+id/main_banner"
+                android:layout_marginBottom="100dp"
+                android:layout_marginStart="20dp"
+                />
 
-        <!--困难-->
-        <swu.xl.linkgame.SelfView.XLButton
-            android:id="@+id/main_mode_hard"
-            style="@style/mode_btn"
-            android:text="@string/mode_hard"
-            />
+            <!--success_banner-->
+            <ImageView
+                android:id="@+id/main_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/main_banner"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+        <!--模式部分-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <!--简单-->
+            <swu.xl.linkgame.SelfView.XLButton
+                android:id="@+id/main_mode_easy"
+                style="@style/mode_btn"
+                android:text="@string/mode_easy"
+                />
+
+            <!--普通-->
+            <swu.xl.linkgame.SelfView.XLButton
+                android:id="@+id/main_mode_normal"
+                style="@style/mode_btn"
+                android:text="@string/mode_normal"
+                />
+
+            <!--困难-->
+            <swu.xl.linkgame.SelfView.XLButton
+                android:id="@+id/main_mode_hard"
+                style="@style/mode_btn"
+                android:text="@string/mode_hard"
+                />
+
+        </LinearLayout>
+
+        <!--相关设置-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="3"
+            android:gravity="center"
+            >
+
+            <!--设置-->
+            <Button
+                android:id="@+id/main_setting"
+                style="@style/main_bg"
+                android:background="@drawable/main_setting"
+                android:layout_marginEnd="30dp"
+                />
+
+            <!--帮助-->
+            <Button
+                android:id="@+id/main_help"
+                style="@style/main_bg"
+                android:background="@drawable/main_help"
+                />
+
+            <!--商店-->
+            <Button
+                android:id="@+id/main_store"
+                style="@style/main_bg"
+                android:background="@drawable/main_store"
+                android:layout_marginStart="30dp"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <!--相关设置-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1.5"
-        android:gravity="center"
-        >
-
-        <!--设置-->
-        <Button
-            android:id="@+id/main_setting"
-            style="@style/main_bg"
-            android:background="@drawable/main_setting"
-            android:layout_marginEnd="30dp"
-            />
-
-        <!--帮助-->
-        <Button
-            android:id="@+id/main_help"
-            style="@style/main_bg"
-            android:background="@drawable/main_help"
-            />
-
-        <!--商店-->
-        <Button
-            android:id="@+id/main_store"
-            style="@style/main_bg"
-            android:background="@drawable/main_store"
-            android:layout_marginStart="30dp"
-            />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

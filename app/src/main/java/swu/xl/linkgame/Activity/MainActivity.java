@@ -9,9 +9,14 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.zhangyue.we.x2c.X2C;
+import com.zhangyue.we.x2c.ano.Xml;
 
 import org.litepal.LitePal;
 
@@ -40,10 +45,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //商店按钮
     Button btn_store;
 
+    //根布局
+    RelativeLayout root_main;
+
+    //帮助布局
+    LinearLayout inflate_help;
+
+    //是否加载帮助布局完成标志
+    boolean flag_help = false;
+
+    @Xml(layouts = "activity_main")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        X2C.setContentView(this, R.layout.activity_main);
 
         //沉浸式状态栏
         ImmersionBar.with(this).init();
@@ -62,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setDrawableLeft(mode_easy,R.drawable.main_mode_easy);
         setDrawableLeft(mode_normal,R.drawable.main_mode_normal);
         setDrawableLeft(mode_hard,R.drawable.main_mode_hard);
+
+        //加载布局
+        initInflate();
     }
 
     /**
@@ -185,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_help.setOnClickListener(this);
         btn_store = findViewById(R.id.main_store);
         btn_store.setOnClickListener(this);
+        root_main = findViewById(R.id.root_main);
     }
 
     /**
@@ -197,6 +216,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawable.setBounds(PxUtil.dpToPx(20,this),PxUtil.dpToPx(2,this), PxUtil.dpToPx(60,this),PxUtil.dpToPx(42,this));
         //设置放在控件的左上右下
         btn.setCompoundDrawables(drawable,null,null,null);
+    }
+
+    /**
+     * 加载布局
+     */
+    @Xml(layouts = "help_view")
+    private void initInflate() {
+        //加载帮助布局
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //加载布局
+                inflate_help = (LinearLayout) X2C.inflate(MainActivity.this, R.layout.help_view, null);
+
+                //改变标志
+                flag_help = true;
+            }
+        }).start();
     }
 
     @Override
@@ -282,6 +319,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.main_help:
                 Log.d(Constant.TAG,"帮助按钮");
+
+                if (flag_help){
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT);
+                    //layoutParams.setMargins(0, ScreenUtil.getScreenHeight(getApplicationContext()),0,0);
+                    root_main.addView(inflate_help,layoutParams);
+
+                    inflate_help.findViewById(R.id.main_know).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            root_main.removeViewInLayout(inflate_help);
+                        }
+                    });
+                }
+
                 break;
             case R.id.main_store:
                 Log.d(Constant.TAG,"商店按钮");
