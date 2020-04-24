@@ -1,6 +1,22 @@
 # LinkGame
 ## Android:连连看
 
+运行效果：
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/setting.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/help.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/store.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/level.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/game.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/stop.png)
+
+***
+
 
 #### 第一次commit-2020-04-15:
 - 项目基础操作。
