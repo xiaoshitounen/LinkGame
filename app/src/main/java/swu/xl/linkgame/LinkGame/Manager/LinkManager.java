@@ -227,8 +227,10 @@ public class LinkManager {
 
     //关闭定时器
     private void stopTimer() {
-        timer.cancel();
-        timer = null;
+        if (timer != null){
+            timer.cancel();
+            timer = null;
+        }
     }
 
     /**
@@ -359,17 +361,15 @@ public class LinkManager {
             Intent intent = new Intent(context, SuccessActivity.class);
             Bundle bundle = new Bundle();
             bundle.putParcelable("level",level);
-            intent.putExtras(bundle);
             bundle.putInt("serial_click",LinkUtil.getSerialClick());
+            intent.putExtras(bundle);
             context.startActivity(intent);
-
         }
 
         //自定义 从右向左滑动的效果
         //((Activity)context).overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
         // 自定义的淡入淡出动画效果
         ((Activity)context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
 
         //清楚上一场游戏
         clearLastGame();

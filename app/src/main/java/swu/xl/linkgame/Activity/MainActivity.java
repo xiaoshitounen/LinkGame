@@ -2,17 +2,21 @@ package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +34,10 @@ import swu.xl.linkgame.Constant.Enum.PropMode;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
+import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
+import swu.xl.linkgame.Util.StateUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //简单模式
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout root_main;
 
     //设置布局
-    LinearLayout inflate_setting;
+    RelativeLayout inflate_setting;
     //帮助布局
     LinearLayout inflate_help;
     //商店布局
@@ -100,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //加载布局
         initInflate();
+
+        //播放音乐
+        playMusic();
     }
 
     /**
@@ -241,14 +250,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 加载布局
      */
-    @Xml(layouts = "help_view")
     private void initInflate() {
+        //加载设置布局
+        new Thread(new Runnable() {
+            @Xml(layouts = "setting_view")
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public void run() {
+                //加载布局
+                inflate_setting = (RelativeLayout) X2C.inflate(MainActivity.this, R.layout.setting_view, null);
+
+                //拦截事件 防止事件被传递下去
+                inflate_setting.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+
+                //获取当前的音量
+                float backgroundVolume = BackgroundMusicManager.getInstance(MainActivity.this).getBackgroundVolume();
+                Log.d(Constant.TAG,"当前的音量是："+backgroundVolume);
+
+                //设置音量
+                SeekBar seekBar = inflate_setting.findViewById(R.id.seek_bar_music);
+                seekBar.setProgress((int) (backgroundVolume * 100));
+
+                //改变标志
+                flag_setting = true;
+            }
+        }).start();
+
         //加载帮助布局
         new Thread(new Runnable() {
+            @Xml(layouts = "help_view")
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void run() {
                 //加载布局
                 inflate_help = (LinearLayout) X2C.inflate(MainActivity.this, R.layout.help_view, null);
+
+                //拦截事件 防止事件被传递下去
+                inflate_help.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
 
                 //改变标志
                 flag_help = true;
@@ -257,10 +305,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //加载商店布局
         new Thread(new Runnable() {
+            @Xml(layouts = "store_view")
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void run() {
                 //加载布局
                 inflate_store = (RelativeLayout) X2C.inflate(MainActivity.this, R.layout.store_view, null);
+
+                //拦截事件 防止事件被传递下去
+                inflate_store.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
 
                 //查询用户数据
                 List<XLUser> users = LitePal.findAll(XLUser.class);
@@ -300,6 +358,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 flag_store = true;
             }
         }).start();
+    }
+
+    /**
+     * 播放背景音乐
+     */
+    private void playMusic() {
+        //判断是否正在播放
+        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
+
+            //播放
+            BackgroundMusicManager.getInstance(this).playBackgroundMusic(
+                    R.raw.bg_music,
+                    true
+            );
+        }
     }
 
     @Override
@@ -382,6 +455,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.main_setting:
                 Log.d(Constant.TAG,"设置按钮");
+
+                if (loadView(flag_setting,inflate_setting)){
+                    //音乐按钮
+                    SeekBar seekBar = inflate_setting.findViewById(R.id.seek_bar_music);
+                    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            Log.d(Constant.TAG,"当前进度："+progress);
+
+                            BackgroundMusicManager.getInstance(MainActivity.this).setBackgroundVolume((float) (progress / 100.0));
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        }
+                    });
+
+
+                    //移除该视图
+                    inflate_setting.findViewById(R.id.setting_finish).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            root_main.removeViewInLayout(inflate_setting);
+                        }
+                    });
+                }
+
                 break;
             case R.id.main_help:
                 Log.d(Constant.TAG,"帮助按钮");
@@ -506,5 +612,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //重新设置金币
         TextView user_money_text = inflate_store.findViewById(R.id.store_user_money);
         user_money_text.setText(String.valueOf(user_money));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (StateUtil.isBackground(this)) {
+            Log.d(Constant.TAG,"后台");
+
+            //暂停播放
+            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
+            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
+        }
     }
 }

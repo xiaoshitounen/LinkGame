@@ -24,10 +24,12 @@ import java.util.List;
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Constant.Enum.LevelState;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.SelfView.XLImageView;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
+import swu.xl.linkgame.Util.StateUtil;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
     //屏幕宽度
@@ -292,6 +294,27 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
                 //右滑
                 scrollLevelsOfDirection(1);
                 break;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (StateUtil.isBackground(this)) {
+            Log.d(Constant.TAG,"后台");
+
+            //暂停播放
+            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
+            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }

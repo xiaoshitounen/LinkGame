@@ -1,6 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#BB000000">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--主题内容-->
+    <RelativeLayout
+        android:id="@+id/setting_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        >
+
+        <!--背景颜色-->
+        <com.shehuan.niv.NiceImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/view_setting_bg"
+            app:corner_bottom_left_radius="15dp"
+            app:corner_bottom_right_radius="15dp"
+            app:corner_top_right_radius="15dp"
+            app:corner_top_left_radius="15dp"
+            />
+
+        <!--具体内容-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!--背景音乐-->
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                >
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Music_Pic"
+                    style="@style/SettingMusicText"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/view_setting_pic_bg"
+                        android:src="@drawable/view_setting_music_pic"
+                        />
+
+                    <SeekBar
+                        android:id="@+id/seek_bar_music"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="4"
+                        android:progressDrawable="@drawable/progressbar_bg"
+                        android:max="100"
+                        android:progress="80"
+                        android:secondaryProgress="100"
+                        android:thumb="@drawable/seek_bar_point"
+                        />
+
+                </LinearLayout>
+
+                
+            </LinearLayout>
+
+            <!--音效-->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                >
+
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Music_Pic"
+                    style="@style/SettingMusicText"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/view_setting_pic_bg"
+                        android:src="@drawable/view_setting_sound_effect"
+                        />
+
+                    <SeekBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="4"
+                        android:progressDrawable="@drawable/progressbar_bg"
+                        android:max="100"
+                        android:progress="100"
+                        android:secondaryProgress="100"
+                        android:thumb="@drawable/seek_bar_point"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--完成-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                >
+
+                <swu.xl.linkgame.SelfView.XLButton
+                    android:id="@+id/setting_finish"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/FinishText"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp"
+                    android:background="@drawable/view_setting_finish"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--标题部分-->
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/view_setting_banner"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/setting_content"
+        android:layout_marginBottom="-50dp"
+        android:gravity="center_horizontal"
+        >
+
+        <swu.xl.linkgame.SelfView.XLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Setting"
+            style="@style/SettingText"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

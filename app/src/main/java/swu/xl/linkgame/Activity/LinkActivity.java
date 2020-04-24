@@ -46,9 +46,11 @@ import swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
+import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
+import swu.xl.linkgame.Util.StateUtil;
 
 public class LinkActivity extends AppCompatActivity implements View.OnClickListener,LinkManager.LinkGame {
     //屏幕宽度,高度
@@ -330,6 +332,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                         level.getL_mode()
                 );
 
+                //设置监听者
+                manager.setListener(LinkActivity.this);
+
                 Log.d(Constant.TAG,"屏幕高度："+PxUtil.pxToDp(screenHeight,getApplicationContext()));
                 Log.d(Constant.TAG,"时间文本的bottom：："+PxUtil.pxToDp(message_bottom,getApplicationContext()));
                 Log.d(Constant.TAG,"AnimalView内容的高度："+PxUtil.pxToDp(screenHeight-message_bottom,getApplicationContext()));
@@ -377,8 +382,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         pause.setOnClickListener(this);
-
-        manager.setListener(this);
 
         //找到显示道具数量的控件
         fight_num_text = findViewById(R.id.link_prop_fight_text);
@@ -662,6 +665,27 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         //开启游戏
         if (manager.isPause()){
             manager.pauseGame();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (StateUtil.isBackground(this)) {
+            Log.d(Constant.TAG,"后台");
+
+            //暂停播放
+            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
+            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }

@@ -15,7 +15,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
 
-        <activity android:name=".Activity.LinkActivity"></activity>
+        <activity android:name=".Activity.LinkActivity" />
         <activity android:name=".Activity.LevelActivity" />
         <activity android:name=".Activity.FailureActivity" />
         <activity android:name=".Activity.SuccessActivity" />

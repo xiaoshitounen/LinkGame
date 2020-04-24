@@ -25,4 +25,7 @@
     <string name="Prop_Bomb_Des">消除某个种类所有的动物</string>
     <string name="Prop_Refresh_Text">重排</string>
     <string name="Prop_Refresh_Des">重新排列页面内的所有动物</string>
+    <string name="Setting">设置</string>
+    <string name="Music_Pic">背景音乐</string>
+    <string name="FinishText">完成</string>
 </resources>

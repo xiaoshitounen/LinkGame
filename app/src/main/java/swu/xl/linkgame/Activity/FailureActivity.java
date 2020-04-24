@@ -20,7 +20,9 @@ import java.util.List;
 
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
+import swu.xl.linkgame.Util.StateUtil;
 
 public class FailureActivity extends AppCompatActivity {
 
@@ -97,6 +99,28 @@ public class FailureActivity extends AppCompatActivity {
             bundle.putParcelable("level",level);
             intent.putExtras(bundle);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (StateUtil.isBackground(this)) {
+            Log.d(Constant.TAG,"后台");
+
+            //暂停播放
+            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        //重新播放
+        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
+            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }

@@ -196,4 +196,17 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <!--设置标题的文本样式-->
+    <style name="SettingText">
+        <item name="android:textColor">#F0B773</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <!--设置背景音乐，音效的文本样式-->
+    <style name="SettingMusicText">
+        <item name="android:textColor">#F0B773</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>
