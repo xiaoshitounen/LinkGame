@@ -3,17 +3,12 @@
 
 运行效果：
 
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/setting.png)
-
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/help.png)
-
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/store.png)
-
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/level.png)
-
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/game.png)
-
-![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/stop.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png)
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png)
 
 ***
 
