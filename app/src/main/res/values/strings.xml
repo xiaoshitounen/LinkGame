@@ -18,4 +18,11 @@
     <string name="Refresh_Explain">重新刷新布局</string>
     <string name="Pause_Explain">暂停游戏</string>
     <string name="Know_Explain">我明白了</string>
+    <string name="ShowMoney">购买金币</string>
+    <string name="Prop_Fight_Text">锤子</string>
+    <string name="Prop_Fight_Des">可以敲除一对可连接的动物</string>
+    <string name="Prop_Bomb_Text">炸弹</string>
+    <string name="Prop_Bomb_Des">消除某个种类所有的动物</string>
+    <string name="Prop_Refresh_Text">重排</string>
+    <string name="Prop_Refresh_Des">重新排列页面内的所有动物</string>
 </resources>

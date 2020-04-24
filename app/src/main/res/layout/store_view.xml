@@ -1,6 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--商店具体内容-->
+    <RelativeLayout
+        android:id="@+id/view_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_store_bg"
+        android:layout_centerInParent="true"
+        android:padding="15dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        >
+
+        <!--持有的金币数量-->
+        <LinearLayout
+            android:id="@+id/money_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            >
+            <swu.xl.linkgame.SelfView.XLTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ShowMoneyText"
+                android:text="@string/ShowMoney"
+                />
+
+            <!--显示持有的金币数目-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/view_store_show_money_bg"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp"
+                >
+
+                <!--图标-->
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/link_coin"
+                    />
+
+                <!--持有的数目-->
+                <swu.xl.linkgame.SelfView.XLTextView
+                    android:id="@+id/store_user_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1099"
+                    style="@style/ShowMoneyNumText"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--道具展示-->
+        <LinearLayout
+            android:layout_below="@id/money_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/view_store_show_prop_bg"
+            android:padding="15dp"
+            >
+
+            <!--拳头道具-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/view_store_show_simple_prop_bg"
+                android:paddingEnd="15dp"
+                >
+
+                <!--道具图标-->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/link_prop_fight"
+                    android:layout_weight="2"
+                    android:padding="10dp"
+                    />
+
+                <!--道具文本说明-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    >
+
+                    <!--名称-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Fight_Text"
+                        style="@style/ShowSimplePropTitleText"
+                        />
+
+                    <!--描述-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Fight_Des"
+                        style="@style/ShowSimplePropDesText"
+                        />
+
+
+                </LinearLayout>
+
+                <!--价格-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/view_store_show_simple_money_bg"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:id="@+id/store_fight"
+                    >
+
+                    <!--图标-->
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/link_coin"
+                        />
+
+                    <!--持有的数目-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:id="@+id/store_fight_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        style="@style/ShowSimpleMoneyNumText"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--炸弹道具-->
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/view_store_show_simple_prop_bg"
+                android:paddingEnd="15dp"
+                >
+
+                <!--道具图标-->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/link_prop_bomb"
+                    android:layout_weight="2"
+                    android:padding="10dp"
+                    />
+
+                <!--道具文本说明-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    >
+
+                    <!--名称-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Bomb_Text"
+                        style="@style/ShowSimplePropTitleText"
+                        />
+
+                    <!--描述-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Bomb_Des"
+                        style="@style/ShowSimplePropDesText"
+                        />
+
+
+                </LinearLayout>
+
+                <!--价格-->
+                <LinearLayout
+                    android:id="@+id/store_bomb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/view_store_show_simple_money_bg"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <!--图标-->
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/link_coin"
+                        />
+
+                    <!--持有的数目-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:id="@+id/store_bomb_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        style="@style/ShowSimpleMoneyNumText"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--刷新道具-->
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/view_store_show_simple_prop_bg"
+                android:paddingEnd="15dp"
+                >
+
+                <!--道具图标-->
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/link_prop_resort"
+                    android:layout_weight="2"
+                    android:padding="10dp"
+                    />
+
+                <!--道具文本说明-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    >
+
+                    <!--名称-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Refresh_Text"
+                        style="@style/ShowSimplePropTitleText"
+                        />
+
+                    <!--描述-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/Prop_Refresh_Des"
+                        style="@style/ShowSimplePropDesText"
+                        />
+
+
+                </LinearLayout>
+
+                <!--价格-->
+                <LinearLayout
+                    android:id="@+id/store_refresh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/view_store_show_simple_money_bg"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <!--图标-->
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/link_coin"
+                        />
+
+                    <!--持有的数目-->
+                    <swu.xl.linkgame.SelfView.XLTextView
+                        android:id="@+id/store_refresh_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        style="@style/ShowSimpleMoneyNumText"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--商店牌子-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/view_store_banner"
+        android:layout_above="@+id/view_store"
+        android:layout_marginBottom="-60dp"
+        />
+
+    <!--关闭按钮-->
+    <ImageView
+        android:id="@+id/store_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/view_store_delete"
+        android:layout_alignEnd="@id/view_store"
+        android:layout_marginEnd="15dp"
+        android:layout_alignTop="@id/view_store"
+        android:layout_marginTop="15dp"
+        />
+
+</RelativeLayout>
