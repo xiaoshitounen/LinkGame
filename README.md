@@ -1,6 +1,23 @@
 # LinkGame
 ## Android:连连看
 
+运行效果：
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/setting.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/help.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/store.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/level.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/game.png)
+
+![](https://link-game-1300729795.cos.ap-nanjing.myqcloud.com/stop.png)
+
+***
+
+
 #### 第一次commit-2020-04-15:
 - 项目基础操作。
 - 自定义XLTextView和XLButton类，方便设置其字体样式为指定的字体样式。
@@ -105,3 +122,9 @@
 - 商店页面布局完成。
 - 商店页面事件回调处理完毕。
 - 商店页面数据库处理完成。
+
+#### 第十九次commit-2020-04-24-23:26:
+- 设置页面布局完成.
+- 背景音乐播放完成.
+- 设置页面回调控制背景音乐大小完成。
+- 使用[NiceImageView](https://github.com/SheHuan/NiceImageView)第三方库达到圆角的效果。
