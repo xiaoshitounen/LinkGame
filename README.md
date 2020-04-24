@@ -127,3 +127,4 @@
 - 设置页面布局完成.
 - 背景音乐播放完成.
 - 设置页面回调控制背景音乐大小完成。
+- 使用[NiceImageView](https://github.com/SheHuan/NiceImageView)第三方库达到圆角的效果。
