@@ -3,7 +3,7 @@
 
 运行效果：
 
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" style="zoom: 25%;" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="400" />
 
 ![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png)
 ![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png)
