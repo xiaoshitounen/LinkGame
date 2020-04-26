@@ -3,14 +3,12 @@
 
 运行效果：
 
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="400" />
-
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png)
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png" width="200" />
 
 ***
 
