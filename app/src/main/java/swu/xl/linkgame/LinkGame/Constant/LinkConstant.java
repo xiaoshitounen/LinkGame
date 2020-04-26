@@ -33,8 +33,8 @@ public interface LinkConstant {
     /**
      * 连连看图标背景
      */
-    int ANIMAL_BG = R.drawable.animal_bg;
-    int ANIMAL_SELECT_BG = R.drawable.animal_select_bg;
+    int ANIMAL_BG = R.drawable.animal_bg1;
+    int ANIMAL_SELECT_BG = R.drawable.animal_select_bg1;
 
     /**
      * 连连看默认的时间
@@ -114,8 +114,6 @@ public interface LinkConstant {
     int[][][] BOARD_HARD = {
             LinkBoard.board_hard_1,
             LinkBoard.board_hard_2,
-            LinkBoard.board_hard_3,
-            LinkBoard.board_hard_4,
-            LinkBoard.board_hard_5
+            LinkBoard.board_hard_3
     };
 }

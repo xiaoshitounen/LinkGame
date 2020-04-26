@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+import swu.xl.linkgame.Constant.Constant;
+
 public class ScreenUtil {
     /**
      * 获取屏幕的宽度
@@ -83,8 +85,12 @@ public class ScreenUtil {
             String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
             if ("1".equals(navBarOverride)) {
                 hasNavigationBar = false;
+
+                Log.d(Constant.TAG,"手机没有导航栏");
             } else if ("0".equals(navBarOverride)) {
                 hasNavigationBar = true;
+
+                Log.d(Constant.TAG,"手机有导航栏");
             }
         } catch (Exception e) {
 

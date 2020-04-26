@@ -3,7 +3,7 @@
     <string name="Score">分数</string>
     <string name="Time">时间</string>
     <string name="Batter">连击</string>
-    <string name="Failure">失败啦!</string>
+    <string name="Failure">失败啦</string>
     <string name="Success">恭喜通关!</string>
     <string name="mode_normal">普通模式</string>
     <string name="mode_hard">困难模式</string>
@@ -20,12 +20,13 @@
     <string name="Know_Explain">我明白了</string>
     <string name="ShowMoney">购买金币</string>
     <string name="Prop_Fight_Text">锤子</string>
-    <string name="Prop_Fight_Des">可以敲除一对可连接的动物</string>
+    <string name="Prop_Fight_Des">可以敲除一对\n可连接的动物</string>
     <string name="Prop_Bomb_Text">炸弹</string>
-    <string name="Prop_Bomb_Des">消除某个种类所有的动物</string>
+    <string name="Prop_Bomb_Des">消除某个种类\n所有的动物</string>
     <string name="Prop_Refresh_Text">重排</string>
-    <string name="Prop_Refresh_Des">重新排列页面内的所有动物</string>
+    <string name="Prop_Refresh_Des">重新排列页面\n内的所有动物</string>
     <string name="Setting">设置</string>
     <string name="Music_Pic">背景音乐</string>
     <string name="FinishText">完成</string>
+    <string name="Sound_Pic">游戏音效</string>
 </resources>

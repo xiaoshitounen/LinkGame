@@ -11,25 +11,25 @@
     <!--关卡成功结束关卡状态标题字体样式-->
     <style name="ShowSuccessMessage">
         <item name="android:textSize">32sp</item>
-        <item name="android:textColor">#f4b56b</item>
+        <item name="android:textColor">#fda245</item>
     </style>
 
     <!--关卡失败结束关卡状态标题字体样式-->
     <style name="ShowFailureMessage">
         <item name="android:textSize">50sp</item>
-        <item name="android:textColor">#f4b56b</item>
+        <item name="android:textColor">#fda245</item>
     </style>
 
     <!--关卡成功结束关卡信息字体样式-->
     <style name="LevelMessage">
         <item name="android:textSize">30sp</item>
-        <item name="android:textColor">#3082b0</item>
+        <item name="android:textColor">#0185b6</item>
     </style>
 
     <!--关卡成功结束状态信息的标题字体样式-->
     <style name="StateTitleMessage">
         <item name="android:textSize">34sp</item>
-        <item name="android:textColor">#3e92a2</item>
+        <item name="android:textColor">#76a171</item>
         <item name="android:layout_marginEnd">40dp</item>
     </style>
 
@@ -149,7 +149,7 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">38sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#78B1F1</item>
+        <item name="android:textColor">#4268d3</item>
     </style>
 
     <!--解释说明，转折，道具说明的字体样式-->

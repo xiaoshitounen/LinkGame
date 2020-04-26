@@ -9,6 +9,7 @@ import java.util.Random;
 
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Constant.Enum.LevelMode;
+import swu.xl.linkgame.LinkGame.Constant.LinkBoard;
 import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
 import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Manager.LinkManager;
@@ -174,8 +175,9 @@ public class LinkUtil {
      * @return
      */
     public static int[][] loadLevelWithIdAndMode(int level_id, char level_mode){
+
         //1.先判断是什么类型的关卡
-        int [][][] BOARD = null;
+        int [][][] BOARD;
         if (level_mode == LevelMode.LEVEL_MODE_EASY.getValue()){
             BOARD = LinkConstant.BOARD_EASY;
         }else if (level_mode == LevelMode.LEVEL_MODE_NORMAL.getValue()){
@@ -189,15 +191,14 @@ public class LinkUtil {
 
         //3.获取随机产生的模板
         int[][] board = BOARD[resourceID];
+        Log.d(Constant.TAG,"加载的board"+resourceID);
 
         //4.拷贝模板
         int row = board.length;
         int col = board[0].length;
         int[][] clone = new int[row][col];
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                clone[i][j] = board[i][j];
-            }
+            System.arraycopy(board[i], 0, clone[i], 0, col);
         }
 
         return clone;

@@ -134,13 +134,12 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
     //是否加载暂停布局完成标志
     boolean flag_pause = false;
 
-    @Xml(layouts = "activity_link")
-    @SuppressLint("ClickableViewAccessibility")
+    //@Xml(layouts = "activity_link")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_link);
-        X2C.setContentView(this,R.layout.activity_link);
+        setContentView(R.layout.activity_link);
+        //X2C.setContentView(this,R.layout.activity_link);
 
         //沉浸式状态栏
         ImmersionBar.with(this).barAlpha(1.0f).init();
@@ -153,115 +152,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
         //加载布局
         initInflate();
-
-        //监听触摸事件
-        link_layout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //获取触摸点相对于布局的坐标
-                int x = (int) event.getX();
-                int y = (int) event.getY();
-
-                //触摸事件
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
-                    for (final AnimalView animal : manager.getAnimals()) {
-                        //获取AnimalView实例的rect
-                        RectF rectF = new RectF(
-                                animal.getLeft(),
-                                animal.getTop(),
-                                animal.getRight(),
-                                animal.getBottom());
-
-                        //判断是否包含
-                        if (rectF.contains(x,y) && animal.getVisibility() == View.VISIBLE){
-                            //获取上一次触摸的AnimalView
-                            final AnimalView lastAnimal = manager.getLastAnimal();
-
-                            //如果不是第一次触摸 且 触摸的不是同一个点
-                            if (lastAnimal != null && lastAnimal != animal){
-
-                                Log.d(Constant.TAG,lastAnimal+" "+animal);
-
-                                //如果两者的图片相同，且两者可以连接
-                                if(animal.getFlag() == lastAnimal.getFlag() &&
-                                        AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
-                                        manager.getBoard(),
-                                        lastAnimal.getPoint(),
-                                        animal.getPoint(),
-                                        linkInfo
-                                )){
-                                    //当前点改变背景和动画
-                                    animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                    animationOnSelectAnimal(animal);
-
-                                    //画线
-                                    link_layout.setLinkInfo(linkInfo);
-
-                                    //延迟操作
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            //修改模板
-                                            manager.getBoard()[lastAnimal.getPoint().x][lastAnimal.getPoint().y] = 0;
-                                            manager.getBoard()[animal.getPoint().x][animal.getPoint().y] = 0;
-
-                                            //输出模板
-                                            for (int i = 0; i < manager.getBoard().length; i++) {
-                                                for (int j = 0; j < manager.getBoard()[0].length; j++) {
-                                                    System.out.print(manager.getBoard()[i][j]+" ");
-                                                }
-                                                System.out.println("");
-                                            }
-
-                                            //隐藏
-                                            lastAnimal.setVisibility(View.INVISIBLE);
-                                            lastAnimal.clearAnimation();
-                                            animal.setVisibility(View.INVISIBLE);
-                                            animal.clearAnimation();
-
-                                            //上一个点置空
-                                            manager.setLastAnimal(null);
-
-                                            //去线
-                                            link_layout.setLinkInfo(null);
-
-                                            //获得金币
-                                            money += 2;
-                                            money_text.setText(String.valueOf(money));
-                                        }
-                                    },500);
-                                }else {
-                                    //否则
-
-                                    //上一个点恢复原样
-                                    lastAnimal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
-                                    if (lastAnimal.getAnimation() != null){
-                                        //清楚所有动画
-                                        lastAnimal.clearAnimation();
-                                    }
-
-                                    //设置当前点的背景颜色和动画
-                                    animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                    animationOnSelectAnimal(animal);
-
-                                    //将当前点作为选中点
-                                    manager.setLastAnimal(animal);
-                                }
-                            }else if (lastAnimal == null){
-                                //第一次触摸 当前点改变背景和动画
-                                animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                animationOnSelectAnimal(animal);
-
-                                //将当前点作为选中点
-                                manager.setLastAnimal(animal);
-                            }
-                        }
-                    }
-                }
-
-                return true;
-            }
-        });
     }
 
     /**
@@ -306,6 +196,10 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         screenHeight = ScreenUtil.getScreenHeight(getApplicationContext());
         Log.d(Constant.TAG,"屏幕宽度："+PxUtil.pxToDp(screenWidth,this)+" "+"屏幕高度："+PxUtil.pxToDp(screenWidth,this));
 
+        linkInfo = new LinkInfo();
+
+        manager = LinkManager.getLinkManager();
+
         message_show_layout = findViewById(R.id.message_show);
         message_show_layout.setPadding(0,ScreenUtil.getStateBarHeight(this)+ PxUtil.dpToPx(5,this),0,0);
         time_show_layout = findViewById(R.id.time_show);
@@ -319,9 +213,124 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 0,0);
         time_show_layout.setLayoutParams(layoutParams);
         time_show_layout.post(new Runnable() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void run() {
                 message_bottom = time_show_layout.getBottom();
+
+                link_layout = findViewById(R.id.link_layout);
+                ViewGroup.LayoutParams params_link_layout = link_layout.getLayoutParams();
+                params_link_layout.height = screenHeight-message_bottom;
+                link_layout.setLayoutParams(params_link_layout);
+
+                //监听触摸事件
+                link_layout.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        //获取触摸点相对于布局的坐标
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+
+                        //触摸事件
+                        if (event.getAction() == MotionEvent.ACTION_DOWN){
+                            for (final AnimalView animal : manager.getAnimals()) {
+                                //获取AnimalView实例的rect
+                                RectF rectF = new RectF(
+                                        animal.getLeft(),
+                                        animal.getTop(),
+                                        animal.getRight(),
+                                        animal.getBottom());
+
+                                //判断是否包含
+                                if (rectF.contains(x,y) && animal.getVisibility() == View.VISIBLE){
+                                    //获取上一次触摸的AnimalView
+                                    final AnimalView lastAnimal = manager.getLastAnimal();
+
+                                    //如果不是第一次触摸 且 触摸的不是同一个点
+                                    if (lastAnimal != null && lastAnimal != animal){
+
+                                        Log.d(Constant.TAG,lastAnimal+" "+animal);
+
+                                        //如果两者的图片相同，且两者可以连接
+                                        if(animal.getFlag() == lastAnimal.getFlag() &&
+                                                AnimalSearchUtil.canMatchTwoAnimalWithTwoBreak(
+                                                        manager.getBoard(),
+                                                        lastAnimal.getPoint(),
+                                                        animal.getPoint(),
+                                                        linkInfo
+                                                )){
+                                            //当前点改变背景和动画
+                                            animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
+                                            animationOnSelectAnimal(animal);
+
+                                            //画线
+                                            link_layout.setLinkInfo(linkInfo);
+
+                                            //延迟操作
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    //修改模板
+                                                    manager.getBoard()[lastAnimal.getPoint().x][lastAnimal.getPoint().y] = 0;
+                                                    manager.getBoard()[animal.getPoint().x][animal.getPoint().y] = 0;
+
+                                                    //输出模板
+                                                    for (int i = 0; i < manager.getBoard().length; i++) {
+                                                        for (int j = 0; j < manager.getBoard()[0].length; j++) {
+                                                            System.out.print(manager.getBoard()[i][j]+" ");
+                                                        }
+                                                        System.out.println("");
+                                                    }
+
+                                                    //隐藏
+                                                    lastAnimal.setVisibility(View.INVISIBLE);
+                                                    lastAnimal.clearAnimation();
+                                                    animal.setVisibility(View.INVISIBLE);
+                                                    animal.clearAnimation();
+
+                                                    //上一个点置空
+                                                    manager.setLastAnimal(null);
+
+                                                    //去线
+                                                    link_layout.setLinkInfo(null);
+
+                                                    //获得金币
+                                                    money += 2;
+                                                    money_text.setText(String.valueOf(money));
+                                                }
+                                            },500);
+                                        }else {
+                                            //否则
+
+                                            //上一个点恢复原样
+                                            lastAnimal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
+                                            if (lastAnimal.getAnimation() != null){
+                                                //清楚所有动画
+                                                lastAnimal.clearAnimation();
+                                            }
+
+                                            //设置当前点的背景颜色和动画
+                                            animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
+                                            animationOnSelectAnimal(animal);
+
+                                            //将当前点作为选中点
+                                            manager.setLastAnimal(animal);
+                                        }
+                                    }else if (lastAnimal == null){
+                                        //第一次触摸 当前点改变背景和动画
+                                        animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
+                                        animationOnSelectAnimal(animal);
+
+                                        //将当前点作为选中点
+                                        manager.setLastAnimal(animal);
+                                    }
+                                }
+                            }
+                        }
+
+                        return true;
+                    }
+                });
 
                 //开始游戏
                 manager.startGame(getApplicationContext(),
@@ -332,6 +341,14 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                         level.getL_mode()
                 );
 
+                Log.d(Constant.TAG,"游戏开始了");
+                for (int i = 0; i < manager.getBoard().length; i++) {
+                    for (int j = 0; j < manager.getBoard()[0].length; j++) {
+                        System.out.print(manager.getBoard()[i][j]);
+                    }
+                    System.out.println("");
+                }
+
                 //设置监听者
                 manager.setListener(LinkActivity.this);
 
@@ -340,15 +357,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(Constant.TAG,"AnimalView内容的高度："+PxUtil.pxToDp(screenHeight-message_bottom,getApplicationContext()));
             }
         });
-
-        link_layout = findViewById(R.id.link_layout);
-        ViewGroup.LayoutParams params_link_layout = link_layout.getLayoutParams();
-        params_link_layout.height = screenHeight-message_bottom;
-        link_layout.setLayoutParams(params_link_layout);
-
-        linkInfo = new LinkInfo();
-
-        manager = LinkManager.getLinkManager();
 
         level_text = findViewById(R.id.link_level_text);
         level_text.setText(String.valueOf(level.getL_id()));

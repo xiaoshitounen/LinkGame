@@ -69,7 +69,6 @@
 
                     <SeekBar
                         android:id="@+id/seek_bar_music"
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="4"
@@ -78,6 +77,8 @@
                         android:progress="80"
                         android:secondaryProgress="100"
                         android:thumb="@drawable/seek_bar_point"
+                        android:splitTrack="false"
+                        android:background="@null"
                         />
 
                 </LinearLayout>
@@ -98,7 +99,7 @@
                 <swu.xl.linkgame.SelfView.XLTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Music_Pic"
+                    android:text="@string/Sound_Pic"
                     style="@style/SettingMusicText"
                     android:layout_marginBottom="10dp"
                     />
@@ -119,7 +120,6 @@
                         />
 
                     <SeekBar
-                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="4"
@@ -128,6 +128,8 @@
                         android:progress="100"
                         android:secondaryProgress="100"
                         android:thumb="@drawable/seek_bar_point"
+                        android:splitTrack="false"
+                        android:background="@null"
                         />
 
                 </LinearLayout>
