@@ -3,12 +3,12 @@
 
 运行效果：
 
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png)
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png)
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png" width="200" />
+<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png" width="200" />
 
 ***
 
@@ -123,3 +123,14 @@
 - 背景音乐播放完成.
 - 设置页面回调控制背景音乐大小完成。
 - 使用[NiceImageView](https://github.com/SheHuan/NiceImageView)第三方库达到圆角的效果。
+
+
+***
+
+![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/bug%E4%BF%AE%E6%94%B9.jpg)
+
+#### 第二十次commit-2020-04-27-00:54:
+- bug提交。
+- 解决bug3，商店页面关闭按钮重叠，文字挤在一起。
+- 解决bug4，相关的RGB，箭头图标替换。
+- 结局bug6，文字重复。
