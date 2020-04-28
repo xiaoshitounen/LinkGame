@@ -117,7 +117,7 @@
                 android:id="@+id/score_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3024"
+                android:text="3000"
                 style="@style/StateContentMessage"
                 />
         </LinearLayout>
