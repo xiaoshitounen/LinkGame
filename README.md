@@ -143,6 +143,7 @@
 - 解决bug8，游戏成功页面字体对齐。
 
 #### 第二十三次commit-2020-05-02-09:27:
+- 代码完善：自定义View做成静态库:[NumberOfItem](https://github.com/xiaoshitounen/NumberOfItem)，为道具相关bug解决奠定基础。
 - 解决bug1，主页面暂停按钮叠到道具图标上。
 - 解决bug5，添加购买道具扣除金币的信息提示。
 - 解决bug11，商店页面添加道具数量。
