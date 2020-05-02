@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -332,7 +334,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                         level.getL_id(),
                         level.getL_mode()
                 );
-
 
                 //设置监听者
                 manager.setListener(LinkActivity.this);

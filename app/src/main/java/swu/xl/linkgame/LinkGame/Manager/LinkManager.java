@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -109,6 +113,39 @@ public class LinkManager {
 
         //开启定时器
         startTimer(time);
+
+        //判断需不需要提示有岩石存在
+        hintRock(context);
+    }
+
+    //判断需不需要岩石
+    private void hintRock(Context context){
+        int flag = 0;
+        for (int i = 0; i < getBoard().length; i++) {
+            for (int j = 0; j < getBoard()[0].length; j++) {
+                if (getBoard()[i][j] < 0){
+                    //加载布局
+                    LinearLayout inflate = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.toast_layout, null);
+                    //创建Toast
+                    Toast toast = new Toast(context);
+                    //设置位置
+                    toast.setGravity(Gravity.FILL_VERTICAL| Gravity.FILL_HORIZONTAL,0,0);
+                    //设置持续时间
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    //添加
+                    toast.setView(inflate);
+                    //显示
+                    toast.show();
+
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if (flag == 1){
+                break;
+            }
+        }
     }
 
     //清楚上一次游戏的痕迹
