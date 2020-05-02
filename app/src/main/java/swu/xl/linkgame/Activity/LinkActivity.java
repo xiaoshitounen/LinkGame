@@ -3,6 +3,7 @@ package swu.xl.linkgame.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -172,12 +173,15 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
             if (prop.getP_kind() == PropMode.PROP_FIGHT.getValue()){
                 //拳头道具
                 fight_num = prop.getP_number();
+                Log.d(Constant.TAG,"查询的消除道具数量："+fight_num);
             }else if (prop.getP_kind() == PropMode.PROP_BOMB.getValue()){
                 //炸弹道具
                 bomb_num = prop.getP_number();
+                Log.d(Constant.TAG,"查询的炸弹道具数量："+bomb_num);
             }else {
                 //刷新道具
                 refresh_num = prop.getP_number();
+                Log.d(Constant.TAG,"查询的刷新道具数量："+refresh_num);
             }
         }
     }
@@ -474,9 +478,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                     prop_fight.setCount(fight_num);
 
                     //数据库处理
-                    XLProp prop = props.get(0);
-                    prop.setP_number(fight_num);
-                    prop.update(1);
+                    ContentValues values = new ContentValues();
+                    values.put("p_number",fight_num);
+                    LitePal.update(XLProp.class,values,1);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }
@@ -492,11 +496,12 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                     //数量减1
                     bomb_num--;
                     prop_bomb.setCount(bomb_num);
+                    Log.d(Constant.TAG,"数量："+bomb_num);
 
                     //数据库处理
-                    XLProp prop = props.get(1);
-                    prop.setP_number(bomb_num);
-                    prop.update(2);
+                    ContentValues values = new ContentValues();
+                    values.put("p_number",bomb_num);
+                    LitePal.update(XLProp.class,values,2);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }
@@ -520,9 +525,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                     prop_refresh.setCount(refresh_num);
 
                     //数据库处理
-                    XLProp prop = props.get(2);
-                    prop.setP_number(refresh_num);
-                    prop.update(3);
+                    ContentValues values = new ContentValues();
+                    values.put("p_number",refresh_num);
+                    LitePal.update(XLProp.class,values,3);
                 }else {
                     Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
                 }

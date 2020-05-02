@@ -125,7 +125,7 @@
                 </LinearLayout>
 
                 <!--价格-->
-                <LinearLayout
+                <swu.xl.linkgame.SelfView.XLLinearLayout
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
                         android:maxLines="1"
                         android:text="10" />
 
-                </LinearLayout>
+                </swu.xl.linkgame.SelfView.XLLinearLayout>
             </LinearLayout>
 
             <!--炸弹道具-->
@@ -209,7 +209,7 @@
                 </LinearLayout>
 
                 <!--价格-->
-                <LinearLayout
+                <swu.xl.linkgame.SelfView.XLLinearLayout
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:id="@+id/store_bomb"
@@ -240,7 +240,7 @@
                         style="@style/ShowSimpleMoneyNumText"
                         />
 
-                </LinearLayout>
+                </swu.xl.linkgame.SelfView.XLLinearLayout>
             </LinearLayout>
 
             <!--刷新道具-->
@@ -294,7 +294,7 @@
                 </LinearLayout>
 
                 <!--价格-->
-                <LinearLayout
+                <swu.xl.linkgame.SelfView.XLLinearLayout
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:id="@+id/store_refresh"
@@ -325,7 +325,7 @@
                         style="@style/ShowSimpleMoneyNumText"
                         />
 
-                </LinearLayout>
+                </swu.xl.linkgame.SelfView.XLLinearLayout>
             </LinearLayout>
 
         </LinearLayout>

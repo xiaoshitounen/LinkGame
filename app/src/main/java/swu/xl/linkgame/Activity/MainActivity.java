@@ -3,12 +3,15 @@ package swu.xl.linkgame.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,10 +40,9 @@ import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
-import swu.xl.linkgame.Util.StateUtil;
 import swu.xl.numberitem.NumberOfItem;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     //简单模式
     Button mode_easy;
     //普通模式
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int refresh_money = 0;
     int refresh_num = 0;
 
+    private BroadcastReceiver mBroadcastReceiver;
+
     @Xml(layouts = "activity_main")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //播放音乐
         playMusic();
+
+        //广播接受者
+        mBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (!TextUtils.isEmpty(action)) {
+                    switch (action) {
+                        case Intent.ACTION_SCREEN_OFF:
+                            Log.d(Constant.TAG, "屏幕关闭，变黑");
+
+                            if (BackgroundMusicManager.getInstance(getBaseContext()).isBackgroundMusicPlaying()) {
+                                Log.d(Constant.TAG, "正在播放音乐，关闭");
+
+                                //暂停播放
+                                BackgroundMusicManager.getInstance(getBaseContext()).pauseBackgroundMusic();
+                            }
+
+                            break;
+                        case Intent.ACTION_SCREEN_ON:
+                            Log.d(Constant.TAG, "屏幕开启，变亮");
+                            break;
+                        case Intent.ACTION_USER_PRESENT:
+                            Log.d(Constant.TAG, "解锁成功");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        };
+        registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
+        registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_SCREEN_ON));
+        registerReceiver(mBroadcastReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
     }
 
     /**
@@ -362,7 +400,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TextView refresh_money_text = inflate_store.findViewById(R.id.store_refresh_money);
                 refresh_money_text.setText(String.valueOf(refresh_money));
 
-
                 //改变标志
                 flag_store = true;
             }
@@ -518,7 +555,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (loadView(flag_store,inflate_store)){
 
                     //购买拳头
-                    inflate_store.findViewById(R.id.store_fight).setOnClickListener(new View.OnClickListener() {
+                    LinearLayout fight = inflate_store.findViewById(R.id.store_fight);
+
+                    fight.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Log.d(Constant.TAG,"购买拳头");
@@ -642,23 +681,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
 
-        if (StateUtil.isBackground(this)) {
-            Log.d(Constant.TAG,"后台");
-
-            //暂停播放
-            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
-            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
-        }
+        unregisterReceiver(mBroadcastReceiver);
     }
 }
