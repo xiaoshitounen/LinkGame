@@ -155,3 +155,7 @@
 - 修改新增bug：息屏的时候没有关闭音乐。
 - 修改新增bug：商店页面购买道具的时候没有屏蔽ViewGroup继续向下分发事件，通过向上抽取一个XLLinearLayout重写onInterceptTouchEvent返回true拦截事件。
 - 代码重构：向上抽取一个BaseActivity，在这里做共同的操作。
+
+#### 第二十六次commit-2020-05-02-22:00:
+- 代码重构：将多线程直接addView的方式转换成动态添加fragment
+- 功能添加：音效单例类完成，游戏成功、失败音效，按钮点击音效加载完毕。
