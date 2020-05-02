@@ -90,7 +90,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     app:imgResource="@drawable/store_prop_bg_shape"
-                    android:src="@drawable/link_prop_fight"
+                    app:srcResource="@drawable/link_prop_fight"
                     android:paddingBottom="2dp"
                     />
 
@@ -174,7 +174,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     app:imgResource="@drawable/store_prop_bg_shape"
-                    android:src="@drawable/link_prop_bomb"
+                    app:srcResource="@drawable/link_prop_bomb"
                     android:paddingBottom="2dp"
                     />
 
@@ -259,7 +259,7 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     app:imgResource="@drawable/store_prop_bg_shape"
-                    android:src="@drawable/link_prop_resort"
+                    app:srcResource="@drawable/link_prop_resort"
                     android:paddingBottom="2dp"
                     />
 
