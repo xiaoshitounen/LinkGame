@@ -21,10 +21,11 @@ import java.util.List;
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
+import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.StateUtil;
 
-public class FailureActivity extends AppCompatActivity {
+public class FailureActivity extends BaseActivity {
 
     //level
     XLLevel level;
@@ -49,6 +50,9 @@ public class FailureActivity extends AppCompatActivity {
         findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //播放点击音效
+                SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
                 Log.d(Constant.TAG,"关卡菜单按钮被点击了");
 
                 jumpToActivity(0);
@@ -59,6 +63,9 @@ public class FailureActivity extends AppCompatActivity {
         findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //播放点击音效
+                SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
                 Log.d(Constant.TAG,"刷新按钮被点击了");
 
                 jumpToActivity(1);
@@ -99,28 +106,6 @@ public class FailureActivity extends AppCompatActivity {
             bundle.putParcelable("level",level);
             intent.putExtras(bundle);
             startActivity(intent);
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (StateUtil.isBackground(this)) {
-            Log.d(Constant.TAG,"后台");
-
-            //暂停播放
-            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        //重新播放
-        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
-            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }

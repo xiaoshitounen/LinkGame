@@ -17,39 +17,40 @@
         >
 
         <!--标题部分-->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
+            android:orientation="vertical"
             >
 
             <!--标题-->
             <swu.xl.linkgame.SelfView.XLTextView
                 android:id="@+id/main_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/main_title_bg"
                 android:text="@string/app_name"
                 android:gravity="center"
                 android:textSize="28sp"
                 android:paddingBottom="8dp"
-                android:layout_alignBottom="@+id/main_banner"
-                android:layout_marginBottom="100dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
                 />
 
             <!--success_banner-->
             <ImageView
                 android:id="@+id/main_banner"
                 android:layout_width="wrap_content"
-                android:layout_height="130dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:src="@drawable/main_banner"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
                 />
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <!--模式部分-->
         <LinearLayout

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,6 +31,7 @@ import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 
@@ -392,6 +394,9 @@ public class LinkManager {
             bundle.putParcelable("level",level);
             intent.putExtras(bundle);
             context.startActivity(intent);
+
+            //播放失败音效
+            SoundPlayUtil.getInstance(context).play(2);
         }else {
             Log.d(Constant.TAG, "成功啦");
 
@@ -401,6 +406,9 @@ public class LinkManager {
             bundle.putInt("serial_click",LinkUtil.getSerialClick());
             intent.putExtras(bundle);
             context.startActivity(intent);
+
+            //播放成功音效
+            SoundPlayUtil.getInstance(context).play(1);
         }
 
         //自定义 从右向左滑动的效果

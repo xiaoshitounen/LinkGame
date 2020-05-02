@@ -25,13 +25,14 @@ import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Constant.Enum.LevelState;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
+import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.SelfView.XLImageView;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 import swu.xl.linkgame.Util.StateUtil;
 
-public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
+public class LevelActivity extends BaseActivity implements View.OnClickListener {
     //屏幕宽度
     int screenWidth;
 
@@ -186,8 +187,12 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
                     //点击事件
                     xlImageView.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View v) {
+                            //播放点击音效
+                            SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
                             Log.d(Constant.TAG,"关卡"+v.getId());
 
                             //判断是否可以进入该关卡
@@ -267,6 +272,10 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
+
+        //播放点击音效
+        SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
         switch (v.getId()){
             case R.id.pager_back:
                 Log.d(Constant.TAG,"返回按钮");
@@ -297,24 +306,4 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (StateUtil.isBackground(this)) {
-            Log.d(Constant.TAG,"后台");
-
-            //暂停播放
-            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
-            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
-        }
-    }
 }

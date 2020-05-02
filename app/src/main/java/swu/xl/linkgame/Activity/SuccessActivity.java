@@ -24,11 +24,12 @@ import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
+import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.SelfView.XLTextView;
 import swu.xl.linkgame.Util.StateUtil;
 
-public class SuccessActivity extends AppCompatActivity implements View.OnClickListener {
+public class SuccessActivity extends BaseActivity implements View.OnClickListener {
     //星星
     ImageView left_star;
     ImageView middle_star;
@@ -131,6 +132,9 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
     //按钮的监听回调
     @Override
     public void onClick(View v) {
+        //播放点击音效
+        SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
         switch (v.getId()){
             case R.id.btn_menu:
                 //关卡菜单按钮
@@ -201,27 +205,6 @@ public class SuccessActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtras(bundle);
             //跳转
             startActivity(intent);
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (StateUtil.isBackground(this)) {
-            Log.d(Constant.TAG,"后台");
-
-            //暂停播放
-            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
-            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }

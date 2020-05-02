@@ -1,6 +1,7 @@
 package swu.xl.linkgame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -39,6 +40,8 @@ import java.util.List;
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Constant.Enum.LevelState;
 import swu.xl.linkgame.Constant.Enum.PropMode;
+import swu.xl.linkgame.Fragment.PauseFragment;
+import swu.xl.linkgame.Fragment.SettingFragment;
 import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
 import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
@@ -50,13 +53,14 @@ import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
+import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 import swu.xl.linkgame.Util.StateUtil;
 import swu.xl.numberitem.NumberOfItem;
 
-public class LinkActivity extends AppCompatActivity implements View.OnClickListener,LinkManager.LinkGame {
+public class LinkActivity extends BaseActivity implements View.OnClickListener,LinkManager.LinkGame {
     //屏幕宽度,高度
     int screenWidth;
     int screenHeight;
@@ -465,6 +469,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
     //点击事件
     @Override
     public void onClick(View v) {
+        //播放点击音效
+        SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
         switch (v.getId()){
             case R.id.prop_fight:
                 Log.d(Constant.TAG,"拳头道具");
@@ -537,78 +544,18 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(Constant.TAG,"暂停");
 
                 //暂停游戏
-                if (flag_pause){
+                if (flag_pause) {
                     //定时器暂停
                     manager.pauseGame();
 
-                    //加载布局
-                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT);
-                    //layoutParams.setMargins(0, ScreenUtil.getScreenHeight(getApplicationContext()),0,0);
-                    root_link.addView(inflate_pause,layoutParams);
-
-                    //按钮的事件回调
-                    inflate_pause.findViewById(R.id.btn_menu).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //回到关卡
-
-                            //查询对应模式的数据
-                            List<XLLevel> XLLevels = LitePal.where("l_mode == ?", String.valueOf(level.getL_mode())).find(XLLevel.class);
-                            Log.d(Constant.TAG,XLLevels.size()+"");
-                            //依次查询每一个内容
-                            for (XLLevel xlLevel : XLLevels) {
-                                Log.d(Constant.TAG, xlLevel.toString());
-                            }
-
-                            //跳转界面
-                            Intent intent = new Intent(LinkActivity.this, LevelActivity.class);
-                            //加入数据
-                            Bundle bundle = new Bundle();
-                            //加入关卡模式数据
-                            bundle.putString("mode","简单");
-                            //加入关卡数据
-                            bundle.putParcelableArrayList("levels", (ArrayList<? extends Parcelable>) XLLevels);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                    });
-                    inflate_pause.findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //回到游戏
-                            manager.pauseGame();
-
-                            //移除自己
-                            root_link.removeView(inflate_pause);
-                        }
-                    });
-                    inflate_pause.findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //下一关
-
-                            //加入关卡数据
-                            XLLevel next_level = LitePal.find(XLLevel.class, level.getId() + 1);
-
-                            //判断是否开启
-                            if (next_level.getL_new() != LevelState.LEVEL_STATE_NO.getValue()){
-                                //跳转界面
-                                Intent intent = new Intent(LinkActivity.this, LinkActivity.class);
-                                //加入数据
-                                Bundle bundle = new Bundle();
-                                bundle.putParcelable("level",next_level);
-                                intent.putExtras(bundle);
-                                //跳转
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(LinkActivity.this, "下一关还没有开启", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }else {
-                    Toast.makeText(this, "正在加载视图，请稍后再试", Toast.LENGTH_SHORT).show();
+                    //添加一个fragment
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    final PauseFragment pause = new PauseFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("level",level);
+                    pause.setArguments(bundle);
+                    transaction.replace(R.id.root_link,pause,"pause");
+                    transaction.commit();
                 }
 
                 break;
@@ -667,27 +614,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         //开启游戏
         if (manager.isPause()){
             manager.pauseGame();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (StateUtil.isBackground(this)) {
-            Log.d(Constant.TAG,"后台");
-
-            //暂停播放
-            BackgroundMusicManager.getInstance(this).pauseBackgroundMusic();
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (!BackgroundMusicManager.getInstance(this).isBackgroundMusicPlaying()) {
-            BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
         }
     }
 }
