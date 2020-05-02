@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#AA000000">
 
     <!--商店具体内容-->
@@ -85,11 +85,13 @@
                 >
 
                 <!--道具图标-->
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_fight"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:imgResource="@drawable/store_prop_bg_shape"
                     android:src="@drawable/link_prop_fight"
-                    android:padding="10dp"
+                    android:paddingBottom="2dp"
                     />
 
                 <!--道具文本说明-->
@@ -167,11 +169,13 @@
                 >
 
                 <!--道具图标-->
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_bomb"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:imgResource="@drawable/store_prop_bg_shape"
                     android:src="@drawable/link_prop_bomb"
-                    android:padding="10dp"
+                    android:paddingBottom="2dp"
                     />
 
                 <!--道具文本说明-->
@@ -250,11 +254,13 @@
                 >
 
                 <!--道具图标-->
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_refresh"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:imgResource="@drawable/store_prop_bg_shape"
                     android:src="@drawable/link_prop_resort"
-                    android:padding="10dp"
+                    android:paddingBottom="2dp"
                     />
 
                 <!--道具文本说明-->

@@ -51,6 +51,7 @@ import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 import swu.xl.linkgame.Util.StateUtil;
+import swu.xl.numberitem.NumberOfItem;
 
 public class LinkActivity extends AppCompatActivity implements View.OnClickListener,LinkManager.LinkGame {
     //屏幕宽度,高度
@@ -95,20 +96,11 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
     TextView time_text;
 
     //拳头道具
-    View prop_fight;
+    NumberOfItem prop_fight;
     //炸弹道具
-    View prop_bomb;
+    NumberOfItem prop_bomb;
     //刷新道具
-    View prop_refresh;
-
-    //显示拳头道具数量的文本
-    TextView fight_num_text;
-
-    //显示炸弹道具数量的文本
-    TextView bomb_num_text;
-
-    //显示刷新道具数量的文本
-    TextView refresh_num_text;
+    NumberOfItem prop_refresh;
 
     //记录金币的变量
     int money;
@@ -341,20 +333,9 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
                         level.getL_mode()
                 );
 
-                Log.d(Constant.TAG,"游戏开始了");
-                for (int i = 0; i < manager.getBoard().length; i++) {
-                    for (int j = 0; j < manager.getBoard()[0].length; j++) {
-                        System.out.print(manager.getBoard()[i][j]);
-                    }
-                    System.out.println("");
-                }
 
                 //设置监听者
                 manager.setListener(LinkActivity.this);
-
-                Log.d(Constant.TAG,"屏幕高度："+PxUtil.pxToDp(screenHeight,getApplicationContext()));
-                Log.d(Constant.TAG,"时间文本的bottom：："+PxUtil.pxToDp(message_bottom,getApplicationContext()));
-                Log.d(Constant.TAG,"AnimalView内容的高度："+PxUtil.pxToDp(screenHeight-message_bottom,getApplicationContext()));
             }
         });
 
@@ -371,38 +352,46 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         prop_refresh = findViewById(R.id.prop_refresh);
         prop_refresh.setOnClickListener(this);
         pause = findViewById(R.id.link_pause);
-        final RelativeLayout.LayoutParams params_pause = new RelativeLayout.LayoutParams(
-                PxUtil.dpToPx(45, this),
-                PxUtil.dpToPx(45, this)
-        );
+        pause.setOnClickListener(this);
+
+        //手动调整道具的排列
+        final View[] temp_prop = {prop_fight,prop_bomb,prop_refresh,pause};
         props_layout.post(new Runnable() {
             @Override
             public void run() {
-                //添加向右依赖
-                params_pause.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                Log.d(Constant.TAG,"道具容器的宽度:"+PxUtil.pxToDp(props_layout.getWidth(),getBaseContext()));
 
-                //设置右边距
-                params_pause.rightMargin = (screenWidth-props_layout.getRight()) / 2;
+                //控制道具的大小
+                int prop_size = PxUtil.dpToPx(55,getBaseContext());
 
-                //设置给控件
-                pause.setLayoutParams(params_pause);
+                //计算间距
+                int padding = (props_layout.getWidth() - prop_size * 4) / 5;
+
+                //依次设置位置
+                for (int i = 0; i < temp_prop.length; i++) {
+                    //设置约束
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                            prop_size,
+                            prop_size
+                    );
+                    layoutParams.setMargins(
+                            padding+(padding+prop_size)*i,
+                            0,
+                            padding+(padding+prop_size)*i+prop_size,
+                            0);
+                    //重新设置给道具视图
+                    temp_prop[i].setLayoutParams(layoutParams);
+                }
             }
         });
-
-        pause.setOnClickListener(this);
-
-        //找到显示道具数量的控件
-        fight_num_text = findViewById(R.id.link_prop_fight_text);
-        bomb_num_text = findViewById(R.id.link_prop_bomb_text);
-        refresh_num_text = findViewById(R.id.link_prop_refresh_text);
 
         //设置金币
         money_text.setText(String.valueOf(money));
 
         //设置道具数量
-        fight_num_text.setText(String.valueOf(fight_num));
-        bomb_num_text.setText(String.valueOf(bomb_num));
-        refresh_num_text.setText(String.valueOf(refresh_num));
+        prop_fight.setCount(fight_num);
+        prop_bomb.setCount(bomb_num);
+        prop_refresh.setCount(refresh_num);
 
         root_link = findViewById(R.id.root_link);
     }
@@ -443,7 +432,6 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
         scaleAnimation.setRepeatCount(0);
         scaleAnimation.setFillAfter(true);
 
-
         //旋转动画
         RotateAnimation rotateAnimation = new RotateAnimation(
                 -20f,
@@ -482,7 +470,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
                     //数量减1
                     fight_num--;
-                    fight_num_text.setText(String.valueOf(fight_num));
+                    prop_fight.setCount(fight_num);
 
                     //数据库处理
                     XLProp prop = props.get(0);
@@ -502,7 +490,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
                     //数量减1
                     bomb_num--;
-                    bomb_num_text.setText(String.valueOf(bomb_num));
+                    prop_bomb.setCount(bomb_num);
 
                     //数据库处理
                     XLProp prop = props.get(1);
@@ -528,7 +516,7 @@ public class LinkActivity extends AppCompatActivity implements View.OnClickListe
 
                     //数量减1
                     refresh_num--;
-                    refresh_num_text.setText(String.valueOf(refresh_num));
+                    prop_refresh.setCount(refresh_num);
 
                     //数据库处理
                     XLProp prop = props.get(2);

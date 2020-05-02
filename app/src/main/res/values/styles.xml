@@ -99,6 +99,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!--控制道具大小的样式-->
+    <style name="link_props">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="imgResource">@drawable/img_shape</item>
+    </style>
+
     <!--控制道具的数量的样式-->
     <style name="link_prop_num">
         <item name="android:layout_width">wrap_content</item>

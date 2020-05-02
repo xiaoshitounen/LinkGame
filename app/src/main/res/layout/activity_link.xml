@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/link_message"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,85 +55,39 @@
             <RelativeLayout
                 android:id="@+id/link_props"
                 style="@style/link_prop_relative"
-                android:clipChildren="false"
                 >
-                <!--道具 拳击-->
-                <RelativeLayout
-                    style="@style/link_prop_in"
-                    android:id="@+id/link_prop_fight"
-                    >
-                    <ImageView
-                        android:id="@+id/prop_fight"
-                        style="@style/link_prop"
-                        android:src="@drawable/link_prop_fight"
-                        />
 
-                    <TextView
-                        android:id="@+id/link_prop_fight_text"
-                        style="@style/link_prop_num"
-                        android:text="+"
-                        android:layout_alignEnd="@id/prop_fight"
-                        android:layout_alignBottom="@+id/prop_fight"
-                        />
-                </RelativeLayout>
+                <!--道具 拳击-->
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_fight"
+                    style="@style/link_props"
+                    app:srcResource="@drawable/link_prop_fight"
+                    />
 
                 <!--道具 炸弹-->
-                <RelativeLayout
-                    style="@style/link_prop_in"
-                    android:id="@+id/link_prop_bomb"
-                    android:layout_marginStart="55dp"
-                    android:clipChildren="false"
-                    >
-
-                    <ImageView
-                        android:id="@+id/prop_bomb"
-                        style="@style/link_prop"
-                        android:src="@drawable/link_prop_bomb"
-                        />
-
-                    <TextView
-                        android:id="@+id/link_prop_bomb_text"
-                        style="@style/link_prop_num"
-                        android:text="+"
-                        android:layout_alignEnd="@id/prop_bomb"
-                        android:layout_alignBottom="@+id/prop_bomb"
-                        />
-
-                </RelativeLayout>
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_bomb"
+                    style="@style/link_props"
+                    app:srcResource="@drawable/link_prop_bomb"
+                    />
 
                 <!--道具 混乱-->
-                <RelativeLayout
-                    style="@style/link_prop_in"
-                    android:id="@+id/link_prop_refresh"
-                    android:layout_marginLeft="110dp"
-                    android:clipChildren="false"
-                    >
+                <swu.xl.numberitem.NumberOfItem
+                    android:id="@+id/prop_refresh"
+                    style="@style/link_props"
+                    app:srcResource="@drawable/link_prop_resort"
+                    />
 
-                    <ImageView
-                        android:id="@+id/prop_refresh"
-                        style="@style/link_prop"
-                        android:src="@drawable/link_prop_resort"
-                        />
+                <!--暂停-->
+                <ImageView
+                    android:id="@+id/link_pause"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/link_stop"
+                    />
 
-                    <TextView
-                        android:id="@+id/link_prop_refresh_text"
-                        style="@style/link_prop_num"
-                        android:text="+"
-                        android:layout_alignEnd="@id/prop_refresh"
-                        android:layout_alignBottom="@+id/prop_refresh"
-                        />
-
-                </RelativeLayout>
             </RelativeLayout>
 
-            <!--暂停-->
-            <ImageView
-                android:id="@+id/link_pause"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/link_stop"
-                 />
 
         </RelativeLayout>
 

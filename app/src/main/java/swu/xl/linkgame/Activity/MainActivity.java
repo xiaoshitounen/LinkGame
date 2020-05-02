@@ -38,6 +38,7 @@ import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.StateUtil;
+import swu.xl.numberitem.NumberOfItem;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //简单模式
@@ -343,7 +344,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
 
-                //找到显示的文本
+                //找到显示道具数量的文本
+                NumberOfItem prop_fight = inflate_store.findViewById(R.id.prop_fight);
+                prop_fight.setCount(fight_num);
+                NumberOfItem prop_bomb = inflate_store.findViewById(R.id.prop_bomb);
+                prop_bomb.setCount(bomb_num);
+                NumberOfItem prop_refresh = inflate_store.findViewById(R.id.prop_refresh);
+                prop_refresh.setCount(refresh_num);
+
+                //找到显示道具价值的文本
                 TextView user_money_text = inflate_store.findViewById(R.id.store_user_money);
                 user_money_text.setText(String.valueOf(user_money));
                 TextView fight_money_text = inflate_store.findViewById(R.id.store_fight_money);
@@ -578,6 +587,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param mode
      */
     private void refreshSQLite(PropMode mode){
+        Toast.makeText(this, "成功购买一个道具", Toast.LENGTH_SHORT).show();
+
+
         XLProp prop = new XLProp();
 
         switch (mode){
@@ -612,6 +624,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //重新设置金币
         TextView user_money_text = inflate_store.findViewById(R.id.store_user_money);
         user_money_text.setText(String.valueOf(user_money));
+
+        //找到显示道具数量的文本
+        NumberOfItem prop_fight = inflate_store.findViewById(R.id.prop_fight);
+        prop_fight.setCount(fight_num);
+        NumberOfItem prop_bomb = inflate_store.findViewById(R.id.prop_bomb);
+        prop_bomb.setCount(bomb_num);
+        NumberOfItem prop_refresh = inflate_store.findViewById(R.id.prop_refresh);
+        prop_refresh.setCount(refresh_num);
     }
 
     @Override
