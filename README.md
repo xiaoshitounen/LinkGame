@@ -143,6 +143,7 @@
 - 解决bug8，游戏成功页面字体对齐。
 
 #### 第二十三次commit-2020-05-02-09:27:
+- 代码完善：自定义View做成静态库:[NumberOfItem](https://github.com/xiaoshitounen/NumberOfItem)，为道具相关bug解决奠定基础。
 - 解决bug1，主页面暂停按钮叠到道具图标上。
 - 解决bug5，添加购买道具扣除金币的信息提示。
 - 解决bug11，商店页面添加道具数量。
@@ -155,3 +156,7 @@
 - 修改新增bug：息屏的时候没有关闭音乐。
 - 修改新增bug：商店页面购买道具的时候没有屏蔽ViewGroup继续向下分发事件，通过向上抽取一个XLLinearLayout重写onInterceptTouchEvent返回true拦截事件。
 - 代码重构：向上抽取一个BaseActivity，在这里做共同的操作。
+
+#### 第二十六次commit-2020-05-02-22:00:
+- 代码重构：将多线程直接addView的方式转换成动态添加fragment
+- 功能添加：音效单例类完成，游戏成功、失败音效，按钮点击音效加载完毕。
