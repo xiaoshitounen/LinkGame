@@ -188,4 +188,14 @@ public class ExampleUnitTest {
                 linkInfo
         ));
     }
+
+    //测试角度
+    @Test
+    public void getDegreeByTan(){
+        double v1 = Math.toDegrees(Math.atan(Math.sqrt(44) / 10));
+        System.out.println(v1);
+
+        double v2 = Math.toDegrees(Math.atan(Math.sqrt(95) / 10));
+        System.out.println(v2);
+    }
 }

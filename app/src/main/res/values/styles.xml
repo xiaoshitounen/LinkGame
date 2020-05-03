@@ -66,8 +66,9 @@
 
     <!--主页设置，帮助，商店按钮的样式-->
     <style name="main_bg">
-        <item name="android:layout_width">70dp</item>
-        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">50dp</item>
     </style>
 
     <!--关卡页面控制器按钮的样式-->

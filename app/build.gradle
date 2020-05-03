@@ -38,8 +38,8 @@ dependencies {
 
     annotationProcessor 'com.zhangyue.we:x2c-apt:1.1.2'
     implementation 'com.zhangyue.we:x2c-lib:1.0.6'
-
     implementation 'com.github.SheHuan:NiceImageView:1.0.5'
 
     implementation 'com.github.xiaoshitounen:NumberOfItem:1.0.2'
+    implementation 'com.github.xiaoshitounen:CircleProgress:1.0.4'
 }

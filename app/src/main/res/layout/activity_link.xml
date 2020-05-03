@@ -8,6 +8,8 @@
     android:background="@drawable/bg_success_failure_link"
 
     android:id="@+id/root_link"
+
+    android:clipChildren="false"
     >
 
     <!--关卡，道具，暂停信息-->
@@ -125,24 +127,13 @@
     </LinearLayout>
 
     <!--时间控制-->
-    <RelativeLayout
+    <swu.xl.circleprogress.CircleProgress
         android:id="@+id/time_show"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="-40dp"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="@drawable/link_time_bg"
-        >
-
-        <swu.xl.linkgame.SelfView.XLTextView
-            android:id="@+id/link_time_text"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="61.7秒"
-            style="@style/link_time_text"
-            />
-
-    </RelativeLayout>
+        app:textLeftPadding="20"
+        app:textSize="19"
+        />
 
     <!--布局部分-->
     <swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout

@@ -89,7 +89,7 @@
             android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="3"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             >
 
             <!--设置-->

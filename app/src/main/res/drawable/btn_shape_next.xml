@@ -6,7 +6,7 @@
     <corners android:radius="30dp"/>
 
     <!--填充颜色-->
-    <solid android:color="#0000ff"/>
+    <solid android:color="#0389ff"/>
 
     <!--边框-->
     <stroke android:width="5dp" android:color="#ffffff"/>

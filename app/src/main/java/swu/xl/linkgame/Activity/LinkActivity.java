@@ -1,18 +1,12 @@
 package swu.xl.linkgame.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,42 +16,36 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentTransaction;
+
 import com.gyf.immersionbar.ImmersionBar;
-import com.zhangyue.we.x2c.X2C;
-import com.zhangyue.we.x2c.ano.Xml;
 
 import org.litepal.LitePal;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
+import swu.xl.circleprogress.CircleProgress;
 import swu.xl.linkgame.Constant.Constant;
-import swu.xl.linkgame.Constant.Enum.LevelState;
 import swu.xl.linkgame.Constant.Enum.PropMode;
 import swu.xl.linkgame.Fragment.PauseFragment;
-import swu.xl.linkgame.Fragment.SettingFragment;
-import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
-import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
-import swu.xl.linkgame.LinkGame.Model.LinkInfo;
 import swu.xl.linkgame.LinkGame.Manager.LinkManager;
-import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
+import swu.xl.linkgame.LinkGame.Model.LinkInfo;
+import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout;
+import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
+import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.Model.XLLevel;
 import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
-import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
-import swu.xl.linkgame.Util.StateUtil;
 import swu.xl.numberitem.NumberOfItem;
 
 public class LinkActivity extends BaseActivity implements View.OnClickListener,LinkManager.LinkGame {
@@ -84,7 +72,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     RelativeLayout props_layout;
 
     //时间信息等布局
-    RelativeLayout time_show_layout;
+    CircleProgress time_circle_progress;
 
     //AnimalView的容器
     XLRelativeLayout link_layout;
@@ -99,8 +87,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     TextView level_text;
     //显示金币的文本
     TextView money_text;
-    //显示时间的文本
-    TextView time_text;
 
     //拳头道具
     NumberOfItem prop_fight;
@@ -108,30 +94,20 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     NumberOfItem prop_bomb;
     //刷新道具
     NumberOfItem prop_refresh;
+    //暂停
+    ImageView pause;
 
     //记录金币的变量
     int money;
-
     //记录拳头道具的数量
     int fight_num;
-
     //记录炸弹道具的数量
     int bomb_num;
-
     //记录刷新道具的数量
     int refresh_num;
 
-    //暂停
-    ImageView pause;
-    
     //根布局
     RelativeLayout root_link;
-
-    //暂停布局
-    LinearLayout inflate_pause;
-
-    //是否加载暂停布局完成标志
-    boolean flag_pause = false;
 
     //@Xml(layouts = "activity_link")
     @Override
@@ -148,9 +124,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
         //加载视图
         initView();
-
-        //加载布局
-        initInflate();
     }
 
     /**
@@ -204,21 +177,35 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
         message_show_layout = findViewById(R.id.message_show);
         message_show_layout.setPadding(0,ScreenUtil.getStateBarHeight(this)+ PxUtil.dpToPx(5,this),0,0);
-        time_show_layout = findViewById(R.id.time_show);
+
+        //CircleProgress相关设置
+        time_circle_progress = findViewById(R.id.time_show);
+        //设置当前进度
+        time_circle_progress.setProgress(LinkConstant.TIME);
+        //设置位置
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 PxUtil.dpToPx(120, this),
                 PxUtil.dpToPx(120, this)
         );
         layoutParams.setMargins(
-                PxUtil.dpToPx(-40, this),
+                PxUtil.dpToPx(-50, this),
                 ScreenUtil.getStateBarHeight(this) - PxUtil.dpToPx(20,this),
                 0,0);
-        time_show_layout.setLayoutParams(layoutParams);
-        time_show_layout.post(new Runnable() {
+        //设置角度
+        int angle1 = (int) Math.toDegrees(Math.atan(Math.sqrt(44) / 10));
+        int angle2 = (int) Math.toDegrees(Math.atan(Math.sqrt(95) / 10));
+        time_circle_progress.setStartAngle(270+angle1);
+        time_circle_progress.setEndAngle(540-angle2);
+        time_circle_progress.setProgress(90);
+        time_circle_progress.setTotal_progress(90);
+
+        //设置游戏主题内容布局
+        time_circle_progress.setLayoutParams(layoutParams);
+        time_circle_progress.post(new Runnable() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void run() {
-                message_bottom = time_show_layout.getBottom();
+                message_bottom = time_circle_progress.getBottom();
 
                 link_layout = findViewById(R.id.link_layout);
                 ViewGroup.LayoutParams params_link_layout = link_layout.getLayoutParams();
@@ -351,7 +338,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         level_text = findViewById(R.id.link_level_text);
         level_text.setText(String.valueOf(level.getL_id()));
         money_text = findViewById(R.id.link_money_text);
-        time_text = findViewById(R.id.link_time_text);
 
         props_layout = findViewById(R.id.link_props);
         prop_fight = findViewById(R.id.prop_fight);
@@ -403,24 +389,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         prop_refresh.setCount(refresh_num);
 
         root_link = findViewById(R.id.root_link);
-    }
-
-    /**
-     * 加载布局
-     */
-    @Xml(layouts = "pause_view")
-    private void initInflate() {
-        //加载帮助布局
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //加载布局
-                inflate_pause = (LinearLayout) X2C.inflate(LinkActivity.this, R.layout.pause_view, null);
-
-                //改变标志
-                flag_pause = true;
-            }
-        }).start();
     }
 
     /**
@@ -544,19 +512,17 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                 Log.d(Constant.TAG,"暂停");
 
                 //暂停游戏
-                if (flag_pause) {
-                    //定时器暂停
-                    manager.pauseGame();
+                //1.定时器暂停
+                manager.pauseGame();
 
-                    //添加一个fragment
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    final PauseFragment pause = new PauseFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("level",level);
-                    pause.setArguments(bundle);
-                    transaction.replace(R.id.root_link,pause,"pause");
-                    transaction.commit();
-                }
+                //2.添加一个fragment
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                final PauseFragment pause = new PauseFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("level",level);
+                pause.setArguments(bundle);
+                transaction.replace(R.id.root_link,pause,"pause");
+                transaction.commit();
 
                 break;
         }
@@ -572,7 +538,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
             manager.endGame(this,level,time);
         }else {
             //保留小数后一位
-            time_text.setText(new DecimalFormat("##0.0").format(time)+"秒");
+            time_circle_progress.setProgress(time);
         }
 
         //如果board全部清除了
