@@ -29,7 +29,7 @@
     <!--关卡成功结束状态信息的标题字体样式-->
     <style name="StateTitleMessage">
         <item name="android:textSize">34sp</item>
-        <item name="android:textColor">#76a171</item>
+        <item name="android:textColor">#0185b6</item>
         <item name="android:layout_marginEnd">40dp</item>
     </style>
 
@@ -157,7 +157,7 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">38sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#4268d3</item>
+        <item name="android:textColor">#75ABF7</item>
     </style>
 
     <!--解释说明，转折，道具说明的字体样式-->
