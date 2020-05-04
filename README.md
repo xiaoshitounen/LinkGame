@@ -160,3 +160,6 @@
 #### 第二十六次commit-2020-05-02-22:00:
 - 代码重构：将多线程直接addView的方式转换成动态添加fragment
 - 功能添加：音效单例类完成，游戏成功、失败音效，按钮点击音效加载完毕。
+
+#### 第二十七次commit-2020-05-04-00:07:
+- 代码重构：自定义View做成静态库:[CircleProgress](https://github.com/xiaoshitounen/CircleProgress)，优化之前显示时间文本的代码结构，添加了动态显示的环形进度。
