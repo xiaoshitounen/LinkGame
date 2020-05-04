@@ -163,3 +163,6 @@
 
 #### 第二十七次commit-2020-05-04-00:07:
 - 代码重构：自定义View做成静态库:[CircleProgress](https://github.com/xiaoshitounen/CircleProgress)，优化之前显示时间文本的代码结构，添加了动态显示的环形进度。
+
+#### 第二十八次commit-2020-05-04-08:54:
+- 颜色重构：修改了一些部分的颜色显示。
