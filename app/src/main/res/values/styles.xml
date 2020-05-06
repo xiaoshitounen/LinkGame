@@ -155,7 +155,7 @@
     <!--暂停的字体样式-->
     <style name="ShowPauseText">
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">38sp</item>
+        <item name="android:textSize">44sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#75ABF7</item>
     </style>

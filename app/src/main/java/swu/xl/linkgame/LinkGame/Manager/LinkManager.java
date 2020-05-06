@@ -31,6 +31,7 @@ import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.Model.XLLevel;
+import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
@@ -238,7 +239,7 @@ public class LinkManager {
                 layout.addView(animal,layoutParams);
 
                 //保存该视图
-                if (animal.getFlag() > 0){
+                if (animal.getFlag() != 0){
                     animals.add(animal);
                 }
             }
@@ -395,6 +396,9 @@ public class LinkManager {
             intent.putExtras(bundle);
             context.startActivity(intent);
 
+            //暂停背景音乐
+            BackgroundMusicManager.getInstance(context).pauseBackgroundMusic();
+
             //播放失败音效
             SoundPlayUtil.getInstance(context).play(2);
         }else {
@@ -406,6 +410,9 @@ public class LinkManager {
             bundle.putInt("serial_click",LinkUtil.getSerialClick());
             intent.putExtras(bundle);
             context.startActivity(intent);
+
+            //暂停背景音乐
+            BackgroundMusicManager.getInstance(context).pauseBackgroundMusic();
 
             //播放成功音效
             SoundPlayUtil.getInstance(context).play(1);

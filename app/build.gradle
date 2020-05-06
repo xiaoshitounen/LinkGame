@@ -41,5 +41,5 @@ dependencies {
     implementation 'com.github.SheHuan:NiceImageView:1.0.5'
 
     implementation 'com.github.xiaoshitounen:NumberOfItem:1.0.2'
-    implementation 'com.github.xiaoshitounen:CircleProgress:1.0.4'
+    implementation 'com.github.xiaoshitounen:CircleProgress:1.0.5'
 }

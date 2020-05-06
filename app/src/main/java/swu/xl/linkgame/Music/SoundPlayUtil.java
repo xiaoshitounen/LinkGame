@@ -25,6 +25,8 @@ public class SoundPlayUtil {
             soundPool.load(context,R.raw.game_victory,1);   // 1 游戏闯关成功
             soundPool.load(context,R.raw.game_default,1);   // 2 游戏闯关失败
             soundPool.load(context,R.raw.game_click_btn,1); // 3 点击按钮的音效
+            soundPool.load(context,R.raw.game_remove,1);    // 4 消除宝可梦的音效
+            soundPool.load(context,R.raw.game_un_click,1);  // 5 无法点击按钮的音效
         }
     }
     public static synchronized SoundPlayUtil getInstance(Context context){

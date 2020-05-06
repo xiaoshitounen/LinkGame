@@ -129,10 +129,11 @@
     <!--时间控制-->
     <swu.xl.circleprogress.CircleProgress
         android:id="@+id/time_show"
-        android:layout_width="120dp"
+        android:layout_width="122dp"
         android:layout_height="120dp"
         app:textLeftPadding="20"
-        app:textSize="19"
+        app:textTopPadding="3"
+        app:textSize="17"
         />
 
     <!--布局部分-->

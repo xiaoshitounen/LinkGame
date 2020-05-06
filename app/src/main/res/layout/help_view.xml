@@ -144,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="@string/No_break"
+                    android:text="@string/One_break"
                     style="@style/ShowExplainText"
                     />
 

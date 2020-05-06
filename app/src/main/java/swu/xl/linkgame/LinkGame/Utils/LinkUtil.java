@@ -13,9 +13,24 @@ import swu.xl.linkgame.LinkGame.Constant.LinkBoard;
 import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
 import swu.xl.linkgame.LinkGame.Constant.LinkConstant;
 import swu.xl.linkgame.LinkGame.Manager.LinkManager;
+import swu.xl.linkgame.LinkGame.SelfView.AnimalView;
 import swu.xl.linkgame.Util.PxUtil;
 
 public class LinkUtil {
+    /**
+     * 设置所有的宝可梦的响应状态
+     * @param status
+     */
+    public static void setBoardsStatus(boolean status){
+        //获取所有宝可梦视图
+        LinkManager manager = LinkManager.getLinkManager();
+        List<AnimalView> animals = manager.getAnimals();
+
+        for (int i = 0; i < animals.size(); i++) {
+            animals.get(i).setEnabled(status);
+        }
+    }
+
     /**
      * 返回一个布局中可以消除的两个AnimalView
      * @return

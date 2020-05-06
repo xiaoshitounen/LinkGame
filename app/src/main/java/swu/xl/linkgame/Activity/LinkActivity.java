@@ -3,6 +3,7 @@ package swu.xl.linkgame.Activity;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Handler;
@@ -196,8 +197,11 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         int angle2 = (int) Math.toDegrees(Math.atan(Math.sqrt(95) / 10));
         time_circle_progress.setStartAngle(270+angle1);
         time_circle_progress.setEndAngle(540-angle2);
+
+        //设置进度颜色以及当前进度值以及总的进度值
         time_circle_progress.setProgress(90);
         time_circle_progress.setTotal_progress(90);
+        time_circle_progress.getProgress_paint().setColor(Color.parseColor("#c2c2c2"));
 
         //设置游戏主题内容布局
         time_circle_progress.setLayoutParams(layoutParams);
@@ -215,7 +219,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                 //监听触摸事件
                 link_layout.setOnTouchListener(new View.OnTouchListener() {
                     @Override
-                    public boolean onTouch(View v, MotionEvent event) {
+                    public boolean onTouch(View v, final MotionEvent event) {
                         //获取触摸点相对于布局的坐标
                         int x = (int) event.getX();
                         int y = (int) event.getY();
@@ -235,6 +239,14 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                     //获取上一次触摸的AnimalView
                                     final AnimalView lastAnimal = manager.getLastAnimal();
 
+                                    //如果触摸的是石头直接结束
+                                    if (animal.getFlag() == -1){
+                                        //播放无法点击音效
+                                        SoundPlayUtil.getInstance(getBaseContext()).play(5);
+
+                                        break;
+                                    }
+
                                     //如果不是第一次触摸 且 触摸的不是同一个点
                                     if (lastAnimal != null && lastAnimal != animal){
 
@@ -248,6 +260,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                         animal.getPoint(),
                                                         linkInfo
                                                 )){
+                                            //播放无法点击音效
+                                            SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
                                             //当前点改变背景和动画
                                             animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
                                             animationOnSelectAnimal(animal);
@@ -255,21 +270,20 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                             //画线
                                             link_layout.setLinkInfo(linkInfo);
 
+                                            //设置所有的宝可梦不可以点击
+                                            LinkUtil.setBoardsStatus(false);
+
                                             //延迟操作
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
+
+                                                    //播放消除音效
+                                                    SoundPlayUtil.getInstance(getBaseContext()).play(4);
+
                                                     //修改模板
                                                     manager.getBoard()[lastAnimal.getPoint().x][lastAnimal.getPoint().y] = 0;
                                                     manager.getBoard()[animal.getPoint().x][animal.getPoint().y] = 0;
-
-                                                    //输出模板
-                                                    for (int i = 0; i < manager.getBoard().length; i++) {
-                                                        for (int j = 0; j < manager.getBoard()[0].length; j++) {
-                                                            System.out.print(manager.getBoard()[i][j]+" ");
-                                                        }
-                                                        System.out.println("");
-                                                    }
 
                                                     //隐藏
                                                     lastAnimal.setVisibility(View.INVISIBLE);
@@ -286,10 +300,16 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                     //获得金币
                                                     money += 2;
                                                     money_text.setText(String.valueOf(money));
+
+                                                    //设置所有的宝可梦可以点击
+                                                    LinkUtil.setBoardsStatus(true);
                                                 }
                                             },500);
                                         }else {
-                                            //否则
+                                            //点击的两个图片不可以相连接
+
+                                            //播放点击音效
+                                            SoundPlayUtil.getInstance(getBaseContext()).play(3);
 
                                             //上一个点恢复原样
                                             lastAnimal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
@@ -306,6 +326,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                             manager.setLastAnimal(animal);
                                         }
                                     }else if (lastAnimal == null){
+                                        //播放点击音效
+                                        SoundPlayUtil.getInstance(getBaseContext()).play(3);
+
                                         //第一次触摸 当前点改变背景和动画
                                         animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
                                         animationOnSelectAnimal(animal);
@@ -313,6 +336,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                         //将当前点作为选中点
                                         manager.setLastAnimal(animal);
                                     }
+
+                                    break;
                                 }
                             }
                         }

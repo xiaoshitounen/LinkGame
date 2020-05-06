@@ -68,6 +68,9 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
 
         //数据加载配置
         initData();
+
+        //继续播放背景音乐
+        BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
     }
 
     /**
