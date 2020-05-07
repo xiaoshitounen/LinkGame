@@ -3,6 +3,8 @@
 
 运行效果：
 
+图片挂了可以在这里查看：[Android项目8：连连看](https://fanandjiu.com/Android%E9%A1%B9%E7%9B%AE8%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/#more)
+
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="200" />
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png" width="200" />
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png" width="200" />
