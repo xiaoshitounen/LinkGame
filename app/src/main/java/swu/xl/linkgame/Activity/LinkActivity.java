@@ -278,7 +278,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                             link_layout.setLinkInfo(linkInfo);
 
                                             //设置所有的宝可梦不可以点击
-                                            LinkUtil.setBoardsStatus(false);
+                                            link_layout.setEnabled(false);
 
                                             //延迟操作
                                             new Handler().postDelayed(new Runnable() {
@@ -313,7 +313,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                     money_text.setText(String.valueOf(money));
 
                                                     //设置所有的宝可梦可以点击
-                                                    LinkUtil.setBoardsStatus(true);
+                                                    link_layout.setEnabled(true);
                                                 }
                                             },500);
                                         }else {
