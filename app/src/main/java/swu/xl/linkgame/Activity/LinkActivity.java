@@ -48,6 +48,7 @@ import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
 import swu.xl.linkgame.Util.ScreenUtil;
 import swu.xl.numberitem.NumberOfItem;
+import tyrantgit.explosionfield.ExplosionField;
 
 public class LinkActivity extends BaseActivity implements View.OnClickListener,LinkManager.LinkGame {
     //屏幕宽度,高度
@@ -110,6 +111,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     //根布局
     RelativeLayout root_link;
 
+    //粉碎视图
+    private ExplosionField explosionField;
+
     //@Xml(layouts = "activity_link")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
         //加载视图
         initView();
+
+        //创建分碎视图的类
+        explosionField = ExplosionField.attach2Window(this);
     }
 
     /**
@@ -284,6 +291,10 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                     //修改模板
                                                     manager.getBoard()[lastAnimal.getPoint().x][lastAnimal.getPoint().y] = 0;
                                                     manager.getBoard()[animal.getPoint().x][animal.getPoint().y] = 0;
+
+                                                    //粉碎
+                                                    explosionField.explode(lastAnimal);
+                                                    explosionField.explode(animal);
 
                                                     //隐藏
                                                     lastAnimal.setVisibility(View.INVISIBLE);
@@ -471,7 +482,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
                 if (fight_num > 0){
                     //随机消除一对可以消除的AnimalView
-                    manager.fightGame();
+                    manager.fightGame(LinkActivity.this);
 
                     //数量减1
                     fight_num--;
@@ -491,7 +502,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
                 if (bomb_num > 0){
                     //随机消除某一种所有的AnimalView
-                    manager.bombGame();
+                    manager.bombGame(LinkActivity.this);
 
                     //数量减1
                     bomb_num--;
@@ -518,7 +529,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                             screenWidth,
                             screenHeight-message_bottom-ScreenUtil.getNavigationBarHeight(getApplicationContext()),
                             level.getL_id(),
-                            level.getL_mode());
+                            level.getL_mode(),
+                            LinkActivity.this
+                    );
 
                     //数量减1
                     refresh_num--;

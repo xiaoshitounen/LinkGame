@@ -73,7 +73,7 @@ public class FailureActivity extends BaseActivity {
         });
 
         //继续播放背景音乐
-        BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
+        //BackgroundMusicManager.getInstance(this).resumeBackgroundMusic();
     }
 
     /**

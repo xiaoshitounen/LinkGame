@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import swu.xl.linkgame.Activity.FailureActivity;
+import swu.xl.linkgame.Activity.LinkActivity;
 import swu.xl.linkgame.Activity.SuccessActivity;
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.LinkGame.Model.AnimalPoint;
@@ -35,6 +36,7 @@ import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
 import swu.xl.linkgame.Util.PxUtil;
+import tyrantgit.explosionfield.ExplosionField;
 
 /**
  * 使用单例模式
@@ -86,6 +88,9 @@ public class LinkManager {
     //是否暂停
     private boolean isPause = false;
 
+    //保存上下文
+    private Context mContext;
+
     //单例模式
     private static LinkManager instance;
     private LinkManager(){}
@@ -105,6 +110,8 @@ public class LinkManager {
      * @param level_mode
      */
     public void startGame(Context context, RelativeLayout layout, int width, int height, int level_id, char level_mode){
+        this.mContext = context;
+
         //清楚上一次游戏的痕迹
         clearLastGame();
 
@@ -276,7 +283,7 @@ public class LinkManager {
     /**
      * 拳头道具的功能实现
      */
-    public void fightGame() {
+    public void fightGame(Activity link_activity) {
         //1.产生一对消除的点
         AnimalPoint[] doubleRemove = LinkUtil.getDoubleRemove();
         Log.d(Constant.TAG,"第一个点："+doubleRemove[0].x+" "+doubleRemove[0].y);
@@ -286,7 +293,12 @@ public class LinkManager {
         board[doubleRemove[0].x][doubleRemove[0].y] = 0;
         board[doubleRemove[1].x][doubleRemove[1].y] = 0;
 
-        //3.AnimalView隐藏
+        //3.播放消除音效以及粉碎
+        SoundPlayUtil.getInstance(mContext).play(4);
+        //粉碎、
+        ExplosionField explosionField = ExplosionField.attach2Window(link_activity);
+
+        //4.AnimalView隐藏
         for (AnimalView animal : animals) {
             if ((animal.getPoint().x == doubleRemove[0].x
                     && animal.getPoint().y == doubleRemove[0].y)
@@ -298,6 +310,9 @@ public class LinkManager {
                     animal.clearAnimation();
                 }
 
+                //粉碎
+                explosionField.explode(animal);
+
                 //隐藏
                 animal.setVisibility(View.INVISIBLE);
             }
@@ -307,7 +322,7 @@ public class LinkManager {
     /**
      * 炸弹道具的功能实现
      */
-    public void bombGame() {
+    public void bombGame(Activity link_activity) {
         //1.随机产生一个待消除的
         int random = LinkUtil.getExistAnimal();
         Log.d(Constant.TAG,"消除"+random);
@@ -321,7 +336,12 @@ public class LinkManager {
             }
         }
 
-        //3.AnimalView隐藏
+        //3.播放消除音效以及粉碎
+        SoundPlayUtil.getInstance(mContext).play(4);
+        //粉碎、
+        ExplosionField explosionField = ExplosionField.attach2Window(link_activity);
+
+        //4.AnimalView隐藏
         for (AnimalView animal : animals) {
             if (animal.getFlag() == random){
                 //恢复背景颜色和清除动画
@@ -329,6 +349,9 @@ public class LinkManager {
                     animal.changeAnimalBackground(LinkConstant.ANIMAL_BG);
                     animal.clearAnimation();
                 }
+
+                //粉碎
+                explosionField.explode(animal);
 
                 //隐藏
                 animal.setVisibility(View.INVISIBLE);
@@ -344,7 +367,12 @@ public class LinkManager {
      * @param level_id
      * @param level_mode
      */
-    public void refreshGame(Context context, RelativeLayout layout, int width, int height, int level_id, char level_mode){
+    public void refreshGame(final Context context, final RelativeLayout layout, final int width, final int height, final int level_id, final char level_mode, Activity link_activity){
+        //0.播放消除音效以及粉碎
+        SoundPlayUtil.getInstance(mContext).play(4);
+        //粉碎、
+        ExplosionField explosionField = ExplosionField.attach2Window(link_activity);
+
         //1.所以的AnimalView消失
         for (AnimalView animal : animals) {
             //恢复背景颜色和清除动画
@@ -353,15 +381,23 @@ public class LinkManager {
                 animal.clearAnimation();
             }
 
+            //粉碎
+            explosionField.explode(animal);
+
             //隐藏
             animal.setVisibility(View.INVISIBLE);
         }
 
-        //2.移除所有的子视图
-        layout.removeAllViews();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //2.移除所有的子视图
+                layout.removeAllViews();
 
-        //3.重新开始游戏
-        startGame(context,layout,width,height,level_id,level_mode);
+                //3.重新开始游戏
+                startGame(context,layout,width,height,level_id,level_mode);
+            }
+        },1500);
     }
 
     /**
@@ -385,7 +421,7 @@ public class LinkManager {
      * @param level
      * @param time
      */
-    public void endGame(Context context, XLLevel level, float time) {
+    public void endGame(final Context context, XLLevel level, float time) {
         if (time < 0.1){
             Log.d(Constant.TAG, "失败啦");
 
@@ -398,9 +434,17 @@ public class LinkManager {
 
             //暂停背景音乐
             BackgroundMusicManager.getInstance(context).pauseBackgroundMusic();
-
             //播放失败音效
             SoundPlayUtil.getInstance(context).play(2);
+
+            //继续播放
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    BackgroundMusicManager.getInstance(context).resumeBackgroundMusic();
+                }
+            },5000);
+
         }else {
             Log.d(Constant.TAG, "成功啦");
 
@@ -413,9 +457,15 @@ public class LinkManager {
 
             //暂停背景音乐
             BackgroundMusicManager.getInstance(context).pauseBackgroundMusic();
-
             //播放成功音效
             SoundPlayUtil.getInstance(context).play(1);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    BackgroundMusicManager.getInstance(context).resumeBackgroundMusic();
+                }
+            },5000);
         }
 
         //自定义 从右向左滑动的效果
