@@ -3,6 +3,8 @@
 
 运行效果：
 
+图片挂了可以在这里查看：[Android项目8：连连看](https://fanandjiu.com/Android%E9%A1%B9%E7%9B%AE8%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/#more)
+
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="200" />
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png" width="200" />
 <img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png" width="200" />
@@ -174,3 +176,8 @@
 - 对连续点击进行了一些优化。
 - 游戏成功，失败的音效和背景音乐完全混在一起的bug。
 - 完善了游戏的点击音效，消除音效，无法点击音效。
+
+#### 第三十次commit-2020-05-07-15:30
+- 宝可梦消除前，在之间绘制的线条优化为闪电效果，参考了[Android 闪电效果 (Electric Screen,电动屏幕)](https://blog.csdn.net/u013045971/article/details/41984879)。
+- 宝可梦消除时，消除添加了破碎效果，使用了[ExplosionField](https://github.com/tyrantgit/ExplosionField)第三方库。
+- 解决了，点击过快，连续消除的问题。
