@@ -5,12 +5,16 @@
 
 图片挂了可以在这里查看：[Android项目8：连连看](https://fanandjiu.com/Android%E9%A1%B9%E7%9B%AE8%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/#more)
 
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/setting.png" width="200" />
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/help.png" width="200" />
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/store.png" width="200" />
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/level.png" width="200" />
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/game.png" width="200" />
-<img src="https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/stop.png" width="200" />
+
+![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_levels.gif)
+
+![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/lingame_level_game.gif)
+
+![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_level_viectory.gif)
+
+![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_level_prop.gif)
+
+
 
 ***
 
@@ -129,7 +133,7 @@
 
 ***
 
-![](https://github.com/xiaoshitounen/LinkGame/blob/master/xiaoguo_picture/bug%E4%BF%AE%E6%94%B9.jpg)
+![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/bug.jpg)
 
 #### 第二十次commit-2020-04-27-00:54:
 - bug提交。
