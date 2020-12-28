@@ -3,16 +3,16 @@
 
 运行效果：
 
-图片挂了可以在这里查看：[Android项目8：连连看](https://fanandjiu.com/Android%E9%A1%B9%E7%9B%AE8%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/#more)
+图片挂了可以在这里查看：[Android项目8：连连看](http://182.254.228.71/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/)
 
 
-![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_levels.gif)
+![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/linkgame_levels.gif)
 
-![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/lingame_level_game.gif)
+![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/lingame_level_game.gif)
 
-![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_level_viectory.gif)
+![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/linkgame_level_viectory.gif)
 
-![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/linkgame_level_prop.gif)
+![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/linkgame_level_prop.gif)
 
 
 
@@ -133,7 +133,7 @@
 
 ***
 
-![](https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/LinkGame/bug.jpg)
+![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/bug.jpg)
 
 #### 第二十次commit-2020-04-27-00:54:
 - bug提交。
