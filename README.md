@@ -3,7 +3,7 @@
 
 运行效果：
 
-图片挂了可以在这里查看：[Android项目8：连连看](http://www.fanandjiu.com/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/)
+图片挂了可以在这里查看：[Android项目8：连连看](http://www.fanandjiu.com/article/45cb5d02.html)
 
 
 ![](https://hexo-photo-1300729795.cos.ap-nanjing.myqcloud.com/hexo-article/Android%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%BF%9E%E8%BF%9E%E7%9C%8B/linkgame_levels.gif)
